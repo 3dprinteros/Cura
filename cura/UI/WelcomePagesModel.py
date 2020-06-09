@@ -237,12 +237,6 @@ class WelcomePagesModel(ListModel):
                           {"id": "user_agreement",
                            "page_url": self._getBuiltinWelcomePagePath("UserAgreementContent.qml"),
                            },
-                          {"id": "whats_new",
-                           "page_url": self._getBuiltinWelcomePagePath("WhatsNewContent.qml"),
-                           },
-                          {"id": "data_collections",
-                           "page_url": self._getBuiltinWelcomePagePath("DataCollectionsContent.qml"),
-                           },
                           {"id": "add_network_or_local_printer",
                            "page_url": self._getBuiltinWelcomePagePath("AddNetworkOrLocalPrinterContent.qml"),
                            "next_page_id": "machine_actions",
@@ -255,10 +249,7 @@ class WelcomePagesModel(ListModel):
                            "page_url": self._getBuiltinWelcomePagePath("FirstStartMachineActionsContent.qml"),
                            "next_page_id": "cloud",
                            "should_show_function": self.shouldShowMachineActions,
-                           },
-                          {"id": "cloud",
-                           "page_url": self._getBuiltinWelcomePagePath("CloudContent.qml"),
-                           },
+                           }
                           ]
 
         pages_to_show = all_pages_list
