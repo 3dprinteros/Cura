@@ -247,7 +247,6 @@ class WelcomePagesModel(ListModel):
                            },
                           {"id": "machine_actions",
                            "page_url": self._getBuiltinWelcomePagePath("FirstStartMachineActionsContent.qml"),
-                           "next_page_id": "cloud",
                            "should_show_function": self.shouldShowMachineActions,
                            }
                           ]

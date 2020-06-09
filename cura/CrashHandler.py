@@ -104,23 +104,22 @@ class CrashHandler:
         dialog = QDialog()
         dialog.setMinimumWidth(500)
         dialog.setMinimumHeight(170)
-        dialog.setWindowTitle(catalog.i18nc("@title:window", "Cura can't start"))
+        dialog.setWindowTitle(catalog.i18nc("@title:window", "DiaPrint PC can't start"))
         dialog.finished.connect(self._closeEarlyCrashDialog)
 
         layout = QVBoxLayout(dialog)
 
         label = QLabel()
-        label.setText(catalog.i18nc("@label crash message", """<p><b>Oops, Ultimaker Cura has encountered something that doesn't seem right.</p></b>
+        label.setText(catalog.i18nc("@label crash message", """<p><b>Oops, DiaPrint PC has encountered something that doesn't seem right.</p></b>
                     <p>We encountered an unrecoverable error during start up. It was possibly caused by some incorrect configuration files. We suggest to backup and reset your configuration.</p>
                     <p>Backups can be found in the configuration folder.</p>
-                    <p>Please send us this Crash Report to fix the problem.</p>
                 """))
         label.setWordWrap(True)
         layout.addWidget(label)
 
         # "send report" check box and show details
-        self._send_report_checkbox = QCheckBox(catalog.i18nc("@action:button", "Send crash report to Ultimaker"), dialog)
-        self._send_report_checkbox.setChecked(True)
+        self._send_report_checkbox = QCheckBox(catalog.i18nc("@action:button", "Send crash report to DiaPrint PC"), dialog)
+        self._send_report_checkbox.setChecked(False)
 
         show_details_button = QPushButton(catalog.i18nc("@action:button", "Show detailed crash report"), dialog)
         show_details_button.setMaximumWidth(200)
@@ -130,7 +129,7 @@ class CrashHandler:
         show_configuration_folder_button.setMaximumWidth(200)
         show_configuration_folder_button.clicked.connect(self._showConfigurationFolder)
 
-        layout.addWidget(self._send_report_checkbox)
+        # layout.addWidget(self._send_report_checkbox)
         layout.addWidget(show_details_button)
         layout.addWidget(show_configuration_folder_button)
 
@@ -202,7 +201,7 @@ class CrashHandler:
             self.cura_version = Application.getInstance().getVersion()
             self.cura_locale = Application.getInstance().getPreferences().getValue("general/language")
         except:
-            self.cura_version = catalog.i18nc("@label unknown version of Cura", "Unknown")
+            self.cura_version = catalog.i18nc("@label unknown version of DiaPrint PC", "Unknown")
             self.cura_locale = "??_??"
 
         self.data["cura_version"] = self.cura_version
@@ -213,8 +212,8 @@ class CrashHandler:
         locale.getdefaultlocale()[0]
         self.data["locale_cura"] = self.cura_locale
 
-        crash_info = "<b>" + catalog.i18nc("@label Cura version number", "Cura version") + ":</b> " + str(self.cura_version) + "<br/>"
-        crash_info += "<b>" + catalog.i18nc("@label", "Cura language") + ":</b> " + str(self.cura_locale) + "<br/>"
+        crash_info = "<b>" + catalog.i18nc("@label DiaPrint PC version number", "DiaPrint PC version") + ":</b> " + str(self.cura_version) + "<br/>"
+        crash_info += "<b>" + catalog.i18nc("@label", "DiaPrint PC language") + ":</b> " + str(self.cura_locale) + "<br/>"
         crash_info += "<b>" + catalog.i18nc("@label", "OS language") + ":</b> " + str(self.data["locale_os"]) + "<br/>"
         crash_info += "<b>" + catalog.i18nc("@label Type of platform", "Platform") + ":</b> " + str(platform.platform()) + "<br/>"
         crash_info += "<b>" + catalog.i18nc("@label", "Qt version") + ":</b> " + str(QT_VERSION_STR) + "<br/>"

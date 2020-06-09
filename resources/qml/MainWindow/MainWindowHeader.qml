@@ -114,7 +114,8 @@ Item
 
         anchors
         {
-            right: accountWidget.left
+ //           right: accountWidget.left
+			right: parent.right
             rightMargin: UM.Theme.getSize("default_margin").width
             verticalCenter: parent.verticalCenter
         }
@@ -138,7 +139,7 @@ Item
             }
         }
     }
-
+/*
     AccountWidget
     {
         id: accountWidget
@@ -149,4 +150,5 @@ Item
             rightMargin: UM.Theme.getSize("default_margin").width
         }
     }
+*/
 }

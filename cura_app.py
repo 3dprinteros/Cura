@@ -36,7 +36,7 @@ try:
 except ImportError:
     with_sentry_sdk = False
 
-parser = argparse.ArgumentParser(prog = "cura",
+parser = argparse.ArgumentParser(prog = "dia_print",
                                  add_help = False)
 parser.add_argument("--debug",
                     action="store_true",
@@ -70,7 +70,7 @@ if with_sentry_sdk:
                         release = "cura%s" % ApplicationMetadata.CuraVersion,
                         default_integrations = False,
                         max_breadcrumbs = 300,
-                        server_name = "cura",
+                        server_name = "dia_print",
                         ignore_errors = ignore_errors)
     except Exception:
         with_sentry_sdk = False

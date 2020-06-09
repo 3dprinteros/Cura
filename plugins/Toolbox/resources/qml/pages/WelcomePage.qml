@@ -30,6 +30,7 @@ Column
         renderType: Text.NativeRendering
     }
 
+/*
     Cura.PrimaryButton
     {
         id: loginButton
@@ -40,5 +41,6 @@ Column
         onClicked: Cura.API.account.login()
         fixedWidthMode: true
     }
+*/
 }
 

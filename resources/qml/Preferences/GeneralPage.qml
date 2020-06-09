@@ -109,10 +109,10 @@ UM.PreferencesPage
         UM.Preferences.resetPreference("cura/choice_on_open_project")
         setDefaultOpenProjectOption(UM.Preferences.getValue("cura/choice_on_open_project"))
 
-        UM.Preferences.resetPreference("info/send_slice_info")
-        sendDataCheckbox.checked = boolCheck(UM.Preferences.getValue("info/send_slice_info"))
-        UM.Preferences.resetPreference("info/automatic_update_check")
-        checkUpdatesCheckbox.checked = boolCheck(UM.Preferences.getValue("info/automatic_update_check"))
+//        UM.Preferences.resetPreference("info/send_slice_info")
+//       sendDataCheckbox.checked = boolCheck(UM.Preferences.getValue("info/send_slice_info"))
+//        UM.Preferences.resetPreference("info/automatic_update_check")
+//        checkUpdatesCheckbox.checked = boolCheck(UM.Preferences.getValue("info/automatic_update_check"))
     }
 
     ScrollView
@@ -153,6 +153,7 @@ UM.PreferencesPage
                         id: languageList
 
                         Component.onCompleted: {
+							append({ text: "Русский", code: "ru_RU" })
                             append({ text: "English", code: "en_US" })
                             append({ text: "Czech", code: "cs_CZ" })
                             append({ text: "Deutsch", code: "de_DE" })
@@ -166,7 +167,7 @@ UM.PreferencesPage
                             //Polish is disabled for being incomplete: append({ text: "Polski", code: "pl_PL" })
                             append({ text: "Português do Brasil", code: "pt_BR" })
                             append({ text: "Português", code: "pt_PT" })
-                            append({ text: "Русский", code: "ru_RU" })
+                            
                             append({ text: "Türkçe", code: "tr_TR" })
                             append({ text: "简体中文", code: "zh_CN" })
                             append({ text: "正體字", code: "zh_TW" })
