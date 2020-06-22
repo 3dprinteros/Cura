@@ -231,10 +231,7 @@ class WelcomePagesModel(ListModel):
                 self.shouldShowWelcomeFlowChanged.emit()
 
         # All pages
-        all_pages_list = [{"id": "welcome",
-                           "page_url": self._getBuiltinWelcomePagePath("WelcomeContent.qml"),
-                           },
-                          {"id": "user_agreement",
+        all_pages_list = [{"id": "user_agreement",
                            "page_url": self._getBuiltinWelcomePagePath("UserAgreementContent.qml"),
                            },
                           {"id": "add_network_or_local_printer",

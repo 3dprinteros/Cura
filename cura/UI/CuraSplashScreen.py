@@ -81,7 +81,7 @@ class CuraSplashScreen(QSplashScreen):
         # Draw the loading image
         pen = QPen()
         pen.setWidth(6 * self._scale)
-        pen.setColor(QColor(32, 166, 219, 255))
+        pen.setColor(QColor(44, 184, 148, 255))
         painter.setPen(pen)
         painter.drawArc(60, 150, 32 * self._scale, 32 * self._scale, self._loading_image_rotation_angle * 16, 300 * 16)
 
