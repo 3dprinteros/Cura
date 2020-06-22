@@ -155,7 +155,7 @@ class CuraApplication(QtApplication):
                          **kwargs)
 
         self._default_language = "ru_RU"
-        self.default_theme = "cura-light"
+        self.default_theme = "dia-light"
 
         self.change_log_url = "https://ultimaker.com/ultimaker-cura-latest-features"
 
