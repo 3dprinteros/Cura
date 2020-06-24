@@ -82,7 +82,7 @@ Item
 
         ExclusiveGroup { id: mainWindowHeaderMenuGroup }
     }
-
+/*
     // Shortcut button to quick access the Toolbox
     Controls2.Button
     {
@@ -139,6 +139,7 @@ Item
             }
         }
     }
+*/
 /*
     AccountWidget
     {
