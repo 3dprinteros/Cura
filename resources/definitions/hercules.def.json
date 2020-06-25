@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "name": "Hercules",
+  "inherits": "fdmprinter",
+  "metadata": {
+    "visible": true,
+    "author": "3DPrinterOS",
+    "manufacturer": "Imprinta",
+    "category": "Imprinta",
+    "file_formats": "text/x-gcode",
+    "platform": "hercules.stl",
+    "supports_usb_connection": true
+  },
+
+  "overrides": {
+	"machine_start_gcode": { "default_value": "M104 S180\nM140 S125\nM190 S125\nM109 S180\nG28\nG1 Z5 F400\nM106 S0\nM104 S260\nM109 S260\nG32\nG1 Z5 F400" },
+	"machine_end_gcode": { "default_value": "G28 X0 Y0\nM104 S0\nM140 S0\nM84" },
+    "machine_name": { "default_value": "Hercules" },
+	"material_diameter": {"default_value": 1.75 },
+    "machine_height": { "default_value": 200 },
+	"machine_width": { "default_value": 200 },
+    "machine_depth": { "default_value": 210 },
+    "layer_height": { "default_value": 0.5 },
+    "speed_print": { "default_value": 100 }
+  }
+}
