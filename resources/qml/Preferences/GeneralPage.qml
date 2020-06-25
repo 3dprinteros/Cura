@@ -780,7 +780,7 @@ UM.PreferencesPage
                     onCheckedChanged: UM.Preferences.setValue("info/automatic_update_check", checked)
                 }
             }
-
+/*
             UM.TooltipArea
             {
                 width: childrenRect.width
@@ -806,7 +806,7 @@ UM.PreferencesPage
                     }
                 }
             }
-
+*/
             /* Multi-buildplate functionality is disabled because it's broken. See CURA-4975 for the ticket to remove it.
             Item
             {
@@ -834,8 +834,9 @@ UM.PreferencesPage
                     checked: boolCheck(UM.Preferences.getValue("cura/use_multi_build_plate"))
                     onCheckedChanged: UM.Preferences.setValue("cura/use_multi_build_plate", checked)
                 }
-            }*/
-
+            }
+*/
+/*
             Connections
             {
                 target: UM.Preferences
@@ -849,6 +850,7 @@ UM.PreferencesPage
                     sendDataCheckbox.checked = boolCheck(UM.Preferences.getValue("info/send_slice_info"))
                 }
             }
+*/
         }
     }
 }

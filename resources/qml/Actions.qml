@@ -74,7 +74,6 @@ Item
 
     UM.I18nCatalog{id: catalog; name: "cura"}
 
-
     Action
     {
         id: showTroubleShootingAction

@@ -40,7 +40,7 @@ class CuraActions(QObject):
 
     @pyqtSlot()
     def openBugReportPage(self) -> None:
-        event = CallFunctionEvent(self._openUrl, [QUrl("https://github.com/Ultimaker/Cura/issues")], {})
+        event = CallFunctionEvent(self._openUrl, [QUrl("https://imprinta.freshservice.com/support/login?fl=1")], {})
         cura.CuraApplication.CuraApplication.getInstance().functionEvent(event)
 
     ##  Reset camera position and direction to default

@@ -17,10 +17,9 @@
 	"machine_end_gcode": { "default_value": "G28 X0 Y0\nM104 S0\nM140 S0\nM84" },
     "machine_name": { "default_value": "Hercules" },
 	"material_diameter": {"default_value": 1.75 },
-    "machine_height": { "default_value": 200 },
+    "machine_height": { "default_value": 210 },
 	"machine_width": { "default_value": 200 },
-    "machine_depth": { "default_value": 210 },
-    "layer_height": { "default_value": 0.5 },
-    "speed_print": { "default_value": 100 }
+    "machine_depth": { "default_value": 200 },
+    "layer_height": { "default_value": 0.5 }
   }
 }
