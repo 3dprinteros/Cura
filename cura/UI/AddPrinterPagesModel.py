@@ -24,6 +24,8 @@ class AddPrinterPagesModel(WelcomePagesModel):
         self._pages.append({"id": "machine_actions",
                             "page_url": self._getBuiltinWelcomePagePath("FirstStartMachineActionsContent.qml"),
                             "should_show_function": self.shouldShowMachineActions,
+                            "next_page_button_text": self._catalog.i18nc("@action:button", "Finish"),
+							"previous_page_button_text": self._catalog.i18nc("@action:button", "Cancel"),
                             })
         self.setItems(self._pages)
 
