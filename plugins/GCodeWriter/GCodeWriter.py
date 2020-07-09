@@ -4,11 +4,15 @@
 import re  # For escaping characters in the settings.
 import json
 import copy
+import datetime
 
 from UM.Mesh.MeshWriter import MeshWriter
 from UM.Logger import Logger
 from UM.Application import Application
 from UM.Settings.InstanceContainer import InstanceContainer
+from UM.Qt.Duration import Duration
+from UM.Qt.Duration import DurationFormat
+
 from cura.Machines.ContainerTree import ContainerTree
 
 from UM.i18n import i18nCatalog
@@ -60,6 +64,32 @@ class GCodeWriter(MeshWriter):
     #   \param nodes This is ignored.
     #   \param mode Additional information on how to format the g-code in the
     #   file. This must always be text mode.
+
+    def get_comment_info(self):
+        print_info = self._application.getPrintInformation()
+        stack = Application.getInstance().getGlobalContainerStack()
+
+        nozzle_sizes = ""
+        infill_sparse_densities = ""
+        layer_height = ""
+        for extruder in sorted(stack.extruderList):
+            nozzle_sizes += str(extruder.getProperty("machine_nozzle_size", "value")) + " "
+            infill_sparse_densities += str(extruder.getProperty("infill_sparse_density", "value")) + " "
+            layer_height = str(extruder.getProperty("layer_height", "value")) + " "
+
+        info_comment_lines = [
+            ";Printing_duration: " + print_info.currentPrintTime.getDisplayString(DurationFormat.Format.ISO8601),
+            ";Nozzle: " + nozzle_sizes,
+            ";Filment: " + ' '.join(print_info.materialNames),
+            ";Filment_weight: " + ' '.join(map(str, print_info.materialWeights)),
+            ";Infill: " + infill_sparse_densities,
+            ";Layer_height: " + layer_height,
+            ";Last_changed: " + str(datetime.datetime.now())
+        ]
+
+        return info_comment_lines
+
+
     def write(self, stream, nodes, mode = MeshWriter.OutputMode.TextMode):
         if mode != MeshWriter.OutputMode.TextMode:
             Logger.log("e", "GCodeWriter does not support non-text mode.")
@@ -79,10 +109,18 @@ class GCodeWriter(MeshWriter):
                 if gcode[:len(self._setting_keyword)] == self._setting_keyword:
                     has_settings = True
                 stream.write(gcode)
+
             # Serialise the current container stack and put it at the end of the file.
             if not has_settings:
                 settings = self._serialiseSettings(Application.getInstance().getGlobalContainerStack())
                 stream.write(settings)
+
+            # put comment with print information to the end of the file
+            info_comment = '\n'.join(self.get_comment_info()) + '\n'
+            stream.write(info_comment)
+            file_size_comment = ";File_size: " + str(round((len(''.join(gcode_list) + info_comment) / 1024 / 1024), 2)) + '\n'
+            stream.write(file_size_comment)
+            
             return True
 
         self.setInformation(catalog.i18nc("@warning:status", "Please prepare G-code before exporting."))
