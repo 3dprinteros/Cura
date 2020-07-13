@@ -84,7 +84,7 @@ class GCodeWriter(MeshWriter):
             ";@Filment_weight: " + ' '.join(map(str, print_info.materialWeights)),
             ";@Infill: " + infill_sparse_densities,
             ";@Layer_height: " + layer_height,
-            ";@Last_changed: " + str(datetime.datetime.now())
+            ";@Last_changed: " + str(round(datetime.datetime.timestamp(datetime.datetime.now())))
         ]
 
         return info_comment_lines
