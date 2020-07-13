@@ -78,13 +78,13 @@ class GCodeWriter(MeshWriter):
             layer_height = str(extruder.getProperty("layer_height", "value")) + " "
 
         info_comment_lines = [
-            ";Printing_duration: " + print_info.currentPrintTime.getDisplayString(DurationFormat.Format.ISO8601),
-            ";Nozzle: " + nozzle_sizes,
-            ";Filment: " + ' '.join(print_info.materialNames),
-            ";Filment_weight: " + ' '.join(map(str, print_info.materialWeights)),
-            ";Infill: " + infill_sparse_densities,
-            ";Layer_height: " + layer_height,
-            ";Last_changed: " + str(datetime.datetime.now())
+            ";@Printing_duration: " + print_info.currentPrintTime.getDisplayString(DurationFormat.Format.ISO8601),
+            ";@Nozzle: " + nozzle_sizes,
+            ";@Filment: " + ' '.join(print_info.materialNames),
+            ";@Filment_weight: " + ' '.join(map(str, print_info.materialWeights)),
+            ";@Infill: " + infill_sparse_densities,
+            ";@Layer_height: " + layer_height,
+            ";@Last_changed: " + str(datetime.datetime.now())
         ]
 
         return info_comment_lines
@@ -118,7 +118,7 @@ class GCodeWriter(MeshWriter):
             # put comment with print information to the end of the file
             info_comment = '\n'.join(self.get_comment_info()) + '\n'
             stream.write(info_comment)
-            file_size_comment = ";File_size: " + str(round((len(''.join(gcode_list) + info_comment) / 1024 / 1024), 2)) + '\n'
+            file_size_comment = ";@File_size: " + str(round((len(''.join(gcode_list) + info_comment) / 1024 / 1024), 2)) + '\n'
             stream.write(file_size_comment)
             
             return True
