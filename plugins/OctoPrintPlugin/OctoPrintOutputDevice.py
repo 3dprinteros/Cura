@@ -417,8 +417,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             return
 
         # Check printer space
-        gcode_body = self._gcode_stream.getvalue()
-        if self._freeStorage < sys.getsizeof(gcode_body):
+        gcode_body_size = sys.getsizeof(self._gcode_stream.getvalue())
+        min_free_space = 125829120
+
+        if self._freeStorage < (gcode_body_size + min_free_space):
             self._error_message = Message(
                 i18n_catalog.i18nc("@info:status", "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"),
                 title=i18n_catalog.i18nc("@label", "OctoPrint error")
@@ -426,7 +428,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._error_message.show()
             Logger.log("e",
                        "Unable to send data to OctoPrint. No memory left on device. Free: %s bytes, Requested: %s bytes",
-                       str(self._freeStorage), str(sys.getsizeof(gcode_body)))
+                       str(self._freeStorage), str(gcode_body_size))
             return
 
         if self._error_message:
