@@ -34,6 +34,7 @@ from PyQt5.QtNetwork import QNetworkReply, QSslConfiguration, QSslSocket
 from PyQt5.QtCore import QUrl, QTimer, pyqtSignal, pyqtProperty, pyqtSlot, QCoreApplication
 from PyQt5.QtGui import QImage, QDesktopServices
 
+import sys
 import json
 import os.path
 import re
@@ -42,6 +43,7 @@ import base64
 from io import StringIO, BytesIO
 from enum import IntEnum
 from collections import namedtuple
+
 
 from typing import cast, Any, Callable, Dict, List, Optional, Union, TYPE_CHECKING
 if TYPE_CHECKING:
@@ -150,6 +152,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "MonitorItem4x.qml")
 
         name = self._id
+        print(name)
         matches = re.search(r"^\"(.*)\"\._octoprint\._tcp.local$", name)
         if matches:
             name = matches.group(1)
@@ -195,7 +198,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._output_controller = OctoPrintOutputController(self)
 
-        self._polling_end_points = ["printer", "job"]
+        self._polling_end_points = ["printer", "job", "files"]
+
+        self._freeStorage = 0
 
     @property
     def _store_on_sd(self) -> bool:
@@ -411,6 +416,19 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             Logger.log("e", "GCodeWrite failed: %s" % gcode_writer.getInformation())
             return
 
+        # Check printer space
+        gcode_body = self._gcode_stream.getvalue()
+        if self._freeStorage < sys.getsizeof(gcode_body):
+            self._error_message = Message(
+                i18n_catalog.i18nc("@info:status", "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"),
+                title=i18n_catalog.i18nc("@label", "OctoPrint error")
+            )
+            self._error_message.show()
+            Logger.log("e",
+                       "Unable to send data to OctoPrint. No memory left on device. Free: %s bytes, Requested: %s bytes",
+                       str(self._freeStorage), str(sys.getsizeof(gcode_body)))
+            return
+
         if self._error_message:
             self._error_message.hide()
             self._error_message = None # type: Optional[Message]
@@ -570,6 +588,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         ##  Create parts (to be placed inside multipart)
         gcode_body = self._gcode_stream.getvalue()
+
         if isinstance(gcode_body, str):
             # encode StringIO result to bytes
             gcode_body = gcode_body.encode()
@@ -674,6 +693,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             return
 
         if reply.operation() == QNetworkAccessManager.GetOperation:
+            file_info_received = False
             if self._api_prefix + "printerprofiles" in reply.url().toString():
                 if http_status_code == 200:
                     try:
@@ -932,6 +952,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     return
 
             elif self._api_prefix + "files/" in reply.url().toString():  # Information about a file
+                file_info_received = True
                 if http_status_code == 200:
                     if not self._waiting_for_analysis:
                         return
@@ -958,6 +979,17 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         self._selectAndPrint(end_point)
                     else:
                         Logger.log("d", "Still waiting for PrintTimeGenius analysis of %s" % end_point)
+            elif self._api_prefix + "files" in reply.url().toString() and not file_info_received:  # Information about a files and memory
+                if http_status_code == 200:
+                    try:
+                        json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
+                    except json.decoder.JSONDecodeError:
+                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        json_data = {}
+
+                    if "free" in json_data:
+                        self._freeStorage = json_data["free"]
+                        #Logger.log("d", "Received JSON from get api/files. Free: %s", str(self._freeStorage))
 
         elif reply.operation() == QNetworkAccessManager.PostOperation:
             if self._api_prefix + "files" in reply.url().toString():  # Result from /files command to start a printjob:
