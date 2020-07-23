@@ -184,6 +184,11 @@ msgctxt "@info:title"
 msgid "Build Volume"
 msgstr ""
 
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:423
+msgctxt "@info:status"
+msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
+msgstr ""
+
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:107
 msgctxt "@title:window"
 msgid "Cura can't start"
