@@ -159,6 +159,11 @@ msgctxt "@info:status"
 msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
 msgstr "На принтере недостаточно места. Удалите старые печати на экране принтера, чтобы освободить память"
 
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@label"
+msgid "Select your OctoPrint instance from the list below."
+msgstr "Выберите свой профиль OctoPrint из списка ниже"
+
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:107
 msgctxt "@title:window"
 msgid "Cura can't start"
