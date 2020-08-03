@@ -67,7 +67,7 @@ Item
                 id: networkPrinterListView
                 anchors.fill: parent
                 model: contentLoader.enabled ? CuraApplication.getDiscoveredPrintersModel().discoveredPrinters: undefined
-
+                // model: contentLoader.enabled ? manager.discoveredInstances: undefined
                 section.property: "modelData.sectionName"
                 section.criteria: ViewSection.FullString
                 section.delegate: sectionHeading
@@ -196,7 +196,7 @@ Item
         Item
         {
             id: troubleshootingButton
-
+            visible: false
             anchors.right: parent.right
             anchors.rightMargin: UM.Theme.getSize("default_margin").width
             anchors.verticalCenter: parent.verticalCenter

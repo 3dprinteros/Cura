@@ -203,13 +203,11 @@ Item
                     {
                         if (addPrinterByIpScreen.hasRequestFinished)
                         {
-                            return catalog.i18nc("@label", "Could not connect to device.") + "<br /><br /><a href=\"https://ultimaker.com/en/resources/52891-set-up-a-cloud-connection\">"
-                                + catalog.i18nc("@label", "Can't connect to your Ultimaker printer?") + "</a>";
+                            return catalog.i18nc("@label", "Could not connect to device.")
                         }
                         else
                         {
-                            return catalog.i18nc("@label", "The printer at this address has not responded yet.") + "<br /><br /><a href=\"https://ultimaker.com/en/resources/52891-set-up-a-cloud-connection\">"
-                                + catalog.i18nc("@label", "Can't connect to your Ultimaker printer?") + "</a>";
+                            return catalog.i18nc("@label", "The printer at this address has not responded yet.")
                         }
                     }
                     onLinkActivated: Qt.openUrlExternally(link)
