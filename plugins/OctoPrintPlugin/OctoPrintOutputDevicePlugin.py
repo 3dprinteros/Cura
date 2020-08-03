@@ -3,6 +3,9 @@
 
 from UM.OutputDevice.OutputDevicePlugin import OutputDevicePlugin
 from .OctoPrintOutputDevice import OctoPrintOutputDevice
+from cura.CuraApplication import CuraApplication
+from cura.Settings.CuraStackBuilder import CuraStackBuilder
+from cura.Settings.GlobalStack import GlobalStack
 
 from UM.Signal import Signal, signalemitter
 from UM.Application import Application
@@ -74,7 +77,6 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         # Load custom instances from preferences
         self._preferences = Application.getInstance().getPreferences()
         self._preferences.addPreference("octoprint/manual_instances", "{}")
-
         self._preferences.addPreference("octoprint/use_zeroconf", True)
 
         try:
@@ -238,17 +240,71 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
                 if self._instances[key].isConnected():
                     self._instances[key].close()
 
+    ## Returns a dict of printer BOM numbers to machine types.
+    #  These numbers are available in the machine definition already so we just search for them here.
+    @staticmethod
+    def _getPrinterTypeIdentifiers() -> Dict[str, str]:
+        container_registry = CuraApplication.getInstance().getContainerRegistry()
+        ultimaker_machines = container_registry.findContainersMetadata(type="machine",
+                                                                       manufacturer="Imprinta")
+        found_machine_type_identifiers = {}  # type: Dict[str, str]
+        for machine in ultimaker_machines:
+            machine_type = machine.get("id", None)
+            machine_bom_numbers = machine.get("bom_numbers", [])
+            if machine_type and machine_bom_numbers:
+                for bom_number in machine_bom_numbers:
+                    # This produces a n:1 mapping of bom numbers to machine types
+                    # allowing the S5R1 and S5R2 hardware to use a single S5 definition.
+                    found_machine_type_identifiers[str(bom_number)] = machine_type
+        return found_machine_type_identifiers
+
+
     ##  Because the model needs to be created in the same thread as the QMLEngine, we use a signal.
     def addInstance(self, name: str, address: str, port: int, properties: Dict[bytes, bytes]) -> None:
+        properties[b"printer_type"] = b"hercules"
         instance = OctoPrintOutputDevice(name, address, port, properties)
+
         self._instances[instance.getId()] = instance
         global_container_stack = Application.getInstance().getGlobalContainerStack()
-        if global_container_stack and instance.getId() == global_container_stack.getMetaDataEntry("octoprint_id"):
-            api_key = global_container_stack.getMetaDataEntry("octoprint_api_key", "")
-            instance.setApiKey(self._deobfuscateString(api_key))
-            instance.setShowCamera(parseBool(global_container_stack.getMetaDataEntry("octoprint_show_camera", "true")))
-            instance.connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
-            instance.connect()
+        instance.setApiKey(self._deobfuscateString("0F22A68224504305889ECA247BD762F9"))
+
+        # Detect the machine type based on the BOM number that is sent over the network.
+        # properties[b"printer_type"] = b"Unknown"
+        # for bom, p_type in printer_type_identifiers.items():
+        #     if machine_identifier.startswith(bom):
+        #         properties[b"printer_type"] = bytes(p_type, encoding="utf8")
+        #         break
+
+        discovered_printers_model = CuraApplication.getInstance().getDiscoveredPrintersModel()
+        if address in list(discovered_printers_model.discoveredPrintersByAddress.keys()):
+            # The printer was already added, we just update the available data.
+            discovered_printers_model.updateDiscoveredPrinter(
+                ip_address=address,
+                name=instance.getName(),
+                machine_type=instance.printerType
+            )
+        else:
+            # The printer was not added yet so let's do that.
+            discovered_printers_model.addDiscoveredPrinter(
+                ip_address=address,
+                key=instance.getId(),
+                name=instance.getName(),
+                create_callback=self._createMachineFromDiscoveredDevice,
+                machine_type=instance.printerType,
+                device=instance
+            )
+
+        api_key = "0F22A68224504305889ECA247BD762F9"
+        instance.setApiKey(self._deobfuscateString(api_key))
+        instance.setShowCamera(True)
+        instance.connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
+        instance.connect()
+        # if global_container_stack and instance.getId() == global_container_stack.getMetaDataEntry("octoprint_id"):
+        #     api_key = global_container_stack.getMetaDataEntry("octoprint_api_key", "")
+        #     print("api_key: " + api_key)
+
+
+
 
     def removeInstance(self, name: str) -> None:
         instance = self._instances.pop(name, None)
@@ -256,6 +312,42 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             if instance.isConnected():
                 instance.connectionStateChanged.disconnect(self._onInstanceConnectionStateChanged)
                 instance.disconnect()
+
+    ## Add a device to the current active machine.
+    def _connectToOutputDevice(self, device: OctoPrintOutputDevice, machine: GlobalStack) -> None:
+
+        machine.setName(device.name)
+        machine.setMetaDataEntry("octoprint_api_key", "0F22A68224504305889ECA247BD762F9")
+        machine.setMetaDataEntry("group_name", device.name)
+        machine.addConfiguredConnectionType(device.connectionType.value)
+
+        if not device.isConnected():
+            device.connect()
+
+        output_device_manager = CuraApplication.getInstance().getOutputDeviceManager()
+        if device.key not in output_device_manager.getOutputDeviceIds():
+            output_device_manager.addOutputDevice(device)
+
+    ## Create a machine instance based on the discovered network printer.
+    def _createMachineFromDiscoveredDevice(self, device_id: str) -> None:
+        print(device_id)
+        device = self.getInstanceById(device_id)
+
+        if device is None:
+            print("device is none")
+            return
+
+        # Create a new machine and activate it.
+        # We do not use use MachineManager.addMachine here because we need to set the network key before activating it.
+        # If we do not do this the auto-pairing with the cloud-equivalent device will not work.
+        new_machine = CuraStackBuilder.createMachine(device.name, device.printerType)
+        if not new_machine:
+            Logger.log("e", "Failed creating a new machine")
+            return
+        new_machine.setMetaDataEntry("octoprint_api_key", "0F22A68224504305889ECA247BD762F9")
+        CuraApplication.getInstance().getMachineManager().setActiveMachine(new_machine.getId())
+        self._connectToOutputDevice(device, new_machine)
+
 
     ##  Utility handler to base64-decode a string (eg an obfuscated API key), if it has been encoded before
     def _deobfuscateString(self, source: str) -> str:

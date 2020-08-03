@@ -305,6 +305,7 @@ Cura.MachineAction
                             id: apiKey
                             width: Math.floor(parent.parent.width * (requestApiKey.visible ? 0.5 : 0.8) - UM.Theme.getSize("default_margin").width)
                             onTextChanged: apiCheckDelay.throttledCheck()
+                            text: "0F22A68224504305889ECA247BD762F9"
                         }
 
                         Button

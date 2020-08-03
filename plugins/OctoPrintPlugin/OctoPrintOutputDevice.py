@@ -152,7 +152,6 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "MonitorItem4x.qml")
 
         name = self._id
-        print(name)
         matches = re.search(r"^\"(.*)\"\._octoprint\._tcp.local$", name)
         if matches:
             name = matches.group(1)

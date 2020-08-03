@@ -203,7 +203,7 @@ class DiscoverOctoPrintAction(MachineAction):
             basic_auth_username, basic_auth_password
         )
         self._appkey_request.setRawHeader(b"Content-Type", b"application/json")
-        data = json.dumps({"app": "Cura"})
+        data = json.dumps({"app": "DiaPrint PC"})
         self._appkey_reply = self._network_manager.post(self._appkey_request, data.encode())
 
     @pyqtSlot()
@@ -426,6 +426,8 @@ class DiscoverOctoPrintAction(MachineAction):
         Logger.log("d", "Creating additional ui components for OctoPrint-connected printers.")
 
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "OctoPrintComponents.qml")
+        path2 = "E:\projects\github\3dprinteros\Cura\resources\qml\WelcomePages\AddNetworkPrinterScrollView.qml"
+
         self._additional_components = self._application.createQmlComponent(path, {"manager": self})
         if not self._additional_components:
             Logger.log("w", "Could not create additional components for OctoPrint-connected printers.")
