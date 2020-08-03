@@ -81,7 +81,7 @@ msgstr "Собственный материал"
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/MaterialManagementModel.py:214 /home/trin/Gedeeld/Projects/Cura/resources/qml/Menus/ConfigurationMenu/ConfigurationMenu.qml:205
 msgctxt "@label"
 msgid "Custom"
-msgstr "Своё"
+msgstr "Расширенные"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/QualityManagementModel.py:359
 msgctxt "@label"
@@ -153,16 +153,6 @@ msgstr "Высота печатаемого объёма была уменьше
 msgctxt "@info:title"
 msgid "Build Volume"
 msgstr "Объём печати"
-
-#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:423
-msgctxt "@info:status"
-msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
-msgstr "На принтере недостаточно места. Удалите старые печати на экране принтера, чтобы освободить память"
-
-#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
-msgctxt "@label"
-msgid "Select your OctoPrint instance from the list below."
-msgstr "Выберите свой профиль OctoPrint из списка ниже"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:107
 msgctxt "@title:window"
@@ -614,7 +604,7 @@ msgstr "Поддержки"
 #: /home/trin/Gedeeld/Projects/Cura/cura/UI/PrintInformation.py:88
 msgctxt "@tooltip"
 msgid "Skirt"
-msgstr "Юбка"
+msgstr "Скирт"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/UI/PrintInformation.py:89
 msgctxt "@tooltip"
@@ -2097,12 +2087,12 @@ msgstr "Перемещения"
 #: /home/trin/Gedeeld/Projects/Cura/plugins/SimulationView/SimulationViewMenuComponent.qml:236
 msgctxt "@label"
 msgid "Helpers"
-msgstr "Помощники"
+msgstr "Поддержки"
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/SimulationView/SimulationViewMenuComponent.qml:242
 msgctxt "@label"
 msgid "Shell"
-msgstr "Ограждение"
+msgstr "Периметры"
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/SimulationView/SimulationViewMenuComponent.qml:248 /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedInfillDensitySelector.qml:65
 msgctxt "@label"
@@ -2934,7 +2924,7 @@ msgstr "%1 г"
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/ActionPanel/SliceProcessWidget.qml:55
 msgctxt "@label:PrintjobStatus"
 msgid "Slicing..."
-msgstr "Нарезка на слои..."
+msgstr "Отслайсить..."
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/ActionPanel/SliceProcessWidget.qml:67
 msgctxt "@label:PrintjobStatus"
@@ -5520,6 +5510,16 @@ msgstr "Предоставляет рентгеновский вид."
 msgctxt "name"
 msgid "X-Ray View"
 msgstr "Просмотр в рентгене"
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:423
+msgctxt "@info:status"
+msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
+msgstr "На принтере недостаточно места. Удалите старые печати на экране принтера, чтобы освободить память"
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@label"
+msgid "Select your OctoPrint instance from the list below."
+msgstr "Выберите свой профиль OctoPrint из списка ниже."
 
 #~ msgctxt "@info:generic"
 #~ msgid ""
@@ -8665,7 +8665,7 @@ msgstr "Просмотр в рентгене"
 
 #~ msgctxt "@label"
 #~ msgid "Helper Parts:"
-#~ msgstr "Помощники:"
+#~ msgstr "Поддержки:"
 
 #~ msgctxt "@option:check"
 #~ msgid "Print Build Plate Adhesion"

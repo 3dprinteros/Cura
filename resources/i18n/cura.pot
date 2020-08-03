@@ -6,17 +6,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
-"POT-Creation-Date: 2020-04-06 16:33+0200\n"
+"POT-Creation-Date: 2020-07-24 05:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 2.4\n"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/DiscoveredPrintersModel.py:85
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentCategoryModel.py:104
@@ -30,8 +30,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/DiscoveredPrintersModel.py:115
 msgctxt "@label"
-msgid ""
-"The printer(s) below cannot be connected because they are part of a group"
+msgid "The printer(s) below cannot be connected because they are part of a group"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/DiscoveredPrintersModel.py:117
@@ -61,8 +60,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentTranslations.py:15
 msgctxt "@text"
 msgid ""
-"The visual profile is designed to print visual prototypes and models with "
-"the intent of high visual and surface quality."
+"The visual profile is designed to print visual prototypes and models with the intent of high visual and "
+"surface quality."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentCategoryModel.py:48
@@ -75,8 +74,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentTranslations.py:19
 msgctxt "@text"
 msgid ""
-"The engineering profile is designed to print functional prototypes and end-"
-"use parts with the intent of better accuracy and for closer tolerances."
+"The engineering profile is designed to print functional prototypes and end-use parts with the intent of "
+"better accuracy and for closer tolerances."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentCategoryModel.py:52
@@ -89,8 +88,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentTranslations.py:23
 msgctxt "@text"
 msgid ""
-"The draft profile is designed to print initial prototypes and concept "
-"validation with the intent of significant print time reduction."
+"The draft profile is designed to print initial prototypes and concept validation with the intent of "
+"significant print time reduction."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/MaterialManagementModel.py:213
@@ -175,23 +174,13 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/BuildVolume.py:95
 msgctxt "@info:status"
 msgid ""
-"The build volume height has been reduced due to the value of the \"Print "
-"Sequence\" setting to prevent the gantry from colliding with printed models."
+"The build volume height has been reduced due to the value of the \"Print Sequence\" setting to prevent "
+"the gantry from colliding with printed models."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/BuildVolume.py:97
 msgctxt "@info:title"
 msgid "Build Volume"
-msgstr ""
-
-#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:423
-msgctxt "@info:status"
-msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
-msgstr ""
-
-#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
-msgctxt "@label"
-msgid "Select your OctoPrint instance from the list below."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:107
@@ -202,15 +191,11 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:113
 msgctxt "@label crash message"
 msgid ""
-"<p><b>Oops, Ultimaker Cura has encountered something that doesn't seem right."
-"</p></b>\n"
-"                    <p>We encountered an unrecoverable error during start "
-"up. It was possibly caused by some incorrect configuration files. We suggest "
-"to backup and reset your configuration.</p>\n"
-"                    <p>Backups can be found in the configuration folder.</"
-"p>\n"
-"                    <p>Please send us this Crash Report to fix the problem.</"
-"p>\n"
+"<p><b>Oops, Ultimaker Cura has encountered something that doesn't seem right.</p></b>\n"
+"                    <p>We encountered an unrecoverable error during start up. It was possibly caused by "
+"some incorrect configuration files. We suggest to backup and reset your configuration.</p>\n"
+"                    <p>Backups can be found in the configuration folder.</p>\n"
+"                    <p>Please send us this Crash Report to fix the problem.</p>\n"
 "                "
 msgstr ""
 
@@ -242,10 +227,9 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/CrashHandler.py:188
 msgctxt "@label crash message"
 msgid ""
-"<p><b>A fatal error has occurred in Cura. Please send us this Crash Report "
-"to fix the problem</p></b>\n"
-"            <p>Please use the \"Send report\" button to post a bug report "
-"automatically to our servers</p>\n"
+"<p><b>A fatal error has occurred in Cura. Please send us this Crash Report to fix the problem</p></b>\n"
+"            <p>Please use the \"Send report\" button to post a bug report automatically to our servers</"
+"p>\n"
 "        "
 msgstr ""
 
@@ -375,8 +359,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/CuraApplication.py:1166
 #, python-format
 msgctxt ""
-"@info 'width', 'depth' and 'height' are variable names that must NOT be "
-"translated; just translate the format of ##x##x## mm."
+"@info 'width', 'depth' and 'height' are variable names that must NOT be translated; just translate the "
+"format of ##x##x## mm."
 msgid "%(width).1f x %(depth).1f x %(height).1f mm"
 msgstr ""
 
@@ -464,9 +448,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:125
 #, python-brace-format
 msgctxt "@label Don't translate the XML tag <filename>!"
-msgid ""
-"The file <filename>{0}</filename> already exists. Are you sure you want to "
-"overwrite it?"
+msgid "The file <filename>{0}</filename> already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/ContainerManager.py:432
@@ -478,16 +460,13 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:136
 #, python-brace-format
 msgctxt "@info:status Don't translate the XML tags <filename> or <message>!"
-msgid ""
-"Failed to export profile to <filename>{0}</filename>: <message>{1}</message>"
+msgid "Failed to export profile to <filename>{0}</filename>: <message>{1}</message>"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:143
 #, python-brace-format
 msgctxt "@info:status Don't translate the XML tag <filename>!"
-msgid ""
-"Failed to export profile to <filename>{0}</filename>: Writer plugin reported "
-"failure."
+msgid "Failed to export profile to <filename>{0}</filename>: Writer plugin reported failure."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:148
@@ -510,8 +489,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:180
 #, python-brace-format
 msgctxt "@info:status Don't translate the XML tags <filename>!"
-msgid ""
-"Can't import profile from <filename>{0}</filename> before a printer is added."
+msgid "Can't import profile from <filename>{0}</filename> before a printer is added."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:197
@@ -530,9 +508,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:235
 #, python-brace-format
 msgctxt "@info:status Don't translate the XML tags <filename>!"
-msgid ""
-"This profile <filename>{0}</filename> contains incorrect data, could not "
-"import it."
+msgid "This profile <filename>{0}</filename> contains incorrect data, could not import it."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/CuraContainerRegistry.py:324
@@ -593,8 +569,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/MachineManager.py:796
 msgctxt "@info:message Followed by a list of settings."
-msgid ""
-"Settings have been changed to match the current availability of extruders:"
+msgid "Settings have been changed to match the current availability of extruders:"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/MachineManager.py:798
@@ -719,22 +694,18 @@ msgstr ""
 #, python-brace-format
 msgctxt "@info:status"
 msgid ""
-"<p>One or more 3D models may not print optimally due to the model size and "
-"material configuration:</p>\n"
+"<p>One or more 3D models may not print optimally due to the model size and material configuration:</p>\n"
 "<p>{model_names}</p>\n"
-"<p>Find out how to ensure the best possible print quality and reliability.</"
-"p>\n"
-"<p><a href=\"https://ultimaker.com/3D-model-assistant\">View print quality "
-"guide</a></p>"
+"<p>Find out how to ensure the best possible print quality and reliability.</p>\n"
+"<p><a href=\"https://ultimaker.com/3D-model-assistant\">View print quality guide</a></p>"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/3MFReader/ThreeMFWorkspaceReader.py:497
 #, python-brace-format
 msgctxt "@info:status Don't translate the XML tags <filename> or <message>!"
 msgid ""
-"Project file <filename>{0}</filename> contains an unknown machine type "
-"<message>{1}</message>. Cannot import the machine. Models will be imported "
-"instead."
+"Project file <filename>{0}</filename> contains an unknown machine type <message>{1}</message>. Cannot "
+"import the machine. Models will be imported instead."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/3MFReader/ThreeMFWorkspaceReader.py:500
@@ -838,8 +809,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:343
 msgctxt "@info:status"
 msgid ""
-"Unable to slice with the current material as it is incompatible with the "
-"selected machine or configuration."
+"Unable to slice with the current material as it is incompatible with the selected machine or "
+"configuration."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:343
@@ -855,31 +826,26 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:373
 #, python-brace-format
 msgctxt "@info:status"
-msgid ""
-"Unable to slice with the current settings. The following settings have "
-"errors: {0}"
+msgid "Unable to slice with the current settings. The following settings have errors: {0}"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:397
 #, python-brace-format
 msgctxt "@info:status"
 msgid ""
-"Unable to slice due to some per-model settings. The following settings have "
-"errors on one or more models: {error_labels}"
+"Unable to slice due to some per-model settings. The following settings have errors on one or more "
+"models: {error_labels}"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:406
 msgctxt "@info:status"
-msgid ""
-"Unable to slice because the prime tower or prime position(s) are invalid."
+msgid "Unable to slice because the prime tower or prime position(s) are invalid."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:415
 #, python-format
 msgctxt "@info:status"
-msgid ""
-"Unable to slice because there are objects associated with disabled Extruder "
-"%s."
+msgid "Unable to slice because there are objects associated with disabled Extruder %s."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraEngineBackend/CuraEngineBackend.py:424
@@ -915,12 +881,10 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdateChecker/FirmwareUpdateCheckerMessage.py:17
 #, python-brace-format
-msgctxt ""
-"@info Don't translate {machine_name}, since it gets replaced by a printer "
-"name!"
+msgctxt "@info Don't translate {machine_name}, since it gets replaced by a printer name!"
 msgid ""
-"New features are available for your {machine_name}! It is recommended to "
-"update the firmware on your printer."
+"New features are available for your {machine_name}! It is recommended to update the firmware on your "
+"printer."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdateChecker/FirmwareUpdateCheckerMessage.py:21
@@ -971,8 +935,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/GCodeReader/FlavorParser.py:495
 msgctxt "@info:generic"
 msgid ""
-"Make sure the g-code is suitable for your printer and printer configuration "
-"before sending the file to it. The g-code representation may not be accurate."
+"Make sure the g-code is suitable for your printer and printer configuration before sending the file to "
+"it. The g-code representation may not be accurate."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/GCodeReader/__init__.py:18
@@ -1329,8 +1293,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/src/Messages/LegacyDeviceNoLongerSupportedMessage.py:18
 msgctxt "@info:status"
 msgid ""
-"You are attempting to connect to a printer that is not running Ultimaker "
-"Connect. Please update the printer to the latest firmware."
+"You are attempting to connect to a printer that is not running Ultimaker Connect. Please update the "
+"printer to the latest firmware."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/src/Messages/LegacyDeviceNoLongerSupportedMessage.py:21
@@ -1341,9 +1305,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/src/Messages/MaterialSyncMessage.py:24
 #, python-brace-format
 msgctxt "@info:status"
-msgid ""
-"Cura has detected material profiles that were not yet installed on the host "
-"printer of group {0}."
+msgid "Cura has detected material profiles that were not yet installed on the host printer of group {0}."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/src/Messages/MaterialSyncMessage.py:26
@@ -1355,8 +1317,8 @@ msgstr ""
 #, python-brace-format
 msgctxt "@info:status"
 msgid ""
-"You are attempting to connect to {0} but it is not the host of a group. You "
-"can visit the web page to configure it as a group host."
+"You are attempting to connect to {0} but it is not the host of a group. You can visit the web page to "
+"configure it as a group host."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/src/Messages/NotClusterHostMessage.py:30
@@ -1461,15 +1423,14 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/USBPrinting/USBPrinterOutputDevice.py:106
 msgctxt "@label"
-msgid ""
-"A USB print is in progress, closing Cura will stop this print. Are you sure?"
+msgid "A USB print is in progress, closing Cura will stop this print. Are you sure?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/USBPrinting/USBPrinterOutputDevice.py:128
 msgctxt "@message"
 msgid ""
-"A print is still in progress. Cura cannot start another print via USB until "
-"the previous print has completed."
+"A print is still in progress. Cura cannot start another print via USB until the previous print has "
+"completed."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/USBPrinting/USBPrinterOutputDevice.py:128
@@ -1489,9 +1450,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ModelChecker/ModelChecker.qml:22
 msgctxt "@info:tooltip"
-msgid ""
-"Some things could be problematic in this print. Click to see tips for "
-"adjustment."
+msgid "Some things could be problematic in this print. Click to see tips for adjustment."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/3MFReader/WorkspaceDialog.qml:14
@@ -1682,9 +1641,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraDrive/src/qml/components/BackupListItem.qml:109
 msgctxt "@dialog:info"
-msgid ""
-"You will need to restart Cura before your backup is restored. Do you want to "
-"close Cura now?"
+msgid "You will need to restart Cura before your backup is restored. Do you want to close Cura now?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraDrive/src/qml/components/BackupListItemDetails.qml:21
@@ -1724,16 +1681,13 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraDrive/src/qml/pages/BackupsPage.qml:38
 msgctxt "@empty_state"
-msgid ""
-"You don't have any backups currently. Use the 'Backup Now' button to create "
-"one."
+msgid "You don't have any backups currently. Use the 'Backup Now' button to create one."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraDrive/src/qml/pages/BackupsPage.qml:60
 msgctxt "@backup_limit_info"
 msgid ""
-"During the preview phase, you'll be limited to 5 visible backups. Remove a "
-"backup to see older ones."
+"During the preview phase, you'll be limited to 5 visible backups. Remove a backup to see older ones."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/CuraDrive/src/qml/pages/WelcomePage.qml:34
@@ -1757,16 +1711,15 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:39
 msgctxt "@label"
 msgid ""
-"Firmware is the piece of software running directly on your 3D printer. This "
-"firmware controls the step motors, regulates the temperature and ultimately "
-"makes your printer work."
+"Firmware is the piece of software running directly on your 3D printer. This firmware controls the step "
+"motors, regulates the temperature and ultimately makes your printer work."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:46
 msgctxt "@label"
 msgid ""
-"The firmware shipping with new printers works, but new versions tend to have "
-"more features and improvements."
+"The firmware shipping with new printers works, but new versions tend to have more features and "
+"improvements."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:58
@@ -1781,15 +1734,13 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:83
 msgctxt "@label"
-msgid ""
-"Firmware can not be updated because there is no connection with the printer."
+msgid "Firmware can not be updated because there is no connection with the printer."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:91
 msgctxt "@label"
 msgid ""
-"Firmware can not be updated because the connection with the printer does not "
-"support upgrading firmware."
+"Firmware can not be updated because the connection with the printer does not support upgrading firmware."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/FirmwareUpdater/FirmwareUpdaterMachineAction.qml:98
@@ -1880,10 +1831,9 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:126
 msgctxt "@info:tooltip"
 msgid ""
-"For lithophanes dark pixels should correspond to thicker locations in order "
-"to block more light coming through. For height maps lighter pixels signify "
-"higher terrain, so lighter pixels should correspond to thicker locations in "
-"the generated 3D model."
+"For lithophanes dark pixels should correspond to thicker locations in order to block more light coming "
+"through. For height maps lighter pixels signify higher terrain, so lighter pixels should correspond to "
+"thicker locations in the generated 3D model."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:139
@@ -1899,8 +1849,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:149
 msgctxt "@info:tooltip"
 msgid ""
-"For lithophanes a simple logarithmic model for translucency is available. "
-"For height maps the pixel values correspond to heights linearly."
+"For lithophanes a simple logarithmic model for translucency is available. For height maps the pixel "
+"values correspond to heights linearly."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:161
@@ -1917,9 +1867,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:171
 msgctxt "@info:tooltip"
 msgid ""
-"The percentage of light penetrating a print with a thickness of 1 "
-"millimeter. Lowering this value increases the contrast in dark regions and "
-"decreases the contrast in light regions of the image."
+"The percentage of light penetrating a print with a thickness of 1 millimeter. Lowering this value "
+"increases the contrast in dark regions and decreases the contrast in light regions of the image."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/ImageReader/ConfigUI.qml:177
@@ -2297,8 +2246,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/SliceInfoPlugin/MoreInfoWindow.qml:74
 msgctxt "@text:window"
 msgid ""
-"Ultimaker Cura collects anonymous data in order to improve the print quality "
-"and user experience. Below is an example of all the data that is shared:"
+"Ultimaker Cura collects anonymous data in order to improve the print quality and user experience. Below "
+"is an example of all the data that is shared:"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/SliceInfoPlugin/MoreInfoWindow.qml:110
@@ -2504,9 +2453,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/dialogs/CompatibilityDialog.qml:97
 msgctxt "@label"
-msgid ""
-"The following packages can not be installed because of an incompatible Cura "
-"version:"
+msgid "The following packages can not be installed because of an incompatible Cura version:"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/dialogs/ToolboxConfirmUninstallResetDialog.qml:20
@@ -2517,8 +2464,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/dialogs/ToolboxConfirmUninstallResetDialog.qml:50
 msgctxt "@text:window"
 msgid ""
-"You are uninstalling materials and/or profiles that are still in use. "
-"Confirming will reset the following materials/profiles to their defaults."
+"You are uninstalling materials and/or profiles that are still in use. Confirming will reset the "
+"following materials/profiles to their defaults."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/dialogs/ToolboxConfirmUninstallResetDialog.qml:51
@@ -2593,8 +2540,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/pages/ToolboxErrorPage.qml:16
 msgctxt "@info"
-msgid ""
-"Could not connect to the Cura Package database. Please check your connection."
+msgid "Could not connect to the Cura Package database. Please check your connection."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/Toolbox/resources/qml/pages/ToolboxLoadingPage.qml:16
@@ -2620,17 +2566,15 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UltimakerMachineActions/BedLevelMachineAction.qml:44
 msgctxt "@label"
 msgid ""
-"To make sure your prints will come out great, you can now adjust your "
-"buildplate. When you click 'Move to Next Position' the nozzle will move to "
-"the different positions that can be adjusted."
+"To make sure your prints will come out great, you can now adjust your buildplate. When you click 'Move "
+"to Next Position' the nozzle will move to the different positions that can be adjusted."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UltimakerMachineActions/BedLevelMachineAction.qml:57
 msgctxt "@label"
 msgid ""
-"For every position; insert a piece of paper under the nozzle and adjust the "
-"print build plate height. The print build plate height is right when the "
-"paper is slightly gripped by the tip of the nozzle."
+"For every position; insert a piece of paper under the nozzle and adjust the print build plate height. "
+"The print build plate height is right when the paper is slightly gripped by the tip of the nozzle."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UltimakerMachineActions/BedLevelMachineAction.qml:75
@@ -2661,11 +2605,9 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/DiscoverUM3Action.qml:57
 msgctxt "@label"
 msgid ""
-"To print directly to your printer over the network, please make sure your "
-"printer is connected to the network using a network cable or by connecting "
-"your printer to your WIFI network. If you don't connect Cura with your "
-"printer, you can still use a USB drive to transfer g-code files to your "
-"printer."
+"To print directly to your printer over the network, please make sure your printer is connected to the "
+"network using a network cable or by connecting your printer to your WIFI network. If you don't connect "
+"Cura with your printer, you can still use a USB drive to transfer g-code files to your printer."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/DiscoverUM3Action.qml:57
@@ -2693,9 +2635,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/DiscoverUM3Action.qml:176
 msgctxt "@label"
-msgid ""
-"If your printer is not listed, read the <a href='%1'>network printing "
-"troubleshooting guide</a>"
+msgid "If your printer is not listed, read the <a href='%1'>network printing troubleshooting guide</a>"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/DiscoverUM3Action.qml:205
@@ -2771,16 +2711,13 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/MonitorConfigOverrideDialog.qml:85
 msgctxt "@label"
 msgid "The assigned printer, %1, requires the following configuration change:"
-msgid_plural ""
-"The assigned printer, %1, requires the following configuration changes:"
+msgid_plural "The assigned printer, %1, requires the following configuration changes:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/MonitorConfigOverrideDialog.qml:89
 msgctxt "@label"
-msgid ""
-"The printer %1 is assigned, but the job contains an unknown material "
-"configuration."
+msgid "The printer %1 is assigned, but the job contains an unknown material configuration."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/MonitorConfigOverrideDialog.qml:99
@@ -2806,8 +2743,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/MonitorConfigOverrideDialog.qml:115
 msgctxt "@label"
 msgid ""
-"Override will use the specified settings with the existing printer "
-"configuration. This may result in a failed print."
+"Override will use the specified settings with the existing printer configuration. This may result in a "
+"failed print."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/plugins/UM3NetworkPrinting/resources/qml/MonitorConfigOverrideDialog.qml:153
@@ -3454,9 +3391,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Cura.qml:731
 msgctxt "@text:window"
 msgid ""
-"We have found one or more G-Code files within the files you have selected. "
-"You can only open one G-Code file at a time. If you want to open a G-Code "
-"file, please just select only one."
+"We have found one or more G-Code files within the files you have selected. You can only open one G-Code "
+"file at a time. If you want to open a G-Code file, please just select only one."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Cura.qml:834
@@ -3618,9 +3554,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Dialogs/AskOpenAsProjectOrModelsDialog.qml:93
 msgctxt "@text:window"
-msgid ""
-"This is a Cura project file. Would you like to open it as a project or "
-"import the models from it?"
+msgid "This is a Cura project file. Would you like to open it as a project or import the models from it?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Dialogs/AskOpenAsProjectOrModelsDialog.qml:103
@@ -3699,9 +3633,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Dialogs/OpenFilesIncludingProjectsDialog.qml:64
 msgctxt "@text:window"
 msgid ""
-"We have found one or more project file(s) within the files you have "
-"selected. You can open only one project file at a time. We suggest to only "
-"import models from those files. Would you like to proceed?"
+"We have found one or more project file(s) within the files you have selected. You can open only one "
+"project file at a time. We suggest to only import models from those files. Would you like to proceed?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Dialogs/OpenFilesIncludingProjectsDialog.qml:99
@@ -3797,8 +3730,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/MainWindow/ApplicationMenu.qml:148
 msgctxt "@info:question"
 msgid ""
-"Are you sure you want to start a new project? This will clear the build "
-"plate and any unsaved settings."
+"Are you sure you want to start a new project? This will clear the build plate and any unsaved settings."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/MainWindow/MainWindowHeader.qml:90
@@ -3814,8 +3746,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Menus/ConfigurationMenu/ConfigurationItem.qml:137
 msgctxt "@label"
 msgid ""
-"This configuration is not available because %1 is not recognized. Please "
-"visit %2 to download the correct material profile."
+"This configuration is not available because %1 is not recognized. Please visit %2 to download the "
+"correct material profile."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Menus/ConfigurationMenu/ConfigurationItem.qml:138
@@ -3830,8 +3762,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Menus/ConfigurationMenu/ConfigurationListView.qml:58
 msgctxt "@label"
-msgid ""
-"The configurations are not available because the printer is disconnected."
+msgid "The configurations are not available because the printer is disconnected."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Menus/ConfigurationMenu/ConfigurationMenu.qml:112
@@ -4070,8 +4001,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:280
 msgctxt "@label"
-msgid ""
-"You will need to restart the application for these changes to have effect."
+msgid "You will need to restart the application for these changes to have effect."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:297
@@ -4092,8 +4022,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:327
 msgctxt "@info:tooltip"
 msgid ""
-"Highlight unsupported areas of the model in red. Without support these areas "
-"will not print properly."
+"Highlight unsupported areas of the model in red. Without support these areas will not print properly."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:336
@@ -4103,9 +4032,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:344
 msgctxt "@info:tooltip"
-msgid ""
-"Moves the camera so the model is in the center of the view when a model is "
-"selected"
+msgid "Moves the camera so the model is in the center of the view when a model is selected"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:349
@@ -4130,8 +4057,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:380
 msgctxt "@info:tooltip"
-msgid ""
-"Zooming towards the mouse is not supported in the orthographic perspective."
+msgid "Zooming towards the mouse is not supported in the orthographic perspective."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:385
@@ -4141,8 +4067,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:411
 msgctxt "@info:tooltip"
-msgid ""
-"Should models on the platform be moved so that they no longer intersect?"
+msgid "Should models on the platform be moved so that they no longer intersect?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:416
@@ -4226,8 +4151,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:561
 msgctxt "@info:tooltip"
 msgid ""
-"An model may appear extremely small if its unit is for example in meters "
-"rather than millimeters. Should these models be scaled up?"
+"An model may appear extremely small if its unit is for example in meters rather than millimeters. Should "
+"these models be scaled up?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:566
@@ -4247,9 +4172,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:591
 msgctxt "@info:tooltip"
-msgid ""
-"Should a prefix based on the printer name be added to the print job name "
-"automatically?"
+msgid "Should a prefix based on the printer name be added to the print job name automatically?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:596
@@ -4295,9 +4218,9 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:680
 msgctxt "@info:tooltip"
 msgid ""
-"When you have made changes to a profile and switched to a different one, a "
-"dialog will be shown asking whether you want to keep your modifications or "
-"not, or you can choose a default behaviour and never show that dialog again."
+"When you have made changes to a profile and switched to a different one, a dialog will be shown asking "
+"whether you want to keep your modifications or not, or you can choose a default behaviour and never show "
+"that dialog again."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:689
@@ -4308,9 +4231,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:694
 msgctxt "@window:text"
-msgid ""
-"Default behavior for changed setting values when switching to a different "
-"profile: "
+msgid "Default behavior for changed setting values when switching to a different profile: "
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:709
@@ -4341,9 +4262,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:766
 msgctxt "@info:tooltip"
 msgid ""
-"Should anonymous data about your print be sent to Ultimaker? Note, no "
-"models, IP addresses or other personally identifiable information is sent or "
-"stored."
+"Should anonymous data about your print be sent to Ultimaker? Note, no models, IP addresses or other "
+"personally identifiable information is sent or stored."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:771
@@ -4416,8 +4336,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsPage.qml:324
 msgctxt "@info:status Don't translate the XML tags <filename> or <message>!"
-msgid ""
-"Could not import material <filename>%1</filename>: <message>%2</message>"
+msgid "Could not import material <filename>%1</filename>: <message>%2</message>"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsPage.qml:328
@@ -4433,8 +4352,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsPage.qml:358
 msgctxt "@info:status Don't translate the XML tags <filename> and <message>!"
-msgid ""
-"Failed to export material to <filename>%1</filename>: <message>%2</message>"
+msgid "Failed to export material to <filename>%1</filename>: <message>%2</message>"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsPage.qml:364
@@ -4455,8 +4373,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsView.qml:102
 msgctxt "@label (%1 is a number)"
 msgid ""
-"The new filament diameter is set to %1 mm, which is not compatible with the "
-"current extruder. Do you wish to continue?"
+"The new filament diameter is set to %1 mm, which is not compatible with the current extruder. Do you "
+"wish to continue?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsView.qml:128
@@ -4599,8 +4517,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/ProfilesPage.qml:580
 msgctxt "@action:label"
 msgid ""
-"This profile uses the defaults specified by the printer, so it has no "
-"settings/overrides in the list below."
+"This profile uses the defaults specified by the printer, so it has no settings/overrides in the list "
+"below."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/ProfilesPage.qml:588
@@ -4656,8 +4574,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ExtruderBox.qml:71
 msgctxt "@tooltip"
 msgid ""
-"The target temperature of the hotend. The hotend will heat up or cool down "
-"towards this temperature. If this is 0, the hotend heating is turned off."
+"The target temperature of the hotend. The hotend will heat up or cool down towards this temperature. If "
+"this is 0, the hotend heating is turned off."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ExtruderBox.qml:103
@@ -4685,9 +4603,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ExtruderBox.qml:370
 msgctxt "@tooltip of pre-heat"
 msgid ""
-"Heat the hotend in advance before printing. You can continue adjusting your "
-"print while it is heating, and you won't have to wait for the hotend to heat "
-"up when you're ready to print."
+"Heat the hotend in advance before printing. You can continue adjusting your print while it is heating, "
+"and you won't have to wait for the hotend to heat up when you're ready to print."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ExtruderBox.qml:406
@@ -4713,8 +4630,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/HeatedBedBox.qml:56
 msgctxt "@tooltip"
 msgid ""
-"The target temperature of the heated bed. The bed will heat up or cool down "
-"towards this temperature. If this is 0, the bed heating is turned off."
+"The target temperature of the heated bed. The bed will heat up or cool down towards this temperature. If "
+"this is 0, the bed heating is turned off."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/HeatedBedBox.qml:88
@@ -4730,9 +4647,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/HeatedBedBox.qml:361
 msgctxt "@tooltip of pre-heat"
 msgid ""
-"Heat the bed in advance before printing. You can continue adjusting your "
-"print while it is heating, and you won't have to wait for the bed to heat up "
-"when you're ready to print."
+"Heat the bed in advance before printing. You can continue adjusting your print while it is heating, and "
+"you won't have to wait for the bed to heat up when you're ready to print."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ManualPrinterControl.qml:52
@@ -4767,9 +4683,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/ManualPrinterControl.qml:365
 msgctxt "@tooltip of G-code command input"
-msgid ""
-"Send a custom G-code command to the connected printer. Press 'enter' to send "
-"the command."
+msgid "Send a custom G-code command to the connected printer. Press 'enter' to send the command."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterOutput/OutputDeviceHeader.qml:55
@@ -4825,8 +4739,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Custom/CustomPrintSetup.qml:172
 msgctxt "@tooltip"
 msgid ""
-"Some setting/override values are different from the values stored in the "
-"profile.\n"
+"Some setting/override values are different from the values stored in the profile.\n"
 "\n"
 "Click to open the profile manager."
 msgstr ""
@@ -4838,14 +4751,11 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/NoIntentIcon.qml:31
 msgctxt ""
-"@label %1 is filled in with the type of a profile. %2 is filled with a list "
-"of numbers (eg '1' or '1, 2')"
+"@label %1 is filled in with the type of a profile. %2 is filled with a list of numbers (eg '1' or '1, 2')"
 msgid ""
-"There is no %1 profile for the configuration in extruder %2. The default "
-"intent will be used instead"
+"There is no %1 profile for the configuration in extruder %2. The default intent will be used instead"
 msgid_plural ""
-"There is no %1 profile for the configurations in extruders %2. The default "
-"intent will be used instead"
+"There is no %1 profile for the configurations in extruders %2. The default intent will be used instead"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -4887,8 +4797,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedAdhesionSelector.qml:74
 msgctxt "@label"
 msgid ""
-"Enable printing a brim or raft. This will add a flat area around or under "
-"your object which is easy to cut off afterwards."
+"Enable printing a brim or raft. This will add a flat area around or under your object which is easy to "
+"cut off afterwards."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedInfillDensitySelector.qml:193
@@ -4898,15 +4808,12 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedInfillDensitySelector.qml:232
 msgctxt "@label"
-msgid ""
-"Gradual infill will gradually increase the amount of infill towards the top."
+msgid "Gradual infill will gradually increase the amount of infill towards the top."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedQualityProfileSelector.qml:81
 msgctxt "@tooltip"
-msgid ""
-"You have modified some profile settings. If you want to change these go to "
-"custom mode."
+msgid "You have modified some profile settings. If you want to change these go to custom mode."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedSupportSelector.qml:30
@@ -4917,24 +4824,21 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrintSetupSelector/Recommended/RecommendedSupportSelector.qml:71
 msgctxt "@label"
 msgid ""
-"Generate structures to support parts of the model which have overhangs. "
-"Without these structures, such parts would collapse during printing."
+"Generate structures to support parts of the model which have overhangs. Without these structures, such "
+"parts would collapse during printing."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingCategory.qml:234
 msgctxt "@label"
 msgid ""
-"Some hidden settings use values different from their normal calculated "
-"value.\n"
+"Some hidden settings use values different from their normal calculated value.\n"
 "\n"
 "Click to make these settings visible."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingItem.qml:81
 msgctxt "@label"
-msgid ""
-"This setting is not used because all the settings that it influences are "
-"overridden."
+msgid "This setting is not used because all the settings that it influences are overridden."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingItem.qml:86
@@ -4950,8 +4854,8 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingItem.qml:187
 msgctxt "@label"
 msgid ""
-"This setting is always shared between all extruders. Changing it here will "
-"change the value for all extruders."
+"This setting is always shared between all extruders. Changing it here will change the value for all "
+"extruders."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingItem.qml:191
@@ -4970,8 +4874,7 @@ msgstr ""
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Settings/SettingItem.qml:329
 msgctxt "@label"
 msgid ""
-"This setting is normally calculated, but it currently has an absolute value "
-"set.\n"
+"This setting is normally calculated, but it currently has an absolute value set.\n"
 "\n"
 "Click to restore the calculated value."
 msgstr ""
@@ -5114,9 +5017,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/AddPrinterByIpContent.qml:245
 msgctxt "@label"
-msgid ""
-"This printer cannot be added because it's an unknown printer or it's not the "
-"host of a group."
+msgid "This printer cannot be added because it's an unknown printer or it's not the host of a group."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/AddPrinterByIpContent.qml:334
@@ -5171,9 +5072,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/DataCollectionsContent.qml:57
 msgctxt "@text"
-msgid ""
-"Ultimaker Cura collects anonymous data to improve print quality and user "
-"experience, including:"
+msgid "Ultimaker Cura collects anonymous data to improve print quality and user experience, including:"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/DataCollectionsContent.qml:71
@@ -5198,8 +5097,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/DataCollectionsContent.qml:102
 msgctxt "@text"
-msgid ""
-"Data collected by Ultimaker Cura will not contain any personal information."
+msgid "Data collected by Ultimaker Cura will not contain any personal information."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/WelcomePages/DataCollectionsContent.qml:103
@@ -5246,9 +5144,7 @@ msgstr ""
 
 #: ModelChecker/plugin.json
 msgctxt "description"
-msgid ""
-"Checks models and print configuration for possible printing issues and give "
-"suggestions."
+msgid "Checks models and print configuration for possible printing issues and give suggestions."
 msgstr ""
 
 #: ModelChecker/plugin.json
@@ -5418,9 +5314,7 @@ msgstr ""
 
 #: MachineSettingsAction/plugin.json
 msgctxt "description"
-msgid ""
-"Provides a way to change machine settings (such as build volume, nozzle "
-"size, etc.)."
+msgid "Provides a way to change machine settings (such as build volume, nozzle size, etc.)."
 msgstr ""
 
 #: MachineSettingsAction/plugin.json
@@ -5530,8 +5424,7 @@ msgstr ""
 
 #: SupportEraser/plugin.json
 msgctxt "description"
-msgid ""
-"Creates an eraser mesh to block the printing of support in certain places"
+msgid "Creates an eraser mesh to block the printing of support in certain places"
 msgstr ""
 
 #: SupportEraser/plugin.json
@@ -5582,8 +5475,7 @@ msgstr ""
 #: UltimakerMachineActions/plugin.json
 msgctxt "description"
 msgid ""
-"Provides machine actions for Ultimaker machines (such as bed leveling "
-"wizard, selecting upgrades, etc.)."
+"Provides machine actions for Ultimaker machines (such as bed leveling wizard, selecting upgrades, etc.)."
 msgstr ""
 
 #: UltimakerMachineActions/plugin.json
@@ -5603,8 +5495,7 @@ msgstr ""
 
 #: USBPrinting/plugin.json
 msgctxt "description"
-msgid ""
-"Accepts G-Code and sends them to a printer. Plugin can also update firmware."
+msgid "Accepts G-Code and sends them to a printer. Plugin can also update firmware."
 msgstr ""
 
 #: USBPrinting/plugin.json
@@ -5800,4 +5691,14 @@ msgstr ""
 #: XRayView/plugin.json
 msgctxt "name"
 msgid "X-Ray View"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:423
+msgctxt "@info:status"
+msgid "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@label"
+msgid "Select your OctoPrint instance from the list below."
 msgstr ""

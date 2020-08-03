@@ -329,7 +329,7 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "shell label"
 #~ msgid "Shell"
-#~ msgstr "Ограждение"
+#~ msgstr "Периметры"
 
 #~ msgctxt "wall_thickness label"
 #~ msgid "Wall Thickness"
@@ -1249,15 +1249,15 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "adhesion_type option skirt"
 #~ msgid "Skirt"
-#~ msgstr "Юбка"
+#~ msgstr "Скирт"
 
 #~ msgctxt "adhesion_type option brim"
 #~ msgid "Brim"
-#~ msgstr "Кайма"
+#~ msgstr "Брим"
 
 #~ msgctxt "adhesion_type option raft"
 #~ msgid "Raft"
-#~ msgstr "Подложка"
+#~ msgstr "Рафт"
 
 #~ msgctxt "skirt_line_count label"
 #~ msgid "Skirt Line Count"

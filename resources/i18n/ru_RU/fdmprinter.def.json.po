@@ -4188,7 +4188,7 @@ msgstr "Будет поддерживать всё ниже объекта, ни
 #: fdmprinter.def.json
 msgctxt "platform_adhesion label"
 msgid "Build Plate Adhesion"
-msgstr "Тип прилипания к столу"
+msgstr "Обводка вокруг модели"
 
 #: fdmprinter.def.json
 msgctxt "platform_adhesion description"
@@ -4233,22 +4233,22 @@ msgstr "Тип прилипания к столу"
 #: fdmprinter.def.json
 msgctxt "adhesion_type description"
 msgid "Different options that help to improve both priming your extrusion and adhesion to the build plate. Brim adds a single layer flat area around the base of your model to prevent warping. Raft adds a thick grid with a roof below the model. Skirt is a line printed around the model, but not connected to the model."
-msgstr "Различные варианты, которые помогают улучшить прилипание пластика к столу. Кайма добавляет однослойную плоскую область вокруг основания печатаемой модели, предотвращая её деформацию. Подложка добавляет толстую сетку с крышей под модель. Юбка - это линия, печатаемая вокруг модели, но не соединённая с ней."
+msgstr "Различные варианты, которые помогают улучшить прилипание пластика к столу. Брим добавляет однослойную плоскую область вокруг основания печатаемой модели, предотвращая её деформацию. Рафт добавляет толстую сетку с крышей под модель. Скирт - это линия, печатаемая вокруг модели, но не соединённая с ней."
 
 #: fdmprinter.def.json
 msgctxt "adhesion_type option skirt"
 msgid "Skirt"
-msgstr "Юбка"
+msgstr "Скирт"
 
 #: fdmprinter.def.json
 msgctxt "adhesion_type option brim"
 msgid "Brim"
-msgstr "Кайма"
+msgstr "Брим"
 
 #: fdmprinter.def.json
 msgctxt "adhesion_type option raft"
 msgid "Raft"
-msgstr "Подложка"
+msgstr "Рафт"
 
 #: fdmprinter.def.json
 msgctxt "adhesion_type option none"
