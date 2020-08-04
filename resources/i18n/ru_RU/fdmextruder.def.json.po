@@ -1276,7 +1276,7 @@ msgstr "Укажите диаметр используемой нити."
 #~ "The horizontal distance between the skirt and the first layer of the print.\n"
 #~ "This is the minimum distance, multiple skirt lines will extend outwards from this distance."
 #~ msgstr ""
-#~ "Расстояние по горизонтали между юбкой и первым слоем печатаемого объекта.\n"
+#~ "Расстояние по горизонтали между скирт и первым слоем печатаемого объекта.\n"
 #~ "Это минимальное расстояние, следующие линии скирт будут печататься наружу."
 
 #~ msgctxt "skirt_minimal_length label"

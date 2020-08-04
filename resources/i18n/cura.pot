@@ -3153,7 +3153,7 @@ msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Actions.qml:167
 msgctxt "@action:inmenu"
-msgid "Configure Cura..."
+msgid "Configure..."
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Actions.qml:174
@@ -5700,5 +5700,21 @@ msgstr ""
 
 #: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
 msgctxt "@label"
-msgid "Select your OctoPrint instance from the list below."
+msgid "Select your instance from the list below."
 msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:74
+msgctxt "@title"
+msgid "Connect to printer"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@action"
+msgid "Connect to printer"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@label"
+msgid "Automatically discover local instances"
+msgstr ""
+

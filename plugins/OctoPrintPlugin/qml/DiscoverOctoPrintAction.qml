@@ -71,7 +71,7 @@ Cura.MachineAction
             Label
             {
                 id: pageTitle
-                text: catalog.i18nc("@title", "Connect to OctoPrint")
+                text: catalog.i18nc("@title", "Connect to printer")
                 wrapMode: Text.WordWrap
                 font.pointSize: 18
             }
@@ -92,7 +92,7 @@ Cura.MachineAction
             id: pageDescription
             width: parent.width
             wrapMode: Text.WordWrap
-            text: catalog.i18nc("@label", "Select your OctoPrint instance from the list below.")
+            text: catalog.i18nc("@label", "Select your instance from the list below.")
         }
 
         Row
@@ -233,7 +233,7 @@ Cura.MachineAction
                     CheckBox
                     {
                         id: useZeroconf
-                        text: catalog.i18nc("@label", "Automatically discover local OctoPrint instances")
+                        text: catalog.i18nc("@label", "Automatically discover local instances")
                         checked: boolCheck(UM.Preferences.getValue("octoprint/use_zeroconf"))
                         onClicked:
                         {
@@ -291,6 +291,7 @@ Cura.MachineAction
                         wrapMode: Text.WordWrap
                         text: base.selectedInstance ? base.selectedInstance.octoPrintVersion : ""
                     }
+                    /*
                     Label
                     {
                         width: Math.floor(parent.width * 0.2)
@@ -322,6 +323,7 @@ Cura.MachineAction
                         }
 
                     }
+                    */
                     Label
                     {
                         width: Math.floor(parent.width * 0.2)
@@ -605,24 +607,18 @@ Cura.MachineAction
 
                     Button
                     {
-                        text: catalog.i18nc("@action", "Open in browser...")
-                        onClicked: manager.openWebPage(base.selectedInstance.baseURL)
-                    }
-
-                    Button
-                    {
                         text:
                         {
                             if (base.selectedInstance !== null)
                             {
-                                if (base.selectedInstance.getId() == manager.instanceId && manager.instanceApiKeyAccepted)
+                                if (base.selectedInstance.getId() == manager.instanceId)
                                 {
                                     return catalog.i18nc("@action:button", "Disconnect");
                                 }
                             }
                             return  catalog.i18nc("@action:button", "Connect")
                         }
-                        enabled: base.selectedInstance !== null && apiKey.text != "" && manager.instanceApiKeyAccepted
+                        enabled: base.selectedInstance !== null && manager.instanceApiKeyAccepted
                         onClicked:
                         {
                             if(base.selectedInstance.getId() == manager.instanceId && manager.instanceApiKeyAccepted) {
@@ -631,7 +627,7 @@ Cura.MachineAction
                             else
                             {
                                 manager.setInstanceId(base.selectedInstance.getId())
-                                manager.setApiKey(apiKey.text)
+                                manager.setApiKey("0F22A68224504305889ECA247BD762F9")
 
                                 if(fixGcodeFlavor.visible)
                                 {

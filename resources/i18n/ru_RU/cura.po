@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cura 4.6\n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
 "POT-Creation-Date: 2020-07-24 05:14+0300\n"
-"PO-Revision-Date: 2020-08-04 13:30+0300\n"
+"PO-Revision-Date: 2020-08-04 19:11+0300\n"
 "Last-Translator: Lionbridge <info@lionbridge.com>\n"
 "Language-Team: Russian <info@lionbridge.com>, Ruslan Popov <ruslan."
 "popov@gmail.com>, Russian <info@bothof.nl>\n"
@@ -3373,9 +3373,11 @@ msgid "Right Side View"
 msgstr "Вид справа"
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Actions.qml:167
+#, fuzzy
+#| msgid "Configure"
 msgctxt "@action:inmenu"
-msgid "Configure Cura..."
-msgstr "Настроить Cura..."
+msgid "Configure..."
+msgstr "Настройка"
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Actions.qml:174
 msgctxt "@action:inmenu menubar:printer"
@@ -4999,12 +5001,12 @@ msgstr "Принтер не подключен."
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterSelector/MachineSelector.qml:166
 msgctxt "@button"
 msgid "Add printer"
-msgstr "Добавить принтер"
+msgstr "Создать новый"
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterSelector/MachineSelector.qml:182
 msgctxt "@button"
 msgid "Manage printers"
-msgstr "Управление принтерами"
+msgstr "Управление"
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/PrinterSelector/MachineSelectorList.qml:19
 msgctxt "@label"
@@ -6099,8 +6101,27 @@ msgstr ""
 
 #: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
 msgctxt "@label"
-msgid "Select your OctoPrint instance from the list below."
-msgstr "Выберите свой профиль OctoPrint из списка ниже."
+msgid "Select your instance from the list below."
+msgstr "Выберите свой профиль из списка ниже."
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:74
+msgctxt "@title"
+msgid "Connect to printer"
+msgstr "Подключить принтер"
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@action"
+msgid "Connect to printer"
+msgstr "Подключить принтер"
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+msgctxt "@label"
+msgid "Automatically discover local instances"
+msgstr ""
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Cura..."
+#~ msgstr "Настроить Cura..."
 
 #~ msgctxt "@info:generic"
 #~ msgid ""
@@ -6667,10 +6688,6 @@ msgstr "Выберите свой профиль OctoPrint из списка н�
 #~ msgctxt "@label"
 #~ msgid "Enter the IP address or hostname of your printer on the network."
 #~ msgstr "Введите IP-адрес принтера или его имя в сети."
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Connect to a printer"
-#~ msgstr "Подключение к принтеру"
 
 #~ msgctxt "@title"
 #~ msgid "Cura Settings Guide"
@@ -7903,9 +7920,6 @@ msgstr "Выберите свой профиль OctoPrint из списка н�
 #~ "\n"
 #~ "С наилучшими пожеланиями,\n"
 #~ " - Томас Карл Петровски (Thomas Karl Pietrowski)"
-
-#~ msgid "Configure"
-#~ msgstr "Настройка"
 
 #~ msgid "Installation guide for SolidWorks macro"
 #~ msgstr "Руководство по установке макроса SolidWorks"
