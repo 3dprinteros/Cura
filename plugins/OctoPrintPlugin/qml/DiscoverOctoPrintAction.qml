@@ -433,7 +433,8 @@ Cura.MachineAction
 
                 Column
                 {
-                    visible: base.selectedInstance != null
+                    // visible: base.selectedInstance != null
+                    visible: false
                     width: parent.width
                     spacing: UM.Theme.getSize("default_lining").height
 
@@ -618,10 +619,10 @@ Cura.MachineAction
                             }
                             return  catalog.i18nc("@action:button", "Connect")
                         }
-                        enabled: base.selectedInstance !== null && manager.instanceApiKeyAccepted
+                        enabled: base.selectedInstance !== null
                         onClicked:
                         {
-                            if(base.selectedInstance.getId() == manager.instanceId && manager.instanceApiKeyAccepted) {
+                            if(base.selectedInstance.getId() == manager.instanceId) {
                                 manager.setInstanceId("")
                             }
                             else
