@@ -5708,7 +5708,7 @@ msgctxt "@title"
 msgid "Connect to printer"
 msgstr ""
 
-#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
+#: Cura/plugins/OctoPrintPlugin/DiscoverOctoPrintAction.py:36
 msgctxt "@action"
 msgid "Connect to Printer"
 msgstr ""
@@ -5716,5 +5716,60 @@ msgstr ""
 #: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:95
 msgctxt "@label"
 msgid "Automatically discover local instances"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:617
+msgctxt "@action:button"
+msgid "Disconnect"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:667
+msgctxt "@title:window"
+msgid "Manually added instance"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:730
+msgctxt "@label"
+msgid "Instance Name"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:747
+msgctxt "@label"
+msgid "IP Address or Hostname"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:764
+msgctxt "@label"
+msgid "Port Number"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:781
+msgctxt "@label"
+msgid "Path"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:800
+msgctxt "@label"
+msgid "Show reverse proxy options (advanced)"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:813
+msgctxt "@label"
+msgid "Use HTTPS"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:826
+msgctxt "@label"
+msgid "HTTP user name"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:839
+msgctxt "@label"
+msgid "HTTP password"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/qml/DiscoverOctoPrintAction.qml:859
+msgctxt "@label"
+msgid "NB: Only use these options if you access printer through a reverse proxy."
 msgstr ""
 

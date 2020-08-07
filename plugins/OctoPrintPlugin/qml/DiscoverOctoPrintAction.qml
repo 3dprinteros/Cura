@@ -664,7 +664,7 @@ Cura.MachineAction
         property alias userNameText: userNameField.text
         property alias passwordText: passwordField.text
 
-        title: catalog.i18nc("@title:window", "Manually added OctoPrint instance")
+        title: catalog.i18nc("@title:window", "Manually added instance")
 
         minimumWidth: 400 * screenScaleFactor
         minimumHeight: (showAdvancedOptions.checked ? 280 : 160) * screenScaleFactor
@@ -856,7 +856,7 @@ Cura.MachineAction
                 visible: showAdvancedOptions.checked
                 wrapMode: Text.WordWrap
                 width: parent.width
-                text: catalog.i18nc("@label","NB: Only use these options if you access OctoPrint through a reverse proxy.")
+                text: catalog.i18nc("@label","NB: Only use these options if you access printer through a reverse proxy.")
             }
         }
 
