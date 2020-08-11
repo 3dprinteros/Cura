@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cura 4.6\n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
 "POT-Creation-Date: 2020-07-24 05:14+0300\n"
-"PO-Revision-Date: 2020-08-07 19:10+0300\n"
+"PO-Revision-Date: 2020-08-11 17:03+0300\n"
 "Last-Translator: Lionbridge <info@lionbridge.com>\n"
 "Language-Team: Russian <info@lionbridge.com>, Ruslan Popov <ruslan."
 "popov@gmail.com>, Russian <info@bothof.nl>\n"
@@ -52,7 +52,7 @@ msgstr "Не переопределен"
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/QualityManagementModel.py:321
 msgctxt "@label"
 msgid "Default"
-msgstr "Default"
+msgstr "Высота слоя"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentCategoryModel.py:44
 #: /home/trin/Gedeeld/Projects/Cura/cura/Machines/Models/IntentTranslations.py:14
@@ -620,7 +620,7 @@ msgstr "Не поддерживается"
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/cura_empty_instance_containers.py:55
 msgctxt "@info:No intent profile selected"
 msgid "Default"
-msgstr "Default"
+msgstr "Стандартные"
 
 #: /home/trin/Gedeeld/Projects/Cura/cura/Settings/MachineManager.py:659
 #: /home/trin/Gedeeld/Projects/Cura/plugins/3MFReader/ThreeMFWorkspaceReader.py:199
@@ -6176,6 +6176,15 @@ msgid ""
 msgstr ""
 "Внимание! Используйте эти параметры только при доступе к принтеру через "
 "обратный прокси-сервер."
+
+#: Cura/plugins/SolidView/SolidView.py:69
+msgctxt "@info:status"
+msgid ""
+"Your model is not manifold. The highlighted areas indicate either missing or "
+"extraneous surfaces."
+msgstr ""
+"Ваша модель не многообразна. Выделенные области указывают на отсутствующие "
+"или посторонние поверхности."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Configure Cura..."

@@ -43,7 +43,7 @@ UM.PreferencesPage
                 left: parent.left;
                 leftMargin: UM.Theme.getSize("default_margin").width
             }
-            text: catalog.i18nc("@label:textbox", "Check all")
+            text: catalog.i18nc("@label:textbox", "Выбрать все")
             checkedState:
             {
                 if(definitionsModel.visibleCount == definitionsModel.categoryCount)

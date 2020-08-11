@@ -23,7 +23,7 @@ class SettingVisibilityPresetsModel(QObject):
         super().__init__(parent)
 
         self._items = []  # type: List[SettingVisibilityPreset]
-        self._custom_preset = SettingVisibilityPreset(preset_id = "custom", name = "Custom selection", weight = -100)
+        self._custom_preset = SettingVisibilityPreset(preset_id = "custom", name = "Пользовательские", weight = -100)
 
         self._populate()
 
@@ -78,7 +78,7 @@ class SettingVisibilityPresetsModel(QObject):
             items.append(setting_visibility_preset)
 
         # Add the "all" visibility:
-        all_setting_visibility_preset = SettingVisibilityPreset(preset_id = "all", name = "All", weight = 9001)
+        all_setting_visibility_preset = SettingVisibilityPreset(preset_id = "all", name = "Все", weight = 9001)
         all_setting_visibility_preset.setSettings(list(CuraApplication.getInstance().getMachineManager().getAllSettingKeys()))
         items.append(all_setting_visibility_preset)
         # Sort them on weight (and if that fails, use ID)

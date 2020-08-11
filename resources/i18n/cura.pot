@@ -5773,3 +5773,12 @@ msgctxt "@label"
 msgid "NB: Only use these options if you access printer through a reverse proxy."
 msgstr ""
 
+#: Cura/plugins/SolidView/SolidView.py:69
+msgctxt "@info:status"
+msgid "Your model is not manifold. The highlighted areas indicate either missing or extraneous surfaces."
+msgstr ""
+
+#: Cura\cura\Machines\Models\SettingVisibilityPresetsModel.py
+msgctxt "@label"
+msgid "Custom selection"
+msgstr ""
