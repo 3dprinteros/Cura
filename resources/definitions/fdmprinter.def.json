@@ -54,7 +54,7 @@
                 "machine_start_gcode":
                 {
                     "label": "Start G-code",
-                    "description": "G-code commands to be executed at the very start - separated by \\n.",
+                    "description": "Команды в G-коде, которые будут выполнены в самом начале, разделенные с помощью \\n.",
                     "default_value": "G28 ;Home\nG1 Z15.0 F6000 ;Move the platform down 15mm\n;Prime the extruder\nG92 E0\nG1 F200 E3\nG92 E0",
                     "type": "str",
                     "settable_per_mesh": false,
@@ -64,7 +64,7 @@
                 "machine_end_gcode":
                 {
                     "label": "End G-code",
-                    "description": "G-code commands to be executed at the very end - separated by \\n.",
+                    "description": "Команды в G-коде, которые будут выполнены в самом конце, разделенные с помощью \\n.",
                     "default_value": "M104 S0\nM140 S0\n;Retract the filament\nG92 E1\nG1 E-1 F300\nG28 X0 Y0\nM84",
                     "type": "str",
                     "settable_per_mesh": false,
@@ -138,7 +138,7 @@
                 "machine_width":
                 {
                     "label": "Machine Width",
-                    "description": "The width (X-direction) of the printable area.",
+                    "description": "Ширина (по оси X) области печати.",
                     "default_value": 100,
                     "type": "float",
                     "minimum_value": "0.001",
@@ -150,7 +150,7 @@
                 "machine_depth":
                 {
                     "label": "Machine Depth",
-                    "description": "The depth (Y-direction) of the printable area.",
+                    "description": "Ширина (по оси Y) области печати.",
                     "default_value": 100,
                     "type": "float",
                     "minimum_value": "0.001",
@@ -162,7 +162,7 @@
                 "machine_shape":
                 {
                     "label": "Build Plate Shape",
-                    "description": "The shape of the build plate without taking unprintable areas into account.",
+                    "description": "Форма стола без учёта непечатаемых областей.",
                     "default_value": "rectangular",
                     "type": "enum",
                     "options":
@@ -192,7 +192,7 @@
                 "machine_height":
                 {
                     "label": "Machine Height",
-                    "description": "The height (Z-direction) of the printable area.",
+                    "description": "Ширина (по оси Z) области печати.",
                     "default_value": 100,
                     "type": "float",
                     "settable_per_mesh": false,
@@ -202,7 +202,7 @@
                 "machine_heated_bed":
                 {
                     "label": "Has Heated Build Plate",
-                    "description": "Whether the machine has a heated build plate present.",
+                    "description": "Имеет ли принтер подогреваемый стол.",
                     "default_value": false,
                     "type": "bool",
                     "settable_per_mesh": false,
@@ -212,7 +212,7 @@
                 "machine_heated_build_volume":
                 {
                     "label": "Has Build Volume Temperature Stabilization",
-                    "description": "Whether the machine is able to stabilize the build volume temperature.",
+                    "description": "Имеет ли принтер возможность стабилизации температуры для объема печати.",
                     "default_value": false,
                     "type": "bool",
                     "settable_per_mesh": false,
@@ -232,7 +232,7 @@
                 "machine_center_is_zero":
                 {
                     "label": "Is Center Origin",
-                    "description": "Whether the X/Y coordinates of the zero position of the printer is at the center of the printable area.",
+                    "description": "Следует ли считать центром координат по осям X/Y в центре области печати.",
                     "default_value": false,
                     "type": "bool",
                     "settable_per_mesh": false,
@@ -242,7 +242,7 @@
                 "machine_extruder_count":
                 {
                     "label": "Number of Extruders",
-                    "description": "Number of extruder trains. An extruder train is the combination of a feeder, bowden tube, and nozzle.",
+                    "description": "Количество экструдеров. Экструдер - это комбинация механизма подачи, трубы и сопла.",
                     "default_value": 1,
                     "minimum_value": "1",
                     "maximum_value": "16",
@@ -358,7 +358,7 @@
                 "machine_gcode_flavor":
                 {
                     "label": "G-code Flavor",
-                    "description": "The type of g-code to be generated.",
+                    "description": "Генерируемый тип G-кода.",
                     "type": "enum",
                     "options":
                     {
@@ -425,7 +425,7 @@
                 "machine_head_with_fans_polygon":
                 {
                     "label": "Machine Head & Fan Polygon",
-                    "description": "A 2D silhouette of the print head (fan caps included).",
+                    "description": "2D контур головы принтера (включая крышки вентилятора).",
                     "type": "polygon",
                     "default_value":
                     [
@@ -453,7 +453,7 @@
                 "gantry_height":
                 {
                     "label": "Gantry Height",
-                    "description": "The height difference between the tip of the nozzle and the gantry system (X and Y axes).",
+                    "description": "Высота между кончиком сопла и портальной системой (по осям X и Y).",
                     "default_value": 99999999999,
                     "value": "machine_height",
                     "type": "float",
