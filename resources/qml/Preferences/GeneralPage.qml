@@ -145,7 +145,7 @@ UM.PreferencesPage
                 Label
                 {
                     id: languageLabel
-                    text: "Language:" //Don't translate this, to make it easier to find the language drop-down if you can't read the current language.
+                    text: catalog.i18nc("@label", "Language:") //Don't translate this, to make it easier to find the language drop-down if you can't read the current language.
                 }
 
                 ComboBox

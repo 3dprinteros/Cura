@@ -4311,6 +4311,11 @@ msgctxt "@info:tooltip"
 msgid "Should layer be forced into compatibility mode?"
 msgstr ""
 
+#: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:360
+msgctxt "@option:check"
+msgid "Display model errors"
+msgstr ""
+
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/GeneralPage.qml:488
 msgctxt "@option:check"
 msgid "Force layer view compatibility mode (restart required)"
@@ -6079,12 +6084,12 @@ msgctxt "@label"
 msgid "NB: Only use these options if you access printer through a reverse proxy."
 msgstr ""
 
-#: Cura/plugins/SolidView/SolidView.py:69
-msgctxt "@info:status"
-msgid "Your model is not manifold. The highlighted areas indicate either missing or extraneous surfaces."
-msgstr ""
-
 #: Cura\cura\Machines\Models\SettingVisibilityPresetsModel.py
 msgctxt "@label"
 msgid "Custom selection"
+msgstr ""
+
+#: Cura/resources/qml/Preferences/GeneralPage.qml:148
+msgctxt "@label"
+msgid "Language:"
 msgstr ""

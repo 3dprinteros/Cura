@@ -195,6 +195,7 @@ Item
             onClicked: base.addByIpButtonClicked()
         }
 
+/*
         Cura.SecondaryButton
         {
             id: addCloudPrinterButton
@@ -208,6 +209,7 @@ Item
                 base.addCloudPrinterButtonClicked()
             }
         }
+*/
 
         Item
         {

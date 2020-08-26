@@ -170,7 +170,7 @@ UM.Dialog
                                     extruder_id = modelData.position
                                 }
 
-                                return catalog.i18nc("@action:label", "Extruder %1").arg(extruder_id)
+                                return catalog.i18nc("@action:label", "Экструдер %1").arg(extruder_id)
                             }
                             font.bold: true
                             enabled: modelData.isEnabled
