@@ -158,10 +158,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self.setPriority(2) # Make sure the output device gets selected above local file output
         self.setName(name)
-        self.setShortDescription(i18n_catalog.i18nc("@action:button", "Print with OctoPrint"))
-        self.setDescription(i18n_catalog.i18nc("@properties:tooltip", "Print with OctoPrint"))
+        self.setShortDescription(i18n_catalog.i18nc("@action:button", "Print with Hercules Host"))
+        self.setDescription(i18n_catalog.i18nc("@properties:tooltip", "Print with Hercules Host"))
         self.setIconName("print")
-        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connected to OctoPrint on {0}").format(self._id))
+        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connected to Hercules Host on {0}").format(self._id))
 
         self._post_gcode_reply = None
 
@@ -357,7 +357,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._last_response_time = None  # type: Optional[float]
         self._setAcceptsCommands(False)
-        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connecting to OctoPrint on {0}").format(self._id))
+        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connecting to Hercules Host on {0}").format(self._id))
 
         ## Request 'settings' dump
         self.get("settings", self._onRequestFinished)
@@ -422,11 +422,11 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if self._freeStorage < (gcode_body_size + min_free_space):
             self._error_message = Message(
                 i18n_catalog.i18nc("@info:status", "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"),
-                title=i18n_catalog.i18nc("@label", "OctoPrint error")
+                title=i18n_catalog.i18nc("@label", "Hercules Host error")
             )
             self._error_message.show()
             Logger.log("e",
-                       "Unable to send data to OctoPrint. No memory left on device. Free: %s bytes, Requested: %s bytes",
+                       "Unable to send data to Hercules Host. No memory left on device. Free: %s bytes, Requested: %s bytes",
                        str(self._freeStorage), str(gcode_body_size))
             return
 
@@ -465,14 +465,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
             else: # auto_connect
                 self._sendCommandToApi("connection/connect", {})
-                Logger.log("d", "Sent command to connect printer to OctoPrint with current settings")
+                Logger.log("d", "Sent command to connect printer to Hercules Host with current settings")
 
                 wait_for_printer = True
 
             if wait_for_printer:
                 self._waiting_message = Message(
-                    i18n_catalog.i18nc("@info:status", "Waiting for OctoPrint to connect to the printer..."),
-                    title=i18n_catalog.i18nc("@label", "OctoPrint"),
+                    i18n_catalog.i18nc("@info:status", "Waiting for Hercules Host to connect to the printer..."),
+                    title=i18n_catalog.i18nc("@label", "Hercules Host"),
                     progress=-1, lifetime=0, dismissable=False, use_inactivity_timer=False
                 )
                 self._waiting_message.addAction(
@@ -499,12 +499,12 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             elif self.activePrinter.state == "offline":
                 error_string = i18n_catalog.i18nc("@info:status", "The printer is offline. Unable to start a new job.")
             else:
-                error_string = i18n_catalog.i18nc("@info:status", "OctoPrint is busy. Unable to start a new job.")
+                error_string = i18n_catalog.i18nc("@info:status", "Hercules Host is busy. Unable to start a new job.")
 
             if error_string:
                 if self._error_message:
                     self._error_message.hide()
-                self._error_message = Message(error_string, title=i18n_catalog.i18nc("@label", "OctoPrint error"))
+                self._error_message = Message(error_string, title=i18n_catalog.i18nc("@label", "Hercules Host error"))
                 self._error_message.addAction(
                     "queue", i18n_catalog.i18nc("@action:button", "Queue job"), "",
                     i18n_catalog.i18nc("@action:tooltip", "Queue this print job so it can be printed later")
@@ -566,8 +566,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 pass
 
         self._progress_message = Message(
-            i18n_catalog.i18nc("@info:status", "Sending data to OctoPrint"),
-            title=i18n_catalog.i18nc("@label", "OctoPrint"),
+            i18n_catalog.i18nc("@info:status", "Sending data to Hercules Host"),
+            title=i18n_catalog.i18nc("@label", "Hercules Host"),
             progress=-1, lifetime=0, dismissable=False, use_inactivity_timer=False
         )
         self._progress_message.addAction(
@@ -624,8 +624,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         except Exception as e:
             self._progress_message.hide()
             self._error_message = Message(
-                i18n_catalog.i18nc("@info:status", "Unable to send data to OctoPrint."),
-                title=i18n_catalog.i18nc("@label", "OctoPrint error")
+                i18n_catalog.i18nc("@info:status", "Unable to send data to Hercules Host."),
+                title=i18n_catalog.i18nc("@label", "Hercules Host error")
             )
             self._error_message.show()
             Logger.log("e", "An exception occurred in network connection: %s" % str(e))
@@ -654,12 +654,12 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def _sendQueuedGcode(self) -> None:
         if self._queued_gcode_commands:
             self._sendCommandToApi("printer/command", self._queued_gcode_commands)
-            Logger.log("d", "Sent gcode command to OctoPrint instance: %s", self._queued_gcode_commands)
+            Logger.log("d", "Sent gcode command to Hercules Host instance: %s", self._queued_gcode_commands)
             self._queued_gcode_commands = [] # type: List[str]
 
     def _sendJobCommand(self, command: str) -> None:
         self._sendCommandToApi("job", command)
-        Logger.log("d", "Sent job command to OctoPrint instance: %s", command)
+        Logger.log("d", "Sent job command to Hercules Host instance: %s", command)
 
     def _sendCommandToApi(self, end_point: str, commands: Union[Dict[str, Any], str, List[str]]) -> None:
         if isinstance(commands, dict):
@@ -700,7 +700,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     for profile_id in json_data["profiles"]:
@@ -734,14 +734,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                     if not self.acceptsCommands:
                         self._setAcceptsCommands(True)
-                        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connected to OctoPrint on {0}").format(self._id))
+                        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connected to Hercules Host on {0}").format(self._id))
 
                     if self._connection_state == UnifiedConnectionState.Connecting:
                         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Connected))
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if "temperature" in json_data:
@@ -800,7 +800,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                 elif http_status_code == 401 or http_status_code == 403:
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "OctoPrint on {0} does not allow access to the printer state").format(self._id)
+                        "@info:status", "Hercules Host on {0} does not allow access to the printer state").format(self._id)
                     )
                     return
 
@@ -809,14 +809,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Connected))
 
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "The printer connected to OctoPrint on {0} is not operational").format(self._id)
+                        "@info:status", "The printer connected to Hercules Host on {0} is not operational").format(self._id)
                     )
                     return
 
                 elif http_status_code == 502 or http_status_code == 503:
                     Logger.log("w", "Received an error status code: %d", http_status_code)
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "OctoPrint on {0} is not running").format(self._id)
+                        "@info:status", "Hercules Host on {0} is not running").format(self._id)
                     )
                     return
 
@@ -836,7 +836,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if printer.activePrintJob is None:
@@ -889,7 +889,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         if not self._progress_message:
                             self._progress_message = Message(
                                 i18n_catalog.i18nc("@info:status", "Streaming file to the printer SD card"),
-                                0, False, -1, title=i18n_catalog.i18nc("@label", "OctoPrint")
+                                0, False, -1, title=i18n_catalog.i18nc("@label", "Hercules Host")
                             )
                             self._progress_message.show()
                         if completion < 100:
@@ -912,14 +912,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                 elif http_status_code == 401 or http_status_code == 403:
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "OctoPrint on {0} does not allow access to the job state").format(self._id)
+                        "@info:status", "Hercules Host on {0} does not allow access to the job state").format(self._id)
                     )
                     return
 
                 elif http_status_code == 502 or http_status_code == 503:
                     Logger.log("w", "Received an error status code: %d", http_status_code)
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "OctoPrint on {0} is not running").format(self._id)
+                        "@info:status", "Hercules Host on {0} is not running").format(self._id)
                     )
                     return
 
@@ -931,7 +931,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     self.parseSettingsData(json_data)
@@ -941,7 +941,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if "server" in json_data:
@@ -963,7 +963,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if "gcodeAnalysis" in json_data and "progress" in json_data["gcodeAnalysis"]:
@@ -985,7 +985,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if "free" in json_data:
@@ -995,10 +995,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         elif reply.operation() == QNetworkAccessManager.PostOperation:
             if self._api_prefix + "files" in reply.url().toString():  # Result from /files command to start a printjob:
                 if http_status_code == 204:
-                    Logger.log("d", "OctoPrint file command accepted")
+                    Logger.log("d", "Hercules Host file command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to start print jobs on OctoPrint with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to start print jobs on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1007,10 +1007,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
             elif self._api_prefix + "job" in reply.url().toString():  # Result from /job command (eg start/pause):
                 if http_status_code == 204:
-                    Logger.log("d", "OctoPrint job command accepted")
+                    Logger.log("d", "Hercules Host job command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control print jobs on OctoPrint with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control print jobs on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1019,10 +1019,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
             elif self._api_prefix + "printer/command" in reply.url().toString():  # Result from /printer/command (gcode statements):
                 if http_status_code == 204:
-                    Logger.log("d", "OctoPrint gcode command(s) accepted")
+                    Logger.log("d", "Hercules Host gcode command(s) accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to send gcode commands to OctoPrint with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to send gcode commands to Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1034,7 +1034,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     try:
                         json_data = json.loads(bytes(reply.readAll()).decode("utf-8"))
                     except json.decoder.JSONDecodeError:
-                        Logger.log("w", "Received invalid JSON from octoprint instance.")
+                        Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
                     if "name" in json_data:
@@ -1053,16 +1053,16 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     self._octoprint_user_name = i18n_catalog.i18nc("@label", "Unknown user")
                     self.additionalDataChanged.emit()
 
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access to OctoPrint with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access to Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
             elif self._api_prefix + "connection/connect" in reply.url().toString():  # Result from /connection/connect command (eg start/pause):
                 if http_status_code == 204:
-                    Logger.log("d", "OctoPrint connection command accepted")
+                    Logger.log("d", "Hercules Host connection command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control printer connections on OctoPrint with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control printer connections on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1074,7 +1074,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if http_status_code >= 400:
             if http_status_code == 401 or http_status_code == 403:
-                error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access OctoPrint with the configured API key.")
+                error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access Hercules Host with the configured API key.")
             else:
                 # Received another error reply
                 error_string = bytes(reply.readAll()).decode("utf-8")
@@ -1102,8 +1102,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             else:
                 self._progress_message.hide()
                 self._progress_message = Message(
-                    i18n_catalog.i18nc("@info:status", "Storing data on OctoPrint"),
-                    0, False, -1, title=i18n_catalog.i18nc("@label", "OctoPrint")
+                    i18n_catalog.i18nc("@info:status", "Storing data on Hercules Host"),
+                    0, False, -1, title=i18n_catalog.i18nc("@label", "Hercules Host")
                 )
                 self._progress_message.show()
         else:
@@ -1119,7 +1119,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         http_status_code = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
         error_string = ""
         if http_status_code == 401 or http_status_code == 403:
-            error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to upload files to OctoPrint with the configured API key.")
+            error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to upload files to Hercules Host with the configured API key.")
 
         elif http_status_code == 409:
             if "files/sdcard" in reply.url().toString():
@@ -1139,7 +1139,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             return
 
         location_url = reply.header(QNetworkRequest.LocationHeader)
-        Logger.log("d", "Resource created on OctoPrint instance: %s", location_url.toString())
+        Logger.log("d", "Resource created on Hercules Host instance: %s", location_url.toString())
 
         end_point = location_url.toString().split(self._api_prefix, 1)[1]
         if self._transfer_as_ufp and end_point.endswith(".ufp"):
@@ -1153,13 +1153,13 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if self._forced_queue or not self._auto_print:
             if location_url:
                 file_name = location_url.fileName()
-                message = Message(i18n_catalog.i18nc("@info:status", "Saved to OctoPrint as {0}").format(file_name))
+                message = Message(i18n_catalog.i18nc("@info:status", "Saved to Hercules Host as {0}").format(file_name))
             else:
-                message = Message(i18n_catalog.i18nc("@info:status", "Saved to OctoPrint"))
-            message.setTitle(i18n_catalog.i18nc("@label", "OctoPrint"))
+                message = Message(i18n_catalog.i18nc("@info:status", "Saved to Hercules Host"))
+            message.setTitle(i18n_catalog.i18nc("@label", "Hercules Host"))
             message.addAction(
-                "open_browser", i18n_catalog.i18nc("@action:button", "OctoPrint..."), "globe",
-                i18n_catalog.i18nc("@info:tooltip", "Open the OctoPrint web interface")
+                "open_browser", i18n_catalog.i18nc("@action:button", "Hercules Host..."), "globe",
+                i18n_catalog.i18nc("@info:tooltip", "Open the Hercules Host web interface")
             )
             message.actionTriggered.connect(self._openOctoPrint)
             message.show()
@@ -1171,8 +1171,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 return
 
             self._waiting_message = Message(
-                i18n_catalog.i18nc("@info:status", "Waiting for OctoPrint to complete Gcode analysis..."),
-                title=i18n_catalog.i18nc("@label", "OctoPrint"),
+                i18n_catalog.i18nc("@info:status", "Waiting for Hercules Host to complete Gcode analysis..."),
+                title=i18n_catalog.i18nc("@label", "Hercules Host"),
                 progress=-1, lifetime=0, dismissable=False, use_inactivity_timer=False
             )
             self._waiting_message.addAction(
@@ -1215,7 +1215,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 Logger.log("w", "Unusable stream url received: %s", stream_url)
                 self._camera_url = ""
 
-            Logger.log("d", "Set OctoPrint camera url to %s", self._camera_url)
+            Logger.log("d", "Set Hercules Host camera url to %s", self._camera_url)
             self.cameraUrlChanged.emit()
 
             if "rotate90" in json_data["webcam"]:
@@ -1281,7 +1281,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def _showErrorMessage(self, error_string: str) -> None:
         if self._error_message:
             self._error_message.hide()
-        self._error_message = Message(error_string, title=i18n_catalog.i18nc("@label", "OctoPrint error"))
+        self._error_message = Message(error_string, title=i18n_catalog.i18nc("@label", "Hercules Host error"))
         self._error_message.show()
 
     def _openOctoPrint(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
