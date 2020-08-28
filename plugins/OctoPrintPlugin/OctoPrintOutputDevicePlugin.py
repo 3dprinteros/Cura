@@ -270,7 +270,7 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         instance = OctoPrintOutputDevice(name, address, port, properties)
 
         self._instances[instance.getId()] = instance
-        instance.setApiKey(self._deobfuscateString("0F22A68224504305889ECA247BD762F9"))
+        # instance.setApiKey(self._deobfuscateString("0F22A68224504305889ECA247BD762F9"))
 
         # Detect the machine type based on the BOM number that is sent over the network.
         # properties[b"printer_type"] = b"Unknown"
@@ -325,6 +325,7 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
 
         output_device_manager = CuraApplication.getInstance().getOutputDeviceManager()
         if device.key not in output_device_manager.getOutputDeviceIds():
+            output_device_manager.addOutputDevice(device.getOutputUploadDevice())
             output_device_manager.addOutputDevice(device)
 
     ## Create a machine instance based on the discovered network printer.
@@ -361,9 +362,11 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             return
 
         if self._instances[key].isConnected():
+            self.getOutputDeviceManager().addOutputDevice(self._instances[key].getOutputUploadDevice())
             self.getOutputDeviceManager().addOutputDevice(self._instances[key])
         else:
             self.getOutputDeviceManager().removeOutputDevice(key)
+            self.getOutputDeviceManager().removeOutputDevice(self._instances[key].getOutputUploadDevice().getId())
 
     ##  Handler for zeroConf detection
     def _onServiceChanged(self, zeroconf: Zeroconf, service_type: str, name: str, state_change: ServiceStateChange) -> None:

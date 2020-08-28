@@ -6219,3 +6219,13 @@ msgctxt "@info:tooltip"
 msgid "Stop waiting for the Gcode analysis and start printing immediately"
 msgstr ""
 
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputUploadDevice.py:19
+msgctxt "@action:button"
+msgid "Upload to Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputUploadDevice.py:20
+msgctxt "@info:tooltip"
+msgid "Upload G-Code to Hercules Host"
+msgstr ""
+

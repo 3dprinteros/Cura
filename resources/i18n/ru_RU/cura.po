@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cura 4.7\n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
 "POT-Creation-Date: 2020-07-24 05:14+0300\n"
-"PO-Revision-Date: 2020-08-28 04:38+0300\n"
+"PO-Revision-Date: 2020-08-28 20:04+0300\n"
 "Last-Translator: Lionbridge <info@lionbridge.com>\n"
 "Language-Team: Russian <info@lionbridge.com>, Ruslan Popov <ruslan."
 "popov@gmail.com>, Russian <info@bothof.nl>\n"
@@ -6667,6 +6667,16 @@ msgstr "Начать печать"
 msgctxt "@info:tooltip"
 msgid "Stop waiting for the Gcode analysis and start printing immediately"
 msgstr "Прекратить ждать анализа Gcode и немедленно начать печать"
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputUploadDevice.py:19
+msgctxt "@action:button"
+msgid "Upload to Hercules Host"
+msgstr "Загрузить на Hercules Host"
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputUploadDevice.py:20
+msgctxt "@info:tooltip"
+msgid "Upload G-Code to Hercules Host"
+msgstr "Загрузить G-Code на Hercules Host"
 
 #~ msgctxt "@title:column"
 #~ msgid "Customized"

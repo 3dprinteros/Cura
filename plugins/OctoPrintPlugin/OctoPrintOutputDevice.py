@@ -15,6 +15,7 @@ from cura.CuraApplication import CuraApplication
 
 from .OctoPrintOutputController import OctoPrintOutputController
 from .OctoPrintPowerPlugins import OctoPrintPowerPlugins
+from .OctoPrintOutputUploadDevice import OctoPrintOutputUploadDevice
 
 try:
     # Cura 4.1 and newer
@@ -44,13 +45,14 @@ from io import StringIO, BytesIO
 from enum import IntEnum
 from collections import namedtuple
 
-
 from typing import cast, Any, Callable, Dict, List, Optional, Union, TYPE_CHECKING
+
 if TYPE_CHECKING:
-    from UM.Scene.SceneNode import SceneNode #For typing.
-    from UM.FileHandler.FileHandler import FileHandler #For typing.
+    from UM.Scene.SceneNode import SceneNode  # For typing.
+    from UM.FileHandler.FileHandler import FileHandler  # For typing.
 
 i18n_catalog = i18nCatalog("cura")
+
 
 ##  The current processing state of the backend.
 #   This shadows PrinterOutputDevice.ConnectionState because its spelling changed
@@ -63,19 +65,21 @@ class UnifiedConnectionState(IntEnum):
         Busy = ConnectionState.Busy
         Error = ConnectionState.Error
     except AttributeError:
-        Closed = ConnectionState.closed          # type: ignore
+        Closed = ConnectionState.closed  # type: ignore
         Connecting = ConnectionState.connecting  # type: ignore
-        Connected = ConnectionState.connected    # type: ignore
-        Busy = ConnectionState.busy              # type: ignore
-        Error = ConnectionState.error            # type: ignore
+        Connected = ConnectionState.connected  # type: ignore
+        Busy = ConnectionState.busy  # type: ignore
+        Error = ConnectionState.error  # type: ignore
+
 
 AxisInformation = namedtuple("AxisInformation", ["speed", "inverted"])
+
 
 ##  OctoPrint connected (wifi / lan) printer using the OctoPrint API
 @signalemitter
 class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def __init__(self, instance_id: str, address: str, port: int, properties: dict, **kwargs) -> None:
-        super().__init__(device_id = instance_id, address = address, properties = properties, **kwargs)
+        super().__init__(device_id=instance_id, address=address, properties=properties, **kwargs)
 
         self._address = address
         self._port = port
@@ -91,7 +95,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         self._octoprint_version = self._properties.get(b"version", b"").decode("utf-8")
         self._octoprint_user_name = ""
 
-        self._axis_information = {axis: AxisInformation(speed=6000 if axis != "e" else 300, inverted=False) for axis in ["x", "y", "z", "e"]}
+        self._axis_information = {axis: AxisInformation(speed=6000 if axis != "e" else 300, inverted=False) for axis in
+                                  ["x", "y", "z", "e"]}
 
         self._gcode_stream = StringIO()  # type: Union[StringIO, BytesIO]
 
@@ -119,7 +124,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             CuraApplication.getInstance().getVersion(),
             "OctoPrintPlugin",
             plugin_version
-        )) # NetworkedPrinterOutputDevice defines this as string, so we encode this later
+        ))  # NetworkedPrinterOutputDevice defines this as string, so we encode this later
 
         self._api_prefix = "api/"
         self._api_key = b""
@@ -146,17 +151,19 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if major_api_version <= 5:
             # In Cura 3.x, the monitor item only shows the camera stream
-            self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "MonitorItem3x.qml")
+            self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml",
+                                                       "MonitorItem3x.qml")
         else:
             # In Cura 4.x, the monitor item shows the camera stream as well as the monitor sidebar
-            self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "MonitorItem4x.qml")
+            self._monitor_view_qml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml",
+                                                       "MonitorItem4x.qml")
 
         name = self._id
         matches = re.search(r"^\"(.*)\"\._octoprint\._tcp.local$", name)
         if matches:
             name = matches.group(1)
 
-        self.setPriority(2) # Make sure the output device gets selected above local file output
+        self.setPriority(2)  # Make sure the output device gets selected above local file output
         self.setName(name)
         self.setShortDescription(i18n_catalog.i18nc("@action:button", "Print with Hercules Host"))
         self.setDescription(i18n_catalog.i18nc("@properties:tooltip", "Print with Hercules Host"))
@@ -165,11 +172,11 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._post_gcode_reply = None
 
-        self._progress_message = None # type: Optional[Message]
-        self._error_message = None # type: Optional[Message]
-        self._waiting_message = None # type: Optional[Message]
+        self._progress_message = None  # type: Optional[Message]
+        self._error_message = None  # type: Optional[Message]
+        self._waiting_message = None  # type: Optional[Message]
 
-        self._queued_gcode_commands = [] # type: List[str]
+        self._queued_gcode_commands = []  # type: List[str]
 
         # TODO; Add preference for update intervals
         self._update_fast_interval = 2000
@@ -186,11 +193,11 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._power_plugins_manager = OctoPrintPowerPlugins()
 
-        self._store_on_sd_supported = False # store gcode on sd card in printer instead of locally
-        self._ufp_transfer_supported = False # transfer gcode as .ufp files including thumbnail image
-        self._gcode_analysis_supported = False # wait for analysis to complete before starting a print
+        self._store_on_sd_supported = False  # store gcode on sd card in printer instead of locally
+        self._ufp_transfer_supported = False  # transfer gcode as .ufp files including thumbnail image
+        self._gcode_analysis_supported = False  # wait for analysis to complete before starting a print
 
-        self._ufp_plugin_version = Version(0) # used to determine how gcode files are extracted from .ufp
+        self._ufp_plugin_version = Version(0)  # used to determine how gcode files are extracted from .ufp
 
         self._waiting_for_analysis = False
         self._waiting_for_printer = False
@@ -203,11 +210,22 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._is_writing = False
 
+        self._output_upload_device_id = self._id + "_upload"
+        self._output_upload_device = OctoPrintOutputUploadDevice(self._output_upload_device_id)
+        self._output_upload_device.writeUploadStarted.connect(self.writeUpload)
+
+    def getOutputUploadDevice(self):
+        return self._output_upload_device
+
+    def writeUpload(self):
+        self.startWrite(True)
+
     @property
     def _store_on_sd(self) -> bool:
         global_container_stack = CuraApplication.getInstance().getGlobalContainerStack()
         if global_container_stack:
-            return self._store_on_sd_supported and parseBool(global_container_stack.getMetaDataEntry("octoprint_store_sd", False))
+            return self._store_on_sd_supported and parseBool(
+                global_container_stack.getMetaDataEntry("octoprint_store_sd", False))
         return False
 
     @property
@@ -221,7 +239,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def getProperties(self) -> Dict[bytes, bytes]:
         return self._properties
 
-    @pyqtSlot(str, result = str)
+    @pyqtSlot(str, result=str)
     def getProperty(self, key: str) -> str:
         key_b = key.encode("utf-8")
         if key_b in self._properties:
@@ -231,7 +249,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
     ##  Get the unique key of this machine
     #   \return key String containing the key of the machine.
-    @pyqtSlot(result = str)
+    @pyqtSlot(result=str)
     def getId(self) -> str:
         return self._id
 
@@ -240,7 +258,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         self._api_key = api_key.encode()
 
     ##  Name of the instance (as returned from the zeroConf properties)
-    @pyqtProperty(str, constant = True)
+    @pyqtProperty(str, constant=True)
     def name(self) -> str:
         return self._name
 
@@ -301,7 +319,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
     cameraOrientationChanged = pyqtSignal()
 
-    @pyqtProperty("QVariantMap", notify = cameraOrientationChanged)
+    @pyqtProperty("QVariantMap", notify=cameraOrientationChanged)
     def cameraOrientation(self) -> Dict[str, Any]:
         return {
             "mirror": self._camera_mirror,
@@ -310,7 +328,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
     cameraUrlChanged = pyqtSignal()
 
-    @pyqtProperty("QUrl", notify = cameraUrlChanged)
+    @pyqtProperty("QUrl", notify=cameraUrlChanged)
     def cameraUrl(self) -> QUrl:
         return QUrl(self._camera_url)
 
@@ -321,7 +339,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
     showCameraChanged = pyqtSignal()
 
-    @pyqtProperty(bool, notify = showCameraChanged)
+    @pyqtProperty(bool, notify=showCameraChanged)
     def showCamera(self) -> bool:
         return self._show_camera
 
@@ -335,13 +353,13 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Closed))
         if self._progress_message:
             self._progress_message.hide()
-            self._progress_message = None #type: Optional[Message]
+            self._progress_message = None  # type: Optional[Message]
         if self._error_message:
             self._error_message.hide()
-            self._error_message = None #type: Optional[Message]
+            self._error_message = None  # type: Optional[Message]
         if self._waiting_message:
             self._waiting_message.hide()
-            self._waiting_message = None #type: Optional[Message]
+            self._waiting_message = None  # type: Optional[Message]
 
         self._waiting_for_printer = False
         self._waiting_for_analysis = False
@@ -359,7 +377,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._last_response_time = None  # type: Optional[float]
         self._setAcceptsCommands(False)
-        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connecting to Hercules Host on {0}").format(self._id))
+        self.setConnectionText(
+            i18n_catalog.i18nc("@info:status", "Connecting to Hercules Host on {0}").format(self._id))
 
         ## Request 'settings' dump
         self.get("settings", self._onRequestFinished)
@@ -371,7 +390,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self.get("version", self._onRequestFinished)
 
         if not self._octoprint_user_name and self._api_key:
-            self._sendCommandToApi("login", {"passive":True})
+            self._sendCommandToApi("login", {"passive": True})
 
         self.get("printerprofiles", self._onRequestFinished)
 
@@ -395,8 +414,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def cancelPrint(self) -> None:
         self._sendJobCommand("cancel")
 
-    def requestWrite(self, nodes: List["SceneNode"], file_name: Optional[str] = None, limit_mimetypes: bool = False,
-                     file_handler: Optional["FileHandler"] = None, filter_by_machine: bool = False, **kwargs) -> None:
+    def startWrite(self, is_output_upload_device: bool) -> None:
         global_container_stack = CuraApplication.getInstance().getGlobalContainerStack()
         if not global_container_stack:
             return
@@ -419,6 +437,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if not gcode_writer.write(self._gcode_stream, None):
             Logger.log("e", "GCodeWrite failed: %s" % gcode_writer.getInformation())
             self._is_writing = False
+            if is_output_upload_device:
+                self._output_upload_device.writeFinished.emit()
             return
 
         # Check printer space
@@ -427,7 +447,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if self._freeStorage < (gcode_body_size + min_free_space):
             self._error_message = Message(
-                i18n_catalog.i18nc("@info:status", "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"),
+                i18n_catalog.i18nc("@info:status",
+                                   "There is not enough space on the printer. Delete old prints on the printer screen to free up memory"),
                 title=i18n_catalog.i18nc("@label", "Hercules Host error")
             )
             self._error_message.show()
@@ -435,19 +456,21 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                        "Unable to send data to Hercules Host. No memory left on device. Free: %s bytes, Requested: %s bytes",
                        str(self._freeStorage), str(gcode_body_size))
             self._is_writing = False
+            if is_output_upload_device:
+                self._output_upload_device.writeFinished.emit()
             return
 
         if self._error_message:
             self._error_message.hide()
-            self._error_message = None # type: Optional[Message]
+            self._error_message = None  # type: Optional[Message]
 
         if self._progress_message:
             self._progress_message.hide()
-            self._progress_message = None # type: Optional[Message]
+            self._progress_message = None  # type: Optional[Message]
 
-        self._auto_print = parseBool(global_container_stack.getMetaDataEntry("octoprint_auto_print", True))
+        self._auto_print = is_output_upload_device is False
         self._auto_select = parseBool(global_container_stack.getMetaDataEntry("octoprint_select_print", False))
-        self._forced_queue = False
+        self._forced_queue = is_output_upload_device
 
         use_power_plugin = parseBool(global_container_stack.getMetaDataEntry("octoprint_power_control", False))
         auto_connect = parseBool(global_container_stack.getMetaDataEntry("octoprint_auto_connect", True))
@@ -470,7 +493,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 else:
                     Logger.log("e", "Specified power plug %s is not available", power_plug_id)
 
-            else: # auto_connect
+            else:  # auto_connect
                 self._sendCommandToApi("connection/connect", {})
                 Logger.log("d", "Sent command to connect printer to Hercules Host with current settings")
 
@@ -486,7 +509,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 )
                 self._waiting_message.addAction(
                     "queue", i18n_catalog.i18nc("@action:button", "Queue"), "",
-                    i18n_catalog.i18nc("@action:tooltip", "Stop waiting for the printer and queue the printjob instead"),
+                    i18n_catalog.i18nc("@action:tooltip",
+                                       "Stop waiting for the printer and queue the printjob instead"),
                     button_style=Message.ActionButtonStyle.SECONDARY
                 )
                 self._waiting_message.addAction(
@@ -522,10 +546,15 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 self._error_message.actionTriggered.connect(self._queuePrintJob)
                 self._error_message.show()
                 self._is_writing = False
+                if is_output_upload_device:
+                    self._output_upload_device.writeFinished.emit()
                 return
 
-        self._is_writing = False
         self._sendPrintJob()
+
+    def requestWrite(self, nodes: List["SceneNode"], file_name: Optional[str] = None, limit_mimetypes: bool = False,
+                     file_handler: Optional["FileHandler"] = None, filter_by_machine: bool = False, **kwargs) -> None:
+        self.startWrite(False)
 
     def _stopWaitingForAnalysis(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
         if self._waiting_message:
@@ -555,6 +584,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._queuePrintJob()
         elif action_id == "cancel":
             self._is_writing = False
+            self._output_upload_device.writeFinished.emit()
             self._gcode_stream = StringIO()  # type: Union[StringIO, BytesIO]
 
     def _queuePrintJob(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
@@ -598,7 +628,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         file_name = "%s.%s" % (job_name, extension)
 
         ##  Create multi_part request
-        post_parts = [] # type: List[QHttpPart]
+        post_parts = []  # type: List[QHttpPart]
 
         ##  Create parts (to be placed inside multipart)
         gcode_body = self._gcode_stream.getvalue()
@@ -608,7 +638,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             gcode_body = gcode_body.encode()
 
         post_parts.append(self._createFormPart("name=\"path\"", b"//", "text/plain"))
-        post_parts.append(self._createFormPart("name=\"file\"; filename=\"%s\"" % file_name, gcode_body, "application/octet-stream"))
+        post_parts.append(
+            self._createFormPart("name=\"file\"; filename=\"%s\"" % file_name, gcode_body, "application/octet-stream"))
 
         if self._store_on_sd or (not self._wait_for_analysis and not self._transfer_as_ufp):
             if self._auto_print and not self._forced_queue:
@@ -654,10 +685,12 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 pass  # The disconnection can fail on mac in some cases. Ignore that.
 
             self._post_gcode_reply.abort()
-            self._post_gcode_reply = None # type:Optional[QNetworkReply]
+            self._post_gcode_reply = None  # type:Optional[QNetworkReply]
         if self._progress_message:
             self._progress_message.hide()
-            self._progress_message = None # type:Optional[Message]
+            self._progress_message = None  # type:Optional[Message]
+        self._is_writing = False
+        self._output_upload_device.writeFinished.emit()
 
     def sendCommand(self, command: str) -> None:
         self._queued_gcode_commands.append(command)
@@ -668,7 +701,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if self._queued_gcode_commands:
             self._sendCommandToApi("printer/command", self._queued_gcode_commands)
             Logger.log("d", "Sent gcode command to Hercules Host instance: %s", self._queued_gcode_commands)
-            self._queued_gcode_commands = [] # type: List[str]
+            self._queued_gcode_commands = []  # type: List[str]
 
     def _sendJobCommand(self, command: str) -> None:
         self._sendCommandToApi("job", command)
@@ -694,7 +727,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if self._connection_state_before_timeout and reply.error() == QNetworkReply.NoError:
             #  There was a timeout, but we got a correct answer again.
             if self._last_response_time:
-                Logger.log("d", "We got a response from the instance after %s of silence", time() - self._last_response_time)
+                Logger.log("d", "We got a response from the instance after %s of silence",
+                           time() - self._last_response_time)
             self.setConnectionState(self._connection_state_before_timeout)
             self._connection_state_before_timeout = None
 
@@ -726,7 +760,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                                 self._axis_information[axis] = AxisInformation(
                                     speed=printer_profile["axes"][axis]["speed"],
                                     inverted=printer_profile["axes"][axis]["inverted"]
-                            )
+                                )
 
                             self.additionalDataChanged.emit()
                             return
@@ -747,7 +781,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                     if not self.acceptsCommands:
                         self._setAcceptsCommands(True)
-                        self.setConnectionText(i18n_catalog.i18nc("@info:status", "Connected to Hercules Host on {0}").format(self._id))
+                        self.setConnectionText(
+                            i18n_catalog.i18nc("@info:status", "Connected to Hercules Host on {0}").format(self._id))
 
                     if self._connection_state == UnifiedConnectionState.Connecting:
                         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Connected))
@@ -776,8 +811,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                             extruder = printer.extruders[index]
                             if ("tool%d" % index) in json_data["temperature"]:
                                 hotend_temperatures = json_data["temperature"]["tool%d" % index]
-                                target_temperature = hotend_temperatures["target"] if hotend_temperatures["target"] is not None else -1
-                                actual_temperature = hotend_temperatures["actual"] if hotend_temperatures["actual"] is not None else -1
+                                target_temperature = hotend_temperatures["target"] if hotend_temperatures[
+                                                                                          "target"] is not None else -1
+                                actual_temperature = hotend_temperatures["actual"] if hotend_temperatures[
+                                                                                          "actual"] is not None else -1
                                 extruder.updateTargetHotendTemperature(target_temperature)
                                 extruder.updateHotendTemperature(actual_temperature)
                             else:
@@ -786,9 +823,11 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                         if "bed" in json_data["temperature"]:
                             bed_temperatures = json_data["temperature"]["bed"]
-                            actual_temperature = bed_temperatures["actual"] if bed_temperatures["actual"] is not None else -1
+                            actual_temperature = bed_temperatures["actual"] if bed_temperatures[
+                                                                                   "actual"] is not None else -1
                             printer.updateBedTemperature(actual_temperature)
-                            target_temperature = bed_temperatures["target"] if bed_temperatures["target"] is not None else -1
+                            target_temperature = bed_temperatures["target"] if bed_temperatures[
+                                                                                   "target"] is not None else -1
                             printer.updateTargetBedTemperature(target_temperature)
                         else:
                             printer.updateBedTemperature(-1)
@@ -813,8 +852,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                 elif http_status_code == 401 or http_status_code == 403:
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "Hercules Host on {0} does not allow access to the printer state").format(self._id)
-                    )
+                        "@info:status", "Hercules Host on {0} does not allow access to the printer state").format(
+                        self._id)
+                                     )
                     return
 
                 elif http_status_code == 409:
@@ -822,15 +862,16 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Connected))
 
                     self._setOffline(printer, i18n_catalog.i18nc(
-                        "@info:status", "The printer connected to Hercules Host on {0} is not operational").format(self._id)
-                    )
+                        "@info:status", "The printer connected to Hercules Host on {0} is not operational").format(
+                        self._id)
+                                     )
                     return
 
                 elif http_status_code == 502 or http_status_code == 503:
                     Logger.log("w", "Received an error status code: %d", http_status_code)
                     self._setOffline(printer, i18n_catalog.i18nc(
                         "@info:status", "Hercules Host on {0} is not running").format(self._id)
-                    )
+                                     )
                     return
 
                 else:
@@ -888,9 +929,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         print_job.updateTimeElapsed(print_time)
 
                         print_time_left = json_data["progress"]["printTimeLeft"]
-                        if print_time_left: # not 0 or None or ""
+                        if print_time_left:  # not 0 or None or ""
                             print_job.updateTimeTotal(print_time + print_time_left)
-                        elif completion: # not 0 or None or ""
+                        elif completion:  # not 0 or None or ""
                             print_job.updateTimeTotal(print_time / (completion / 100))
                         else:
                             print_job.updateTimeTotal(0)
@@ -898,7 +939,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         print_job.updateTimeElapsed(0)
                         print_job.updateTimeTotal(0)
 
-                    if completion and print_job_state == "pre_print": # completion not not 0 or None or "", state "Sending file to SD"
+                    if completion and print_job_state == "pre_print":  # completion not not 0 or None or "", state "Sending file to SD"
                         if not self._progress_message:
                             self._progress_message = Message(
                                 i18n_catalog.i18nc("@info:status", "Streaming file to the printer SD card"),
@@ -909,10 +950,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                             self._progress_message.setProgress(completion)
                     else:
                         if self._progress_message and self._progress_message.getText().startswith(
-                            i18n_catalog.i18nc("@info:status", "Streaming file to the printer SD card")
+                                i18n_catalog.i18nc("@info:status", "Streaming file to the printer SD card")
                         ):
                             self._progress_message.hide()
-                            self._progress_message = None # type:Optional[Message]
+                            self._progress_message = None  # type:Optional[Message]
 
                     print_job.updateName(json_data["job"]["file"]["name"])
 
@@ -926,14 +967,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 elif http_status_code == 401 or http_status_code == 403:
                     self._setOffline(printer, i18n_catalog.i18nc(
                         "@info:status", "Hercules Host on {0} does not allow access to the job state").format(self._id)
-                    )
+                                     )
                     return
 
                 elif http_status_code == 502 or http_status_code == 503:
                     Logger.log("w", "Received an error status code: %d", http_status_code)
                     self._setOffline(printer, i18n_catalog.i18nc(
                         "@info:status", "Hercules Host on {0} is not running").format(self._id)
-                    )
+                                     )
                     return
 
                 else:
@@ -988,7 +1029,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                             self._waiting_message.hide()
                             self._waiting_message = None
 
-                        self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
+                        self._polling_end_points = [point for point in self._polling_end_points if
+                                                    not point.startswith("files/")]
 
                         self._selectAndPrint(end_point)
                     else:
@@ -1003,7 +1045,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                     if "free" in json_data:
                         self._freeStorage = json_data["free"]
-                        #Logger.log("d", "Received JSON from get api/files. Free: %s", str(self._freeStorage))
+                        # Logger.log("d", "Received JSON from get api/files. Free: %s", str(self._freeStorage))
 
         elif reply.operation() == QNetworkAccessManager.PostOperation:
             if self._api_prefix + "files" in reply.url().toString():  # Result from /files command to start a printjob:
@@ -1011,7 +1053,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     Logger.log("d", "Hercules Host file command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to start print jobs on Hercules Host with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error",
+                                                      "You are not allowed to start print jobs on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1023,7 +1066,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     Logger.log("d", "Hercules Host job command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control print jobs on Hercules Host with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error",
+                                                      "You are not allowed to control print jobs on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1035,7 +1079,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     Logger.log("d", "Hercules Host gcode command(s) accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to send gcode commands to Hercules Host with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error",
+                                                      "You are not allowed to send gcode commands to Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1066,7 +1111,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     self._octoprint_user_name = i18n_catalog.i18nc("@label", "Unknown user")
                     self.additionalDataChanged.emit()
 
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access to Hercules Host with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error",
+                                                      "You are not allowed to access to Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1075,7 +1121,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                     Logger.log("d", "Hercules Host connection command accepted")
 
                 elif http_status_code == 401 or http_status_code == 403:
-                    error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to control printer connections on Hercules Host with the configured API key.")
+                    error_string = i18n_catalog.i18nc("@info:error",
+                                                      "You are not allowed to control printer connections on Hercules Host with the configured API key.")
                     self._showErrorMessage(error_string)
                     return
 
@@ -1087,7 +1134,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if http_status_code >= 400:
             if http_status_code == 401 or http_status_code == 403:
-                error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to access Hercules Host with the configured API key.")
+                error_string = i18n_catalog.i18nc("@info:error",
+                                                  "You are not allowed to access Hercules Host with the configured API key.")
             else:
                 # Received another error reply
                 error_string = bytes(reply.readAll()).decode("utf-8")
@@ -1127,18 +1175,20 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if self._progress_message:
             self._progress_message.hide()
-            self._progress_message = None # type:Optional[message]
+            self._progress_message = None  # type:Optional[message]
 
         http_status_code = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
         error_string = ""
         if http_status_code == 401 or http_status_code == 403:
-            error_string = i18n_catalog.i18nc("@info:error", "You are not allowed to upload files to Hercules Host with the configured API key.")
+            error_string = i18n_catalog.i18nc("@info:error",
+                                              "You are not allowed to upload files to Hercules Host with the configured API key.")
 
         elif http_status_code == 409:
             if "files/sdcard" in reply.url().toString():
                 error_string = i18n_catalog.i18nc("@info:error", "Can't store the printjob on the printer sd card.")
             else:
-                error_string = i18n_catalog.i18nc("@info:error", "Can't store the printjob with the same name as the one that is currently printing.")
+                error_string = i18n_catalog.i18nc("@info:error",
+                                                  "Can't store the printjob with the same name as the one that is currently printing.")
 
         elif http_status_code >= 400:
             error_string = bytes(reply.readAll()).decode("utf-8")
@@ -1156,7 +1206,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         end_point = location_url.toString().split(self._api_prefix, 1)[1]
         if self._transfer_as_ufp and end_point.endswith(".ufp"):
-            if self._ufp_plugin_version < Version("0.1.7"): # unfortunately, version 0.1.6 can not be detected
+            if self._ufp_plugin_version < Version("0.1.7"):  # unfortunately, version 0.1.6 can not be detected
                 # before 0.1.6, the plugin extracts gcode from *.ufp files as *.ufp.gcode
                 end_point += ".gcode"
             else:
@@ -1171,14 +1221,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 message = Message(i18n_catalog.i18nc("@info:status", "Saved to Hercules Host"))
             message.setTitle(i18n_catalog.i18nc("@label", "Hercules Host"))
             self._is_writing = False
-            # message.addAction(
-            #     "open_browser", i18n_catalog.i18nc("@action:button", "Hercules Host..."), "globe",
-            #     i18n_catalog.i18nc("@info:tooltip", "Open the Hercules Host web interface")
-            # )
-            # message.actionTriggered.connect(self._openOctoPrint)
+            self._output_upload_device.writeFinished.emit()
             message.show()
-
-            self._selectAndPrint(end_point)
+            if self._auto_select:
+                self._selectAndPrint(end_point)
         elif self._auto_print or self._auto_select or self._wait_for_analysis:
             if not self._wait_for_analysis or not self._auto_print:
                 self._selectAndPrint(end_point)
@@ -1191,7 +1237,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             )
             self._waiting_message.addAction(
                 "print", i18n_catalog.i18nc("@action:button", "Print now"), "",
-                i18n_catalog.i18nc("@action:tooltip", "Stop waiting for the Gcode analysis and start printing immediately"),
+                i18n_catalog.i18nc("@action:tooltip",
+                                   "Stop waiting for the Gcode analysis and start printing immediately"),
                 button_style=Message.ActionButtonStyle.SECONDARY
             )
             self._waiting_message.addAction(
@@ -1209,22 +1256,22 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if "feature" in json_data and "sdSupport" in json_data["feature"]:
             self._store_on_sd_supported = json_data["feature"]["sdSupport"]
 
-
         if "webcam" in json_data and "streamUrl" in json_data["webcam"]:
             stream_url = json_data["webcam"]["streamUrl"]
-            if not stream_url: #empty string or None
+            if not stream_url:  # empty string or None
                 self._camera_url = ""
-            elif stream_url[:4].lower() == "http": # absolute uri
+            elif stream_url[:4].lower() == "http":  # absolute uri
                 self._camera_url = stream_url
-            elif stream_url[:2] == "//": # protocol-relative
+            elif stream_url[:2] == "//":  # protocol-relative
                 self._camera_url = "%s:%s" % (self._protocol, stream_url)
-            elif stream_url[:1] == ":": # domain-relative (on another port)
+            elif stream_url[:1] == ":":  # domain-relative (on another port)
                 self._camera_url = "%s://%s%s" % (self._protocol, self._address, stream_url)
-            elif stream_url[:1] == "/": # domain-relative (on same port)
+            elif stream_url[:1] == "/":  # domain-relative (on same port)
                 if not self._basic_auth_string:
                     self._camera_url = "%s://%s:%d%s" % (self._protocol, self._address, self._port, stream_url)
                 else:
-                    self._camera_url = "%s://%s@%s:%d%s" % (self._protocol, self._basic_auth_string, self._address, self._port, stream_url)
+                    self._camera_url = "%s://%s@%s:%d%s" % (
+                    self._protocol, self._basic_auth_string, self._address, self._port, stream_url)
             else:
                 Logger.log("w", "Unusable stream url received: %s", stream_url)
                 self._camera_url = ""
@@ -1270,7 +1317,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         Logger.log("d", "OctoPrint-UltimakerFormatPackage plugin version < 0.1.7")
 
     def _createPrinterList(self) -> None:
-        printer = PrinterOutputModel(output_controller=self._output_controller, number_of_extruders=self._number_of_extruders)
+        printer = PrinterOutputModel(output_controller=self._output_controller,
+                                     number_of_extruders=self._number_of_extruders)
         printer.updateName(self.name)
         self._printers = [printer]
         self.printersChanged.emit()
@@ -1279,12 +1327,16 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         command = {
             "command": "select"
         }
+
+        print("self._auto_print " + str(self._auto_print))
+        print("self._forced_queue " + str(self._forced_queue))
         if self._auto_print and not self._forced_queue:
             command["print"] = True
-
+        else:
+            command["print"] = False
         self._sendCommandToApi(end_point, command)
 
-    def _setOffline(self, printer:PrinterOutputModel, reason: str = "") -> None:
+    def _setOffline(self, printer: PrinterOutputModel, reason: str = "") -> None:
         if printer.state != "offline":
             printer.updateState("offline")
             if printer.activePrintJob:
