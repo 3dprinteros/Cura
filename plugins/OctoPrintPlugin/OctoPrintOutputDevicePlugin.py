@@ -2,6 +2,7 @@
 # OctoPrintPlugin is released under the terms of the AGPLv3 or higher.
 
 from UM.OutputDevice.OutputDevicePlugin import OutputDevicePlugin
+from UM.OutputDevice.OutputDeviceManager import ManualDeviceAdditionAttempt
 from .OctoPrintOutputDevice import OctoPrintOutputDevice
 from cura.CuraApplication import CuraApplication
 from cura.Settings.CuraStackBuilder import CuraStackBuilder
@@ -12,6 +13,7 @@ from UM.Application import Application
 from UM.Logger import Logger
 from UM.Util import parseBool
 
+
 from PyQt5.QtCore import QTimer
 
 import time
@@ -21,7 +23,7 @@ import base64
 import os.path
 import ipaddress
 
-from typing import Any, Dict, List, Union, Optional, TYPE_CHECKING
+from typing import Any, Dict, List, Union, Optional, TYPE_CHECKING, Callable
 
 if TYPE_CHECKING:
     # for MYPY, fall back to the system-installed version
@@ -93,7 +95,6 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         self._keep_alive_timer.setSingleShot(True)
         self._keep_alive_timer.timeout.connect(self._keepDiscoveryAlive)
         self._consecutive_zeroconf_restarts = 0
-
 
     addInstanceSignal = Signal()
     removeInstanceSignal = Signal()
@@ -167,7 +168,15 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             self._consecutive_zeroconf_restarts = 0
             self._keep_alive_timer.start()
 
-    def addManualInstance(self, name: str, address: str, port: int, path: str, useHttps: bool = False, userName: str = "", password: str = "") -> None:
+    ## Indicate that this plugin supports adding networked printers manually.
+    def canAddManualDevice(self, address: str = "") -> ManualDeviceAdditionAttempt:
+        return ManualDeviceAdditionAttempt.PRIORITY
+
+    ## Add a networked printer manually based on its network address.
+    def addManualDevice(self, address: str, callback: Optional[Callable[[bool, str], None]] = None) -> None:
+        self.addManualInstance(address, address, 5000, '/', False, "", "", callback)
+
+    def addManualInstance(self, name: str, address: str, port: int, path: str, useHttps: bool = False, userName: str = "", password: str = "", callback: Optional[Callable[[bool, str], None]] = None) -> None:
         self._manual_instances[name] = {
             "address": address,
             "port": port,
@@ -189,7 +198,7 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         if name in self._instances:
             self.removeInstance(name)
 
-        self.addInstance(name, address, port, properties)
+        self.addInstance(name, address, port, properties, callback)
         self.instanceListChanged.emit()
 
     def removeManualInstance(self, name: str) -> None:
@@ -246,10 +255,10 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
     @staticmethod
     def _getPrinterTypeIdentifiers() -> Dict[str, str]:
         container_registry = CuraApplication.getInstance().getContainerRegistry()
-        ultimaker_machines = container_registry.findContainersMetadata(type="machine",
+        octoprint_machines = container_registry.findContainersMetadata(type="machine",
                                                                        manufacturer="Imprinta")
         found_machine_type_identifiers = {}  # type: Dict[str, str]
-        for machine in ultimaker_machines:
+        for machine in octoprint_machines:
             machine_type = machine.get("id", None)
             machine_bom_numbers = machine.get("bom_numbers", [])
             if machine_type and machine_bom_numbers:
@@ -261,23 +270,14 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
 
 
     ##  Because the model needs to be created in the same thread as the QMLEngine, we use a signal.
-    def addInstance(self, name: str, address: str, port: int, properties: Dict[bytes, bytes]) -> None:
+    def addInstance(self, name: str, address: str, port: int, properties: Dict[bytes, bytes], callback: Optional[Callable[[bool, str], None]] = None) -> None:
         properties[b"printer_type"] = b"hercules"
         if name in self._instances:
             Logger.log("w", "Instance %s already exist", name)
             return
 
         instance = OctoPrintOutputDevice(name, address, port, properties)
-
         self._instances[instance.getId()] = instance
-        # instance.setApiKey(self._deobfuscateString("0F22A68224504305889ECA247BD762F9"))
-
-        # Detect the machine type based on the BOM number that is sent over the network.
-        # properties[b"printer_type"] = b"Unknown"
-        # for bom, p_type in printer_type_identifiers.items():
-        #     if machine_identifier.startswith(bom):
-        #         properties[b"printer_type"] = bytes(p_type, encoding="utf8")
-        #         break
 
         discovered_printers_model = CuraApplication.getInstance().getDiscoveredPrintersModel()
         if address in list(discovered_printers_model.discoveredPrintersByAddress.keys()):
@@ -304,13 +304,22 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         instance.connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
         instance.connect()
 
+        if callback is not None:
+            CuraApplication.getInstance().callLater(callback, True, address)
+
 
     def removeInstance(self, name: str) -> None:
         instance = self._instances.pop(name, None)
+        discovered_printers_model = CuraApplication.getInstance().getDiscoveredPrintersModel()
+
         if instance:
             if instance.isConnected():
                 instance.connectionStateChanged.disconnect(self._onInstanceConnectionStateChanged)
                 instance.disconnect()
+
+        for item in discovered_printers_model.discoveredPrinters:
+            if instance.name == item.name:
+                discovered_printers_model.removeDiscoveredPrinter(item.address)
 
     ## Add a device to the current active machine.
     def _connectToOutputDevice(self, device: OctoPrintOutputDevice, machine: GlobalStack) -> None:
