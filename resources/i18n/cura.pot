@@ -6093,3 +6093,129 @@ msgstr ""
 msgctxt "@label"
 msgid "Language:"
 msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:161
+msgctxt "@action:button"
+msgid "Print with Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:162
+msgctxt "@properties:tooltip"
+msgid "Print with Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:164
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:362
+msgctxt "@info:status"
+msgid "Connected to Hercules Host on {0}"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:483
+msgctxt "@info:status"
+msgid "Waiting for Hercules Host to connect to the printer..."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:488
+msgctxt "@action:button"
+msgid "Queue"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:489
+msgctxt "@action:tooltip"
+msgid "Stop waiting for the printer and queue the printjob instead"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:494
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:588
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1199
+msgctxt "@action:tooltip"
+msgid "Abort the printjob"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:510
+msgctxt "@info:status"
+msgid "The printer is offline. Unable to start a new job."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:512
+msgctxt "@info:status"
+msgid "Hercules Host is busy. Unable to start a new job."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:517
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:641
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1298
+msgctxt "@label"
+msgid "Hercules Host error"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:519
+msgctxt "@action:button"
+msgid "Queue job"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:520
+msgctxt "@action:tooltip"
+msgid "Queue this print job so it can be printed later"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:582
+msgctxt "@info:status"
+msgid "Sending data to Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:640
+msgctxt "@info:status"
+msgid "Unable to send data to Hercules Host."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1090
+msgctxt "@info:error"
+msgid "You are not allowed to access Hercules Host with the configured API key."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1118
+msgctxt "@info:status"
+msgid "Storing data on Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1135
+msgctxt "@info:error"
+msgid "You are not allowed to upload files to Hercules Host with the configured API key."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1139
+msgctxt "@info:error"
+msgid "Can't store the printjob on the printer sd card."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1141
+msgctxt "@info:error"
+msgid "Can't store the printjob with the same name as the one that is currently printing."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1169
+msgctxt "@info:status"
+msgid "Saved to Hercules Host as {0}"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1171
+msgctxt "@info:status"
+msgid "Saved to Hercules Host"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1188
+msgctxt "@info:status"
+msgid "Waiting for Hercules Host to complete Gcode analysis..."
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1193
+msgctxt "@info:button"
+msgid "Print now"
+msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1193
+msgctxt "@info:tooltip"
+msgid "Stop waiting for the Gcode analysis and start printing immediately"
+msgstr ""
+

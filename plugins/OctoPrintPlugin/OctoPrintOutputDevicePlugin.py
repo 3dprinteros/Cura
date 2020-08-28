@@ -299,11 +299,6 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         instance.setShowCamera(True)
         instance.connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
         instance.connect()
-        # if global_container_stack and instance.getId() == global_container_stack.getMetaDataEntry("octoprint_id"):
-        #     api_key = global_container_stack.getMetaDataEntry("octoprint_api_key", "")
-        #     print("api_key: " + api_key)
-
-
 
 
     def removeInstance(self, name: str) -> None:

@@ -201,6 +201,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._freeStorage = 0
 
+        self._is_writing = False
+
     @property
     def _store_on_sd(self) -> bool:
         global_container_stack = CuraApplication.getInstance().getGlobalContainerStack()
@@ -399,6 +401,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if not global_container_stack:
             return
 
+        if self._is_writing:
+            return
+        self._is_writing = True
         # Make sure post-processing plugin are run on the gcode
         self.writeStarted.emit(self)
 
@@ -413,6 +418,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if not gcode_writer.write(self._gcode_stream, None):
             Logger.log("e", "GCodeWrite failed: %s" % gcode_writer.getInformation())
+            self._is_writing = False
             return
 
         # Check printer space
@@ -428,6 +434,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             Logger.log("e",
                        "Unable to send data to Hercules Host. No memory left on device. Free: %s bytes, Requested: %s bytes",
                        str(self._freeStorage), str(gcode_body_size))
+            self._is_writing = False
             return
 
         if self._error_message:
@@ -470,6 +477,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 wait_for_printer = True
 
             if wait_for_printer:
+                if self._waiting_for_printer:
+                    return
                 self._waiting_message = Message(
                     i18n_catalog.i18nc("@info:status", "Waiting for Hercules Host to connect to the printer..."),
                     title=i18n_catalog.i18nc("@label", "Hercules Host"),
@@ -488,6 +497,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
                 self._waiting_message.show()
                 self._waiting_for_printer = True
+
                 return
 
         elif self.activePrinter.state not in ["idle", ""]:
@@ -511,8 +521,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 )
                 self._error_message.actionTriggered.connect(self._queuePrintJob)
                 self._error_message.show()
+                self._is_writing = False
                 return
 
+        self._is_writing = False
         self._sendPrintJob()
 
     def _stopWaitingForAnalysis(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
@@ -542,6 +554,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if action_id == "queue":
             self._queuePrintJob()
         elif action_id == "cancel":
+            self._is_writing = False
             self._gcode_stream = StringIO()  # type: Union[StringIO, BytesIO]
 
     def _queuePrintJob(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
@@ -1157,11 +1170,12 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             else:
                 message = Message(i18n_catalog.i18nc("@info:status", "Saved to Hercules Host"))
             message.setTitle(i18n_catalog.i18nc("@label", "Hercules Host"))
-            message.addAction(
-                "open_browser", i18n_catalog.i18nc("@action:button", "Hercules Host..."), "globe",
-                i18n_catalog.i18nc("@info:tooltip", "Open the Hercules Host web interface")
-            )
-            message.actionTriggered.connect(self._openOctoPrint)
+            self._is_writing = False
+            # message.addAction(
+            #     "open_browser", i18n_catalog.i18nc("@action:button", "Hercules Host..."), "globe",
+            #     i18n_catalog.i18nc("@info:tooltip", "Open the Hercules Host web interface")
+            # )
+            # message.actionTriggered.connect(self._openOctoPrint)
             message.show()
 
             self._selectAndPrint(end_point)
