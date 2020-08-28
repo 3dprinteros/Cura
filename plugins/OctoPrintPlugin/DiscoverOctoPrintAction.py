@@ -424,10 +424,7 @@ class DiscoverOctoPrintAction(MachineAction):
 
     def _createAdditionalComponentsView(self) -> None:
         Logger.log("d", "Creating additional ui components for OctoPrint-connected printers.")
-
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qml", "OctoPrintComponents.qml")
-        path2 = "E:\projects\github\3dprinteros\Cura\resources\qml\WelcomePages\AddNetworkPrinterScrollView.qml"
-
         self._additional_components = self._application.createQmlComponent(path, {"manager": self})
         if not self._additional_components:
             Logger.log("w", "Could not create additional components for OctoPrint-connected printers.")

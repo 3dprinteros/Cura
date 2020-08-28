@@ -6210,7 +6210,7 @@ msgid "Waiting for Hercules Host to complete Gcode analysis..."
 msgstr ""
 
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:1193
-msgctxt "@info:button"
+msgctxt "@action:button"
 msgid "Print now"
 msgstr ""
 

@@ -14,6 +14,7 @@ Cura.MachineAction
     id: base
     anchors.fill: parent;
     property var selectedInstance: null
+    property string apiKeyText: "0F22A68224504305889ECA247BD762F9"
     property string activeMachineId:
     {
         if (Cura.MachineManager.activeMachineId != undefined)
@@ -291,39 +292,7 @@ Cura.MachineAction
                         wrapMode: Text.WordWrap
                         text: base.selectedInstance ? base.selectedInstance.octoPrintVersion : ""
                     }
-                    /*
-                    Label
-                    {
-                        width: Math.floor(parent.width * 0.2)
-                        wrapMode: Text.WordWrap
-                        text: catalog.i18nc("@label", "API Key")
-                    }
-                    Row
-                    {
-                        spacing: UM.Theme.getSize("default_lining").width
-                        TextField
-                        {
-                            id: apiKey
-                            width: Math.floor(parent.parent.width * (requestApiKey.visible ? 0.5 : 0.8) - UM.Theme.getSize("default_margin").width)
-                            onTextChanged: apiCheckDelay.throttledCheck()
-                            text: "0F22A68224504305889ECA247BD762F9"
-                        }
 
-                        Button
-                        {
-                            id: requestApiKey
-                            visible: manager.instanceSupportsAppKeys
-                            enabled: !manager.instanceApiKeyAccepted
-                            text: catalog.i18nc("@action", "Request...")
-                            onClicked:
-                            {
-                                manager.requestApiKey(base.selectedInstance.getId());
-                                manager.openWebPage(base.selectedInstance.baseURL);
-                            }
-                        }
-
-                    }
-                    */
                     Label
                     {
                         width: Math.floor(parent.width * 0.2)
@@ -346,7 +315,7 @@ Cura.MachineAction
                             {
                                 manager.probeAppKeySupport(base.selectedInstance.getId());
                                 apiCheckDelay.lastKey = "\0";
-                                apiKey.text = manager.getApiKey(base.selectedInstance.getId());
+                                //apiKey.text = manager.getApiKey(base.selectedInstance.getId());
                             }
                         }
                     }
@@ -356,7 +325,7 @@ Cura.MachineAction
                         onAppKeyReceived:
                         {
                             apiCheckDelay.lastKey = "\0";
-                            apiKey.text = manager.getApiKey(base.selectedInstance.getId())
+                            //apiKey.text = manager.getApiKey(base.selectedInstance.getId())
                         }
                     }
                     Timer
@@ -374,10 +343,10 @@ Cura.MachineAction
                         }
                         function check()
                         {
-                            if(apiKey.text != lastKey)
+                            if(apiKeyText != lastKey && base.selectedInstance != null)
                             {
-                                lastKey = apiKey.text;
-                                manager.testApiKey(base.selectedInstance.getId(), apiKey.text);
+                                lastKey = apiKeyText;
+                                manager.testApiKey(base.selectedInstance.getId(), apiKeyText);
                                 checkOnTrigger = false;
                                 restart();
                             }
@@ -398,15 +367,15 @@ Cura.MachineAction
                     text:
                     {
                         var result = ""
-                        if (apiKey.text == "")
+                        if (apiKeyText == "")
                         {
-                            result = catalog.i18nc("@label", "Please enter the API key to access OctoPrint.");
+                            result = catalog.i18nc("@label", "Please enter the API key to access Hercules Host.");
                         }
                         else
                         {
                             if(manager.instanceInError)
                             {
-                                return catalog.i18nc("@label", "OctoPrint is not available.")
+                                return catalog.i18nc("@label", "Hercules Host is not available.")
                             }
                             if(manager.instanceResponded)
                             {
@@ -424,7 +393,7 @@ Cura.MachineAction
                                 return catalog.i18nc("@label", "Checking the API key...")
                             }
                         }
-                        result += " " + catalog.i18nc("@label", "You can get the API key through the OctoPrint web page.");
+                        result += " " + catalog.i18nc("@label", "You can get the API key through the Hercules Host web page.");
                         return result;
                     }
                     width: parent.width - UM.Theme.getSize("default_margin").width
@@ -610,7 +579,7 @@ Cura.MachineAction
                     {
                         text:
                         {
-                            if (base.selectedInstance !== null)
+                            if (base.selectedInstance != null)
                             {
                                 if (base.selectedInstance.getId() == manager.instanceId)
                                 {
@@ -628,7 +597,7 @@ Cura.MachineAction
                             else
                             {
                                 manager.setInstanceId(base.selectedInstance.getId())
-                                manager.setApiKey("0F22A68224504305889ECA247BD762F9")
+                                manager.setApiKey(apiKeyText)
 
                                 if(fixGcodeFlavor.visible)
                                 {

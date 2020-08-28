@@ -228,13 +228,14 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             return
 
         for key in self._instances:
+            print(key)
             if key == global_container_stack.getMetaDataEntry("octoprint_id"):
                 api_key = global_container_stack.getMetaDataEntry("octoprint_api_key", "")
                 self._instances[key].setApiKey(self._deobfuscateString(api_key))
                 self._instances[key].setShowCamera(parseBool(
                     global_container_stack.getMetaDataEntry("octoprint_show_camera", "true"))
                 )
-                self._instances[key].connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
+
                 self._instances[key].connect()
             else:
                 if self._instances[key].isConnected():
@@ -262,10 +263,13 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
     ##  Because the model needs to be created in the same thread as the QMLEngine, we use a signal.
     def addInstance(self, name: str, address: str, port: int, properties: Dict[bytes, bytes]) -> None:
         properties[b"printer_type"] = b"hercules"
+        if name in self._instances:
+            Logger.log("w", "Instance %s already exist", name)
+            return
+
         instance = OctoPrintOutputDevice(name, address, port, properties)
 
         self._instances[instance.getId()] = instance
-        global_container_stack = Application.getInstance().getGlobalContainerStack()
         instance.setApiKey(self._deobfuscateString("0F22A68224504305889ECA247BD762F9"))
 
         # Detect the machine type based on the BOM number that is sent over the network.
