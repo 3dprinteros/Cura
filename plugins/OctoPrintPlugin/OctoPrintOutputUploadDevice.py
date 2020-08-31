@@ -19,9 +19,9 @@ class OctoPrintOutputUploadDevice(OutputDevice):
         self.setShortDescription(catalog.i18nc("@action:button", "Upload to Hercules Host"))
         self.setDescription(catalog.i18nc("@info:tooltip", "Upload G-Code to Hercules Host"))
         self.setIconName("upload_3d")
-        self._writing = False
+        self._busy = False
 
-        self.writeFinished.connect(self._onWriteJobFinished)
+        self.finished.connect(self._onUploadJobFinished)
 		
     ##  Request the specified nodes to be written to a file.
     #
@@ -36,14 +36,14 @@ class OctoPrintOutputUploadDevice(OutputDevice):
     def requestWrite(self, nodes: List[SceneNode], file_name: Optional[str] = None, limit_mimetypes: bool = False,
                      file_handler: Optional[FileHandler] = None, filter_by_machine: bool = False,
                      **kwargs: str) -> None:
-        if self._writing:
+        if self._busy:
             raise OutputDeviceError.DeviceBusyError()
 
-        self._writing = True
-        #Set default file name
-        self.writeUploadStarted.emit()
+        self._busy = True
+        self.started.emit()
 
-    def _onWriteJobFinished(self):
-        self._writing = False
+    def _onUploadJobFinished(self):
+        self._busy = False
 
-    writeUploadStarted = Signal()
+    started = Signal()
+    finished = Signal()

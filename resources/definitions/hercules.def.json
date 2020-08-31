@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "Hercules 2020",
+  "name": "Hercules G2",
   "inherits": "fdmprinter",
   "metadata": {
     "visible": true,

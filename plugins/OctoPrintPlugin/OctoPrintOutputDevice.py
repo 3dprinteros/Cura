@@ -32,7 +32,7 @@ from cura.PrinterOutput.NetworkedPrinterOutputDevice import NetworkedPrinterOutp
 
 from PyQt5.QtNetwork import QHttpMultiPart, QHttpPart, QNetworkRequest, QNetworkAccessManager
 from PyQt5.QtNetwork import QNetworkReply, QSslConfiguration, QSslSocket
-from PyQt5.QtCore import QUrl, QTimer, pyqtSignal, pyqtProperty, pyqtSlot, QCoreApplication
+from PyQt5.QtCore import QUrl, QTimer, pyqtSignal, pyqtProperty, pyqtSlot
 from PyQt5.QtGui import QImage, QDesktopServices
 
 import sys
@@ -208,17 +208,21 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         self._freeStorage = 0
 
-        self._is_writing = False
+        self._is_busy = False
 
         self._output_upload_device_id = self._id + "_upload"
         self._output_upload_device = OctoPrintOutputUploadDevice(self._output_upload_device_id)
-        self._output_upload_device.writeUploadStarted.connect(self.writeUpload)
+        self._output_upload_device.started.connect(self._uploadOnly)
+        self._output_upload_device.finished.connect(self._unlock)
 
     def getOutputUploadDevice(self):
         return self._output_upload_device
 
-    def writeUpload(self):
+    def _uploadOnly(self):
         self.startWrite(True)
+
+    def _unlock(self):
+        self._is_busy = False
 
     @property
     def _store_on_sd(self) -> bool:
@@ -419,9 +423,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if not global_container_stack:
             return
 
-        if self._is_writing:
+        if self._is_busy:
             return
-        self._is_writing = True
+        self._is_busy = True
         # Make sure post-processing plugin are run on the gcode
         self.writeStarted.emit(self)
 
@@ -436,9 +440,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
         if not gcode_writer.write(self._gcode_stream, None):
             Logger.log("e", "GCodeWrite failed: %s" % gcode_writer.getInformation())
-            self._is_writing = False
-            if is_output_upload_device:
-                self._output_upload_device.writeFinished.emit()
+            self._output_upload_device.finished.emit()
+
             return
 
         # Check printer space
@@ -455,9 +458,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             Logger.log("e",
                        "Unable to send data to Hercules Host. No memory left on device. Free: %s bytes, Requested: %s bytes",
                        str(self._freeStorage), str(gcode_body_size))
-            self._is_writing = False
-            if is_output_upload_device:
-                self._output_upload_device.writeFinished.emit()
+
+            self._output_upload_device.finished.emit()
             return
 
         if self._error_message:
@@ -545,11 +547,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 )
                 self._error_message.actionTriggered.connect(self._queuePrintJob)
                 self._error_message.show()
-                self._is_writing = False
-                if is_output_upload_device:
-                    self._output_upload_device.writeFinished.emit()
+                self._output_upload_device.finished.emit()
                 return
-
+        self._output_upload_device.finished.emit()
         self._sendPrintJob()
 
     def requestWrite(self, nodes: List["SceneNode"], file_name: Optional[str] = None, limit_mimetypes: bool = False,
@@ -566,6 +566,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 break
         if "files/" not in end_point:
             Logger.log("e", "Could not find files/ endpoint")
+            self._output_upload_device.finished.emit()
             return
 
         self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
@@ -573,7 +574,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if action_id == "print":
             self._selectAndPrint(end_point)
         elif action_id == "cancel":
-            pass
+            self._output_upload_device.finished.emit()
 
     def _stopWaitingForPrinter(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
         if self._waiting_message:
@@ -583,8 +584,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if action_id == "queue":
             self._queuePrintJob()
         elif action_id == "cancel":
-            self._is_writing = False
-            self._output_upload_device.writeFinished.emit()
+            self._output_upload_device.finished.emit()
             self._gcode_stream = StringIO()  # type: Union[StringIO, BytesIO]
 
     def _queuePrintJob(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
@@ -689,8 +689,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if self._progress_message:
             self._progress_message.hide()
             self._progress_message = None  # type:Optional[Message]
-        self._is_writing = False
-        self._output_upload_device.writeFinished.emit()
+
+        self._output_upload_device.finished.emit()
 
     def sendCommand(self, command: str) -> None:
         self._queued_gcode_commands.append(command)
@@ -1220,8 +1220,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             else:
                 message = Message(i18n_catalog.i18nc("@info:status", "Saved to Hercules Host"))
             message.setTitle(i18n_catalog.i18nc("@label", "Hercules Host"))
-            self._is_writing = False
-            self._output_upload_device.writeFinished.emit()
+            self._output_upload_device.finished.emit()
             message.show()
             if self._auto_select:
                 self._selectAndPrint(end_point)
