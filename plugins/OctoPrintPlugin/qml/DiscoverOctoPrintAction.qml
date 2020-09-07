@@ -535,8 +535,19 @@ Cura.MachineAction
                     visible: base.selectedInstance != null
                     spacing: UM.Theme.getSize("default_margin").width
 
+                    Timer {
+                        id: connectEnableTimer
+                        interval: 2500
+                        repeat: false
+                        running: false
+                        onTriggered: {
+                            connectBtn.enabled = true
+                        }
+                    }
+
                     Button
                     {
+                        id: connectBtn
                         text:
                         {
                             if (base.selectedInstance != null)
@@ -564,6 +575,9 @@ Cura.MachineAction
                                     manager.applyGcodeFlavorFix(fixGcodeFlavor.checked)
                                 }
                             }
+
+                            connectBtn.enabled = false
+                            connectEnableTimer.start()
                             completed()
                         }
                     }

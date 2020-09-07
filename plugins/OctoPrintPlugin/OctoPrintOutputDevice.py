@@ -370,11 +370,14 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         self._waiting_for_analysis = False
         self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
 
+
     ##  Start requesting data from the instance
     def connect(self) -> None:
-        self._createNetworkManager()
+        if self.connectionState == UnifiedConnectionState.Connecting:
+            return
 
         self.setConnectionState(cast(ConnectionState, UnifiedConnectionState.Connecting))
+        self._createNetworkManager()
         self._update()  # Manually trigger the first update, as we don't want to wait a few secs before it starts.
 
         Logger.log("d", "Connection with instance %s with url %s started", self._id, self._base_url)
@@ -566,26 +569,6 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def requestWrite(self, nodes: List["SceneNode"], file_name: Optional[str] = None, limit_mimetypes: bool = False,
                      file_handler: Optional["FileHandler"] = None, filter_by_machine: bool = False, **kwargs) -> None:
         self.startWrite(False)
-
-    # def _stopWaitingForAnalysis(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
-    #     if self._waiting_message:
-    #         self._waiting_message.hide()
-    #     self._waiting_for_analysis = False
-    #
-    #     for end_point in self._polling_end_points:
-    #         if "files/" in end_point:
-    #             break
-    #     if "files/" not in end_point:
-    #         Logger.log("e", "Could not find files/ endpoint")
-    #         self._output_upload_device.finished.emit()
-    #         return
-    #
-    #     self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
-    #
-    #     if action_id == "print":
-    #         self._selectAndPrint(end_point)
-    #     elif action_id == "cancel":
-    #         self._output_upload_device.finished.emit()
 
     def _stopWaitingForPrinter(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
         if self._waiting_message:
