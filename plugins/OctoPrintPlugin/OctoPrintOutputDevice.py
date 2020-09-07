@@ -238,7 +238,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
 
     @property
     def _wait_for_analysis(self) -> bool:
-        return self._gcode_analysis_supported and not self._store_on_sd
+        return False
+        #return self._gcode_analysis_supported and not self._store_on_sd
 
     def getProperties(self) -> Dict[bytes, bytes]:
         return self._properties
@@ -441,7 +442,17 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if not gcode_writer.write(self._gcode_stream, None):
             Logger.log("e", "GCodeWrite failed: %s" % gcode_writer.getInformation())
             self._output_upload_device.finished.emit()
+            return
 
+        if (self._connection_state != UnifiedConnectionState.Connected) and (self._connection_state != UnifiedConnectionState.Busy):
+            self._error_message = Message(
+                i18n_catalog.i18nc("@info:status",
+                                   "Can't send print job. Printer is not connected"),
+                title=i18n_catalog.i18nc("@label", "Hercules Host error")
+            )
+            self._error_message.show()
+            Logger.log("e", "Can't send print job. Printer is not connected")
+            self._output_upload_device.finished.emit()
             return
 
         # Check printer space
@@ -556,25 +567,25 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                      file_handler: Optional["FileHandler"] = None, filter_by_machine: bool = False, **kwargs) -> None:
         self.startWrite(False)
 
-    def _stopWaitingForAnalysis(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
-        if self._waiting_message:
-            self._waiting_message.hide()
-        self._waiting_for_analysis = False
-
-        for end_point in self._polling_end_points:
-            if "files/" in end_point:
-                break
-        if "files/" not in end_point:
-            Logger.log("e", "Could not find files/ endpoint")
-            self._output_upload_device.finished.emit()
-            return
-
-        self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
-
-        if action_id == "print":
-            self._selectAndPrint(end_point)
-        elif action_id == "cancel":
-            self._output_upload_device.finished.emit()
+    # def _stopWaitingForAnalysis(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
+    #     if self._waiting_message:
+    #         self._waiting_message.hide()
+    #     self._waiting_for_analysis = False
+    #
+    #     for end_point in self._polling_end_points:
+    #         if "files/" in end_point:
+    #             break
+    #     if "files/" not in end_point:
+    #         Logger.log("e", "Could not find files/ endpoint")
+    #         self._output_upload_device.finished.emit()
+    #         return
+    #
+    #     self._polling_end_points = [point for point in self._polling_end_points if not point.startswith("files/")]
+    #
+    #     if action_id == "print":
+    #         self._selectAndPrint(end_point)
+    #     elif action_id == "cancel":
+    #         self._output_upload_device.finished.emit()
 
     def _stopWaitingForPrinter(self, message_id: Optional[str] = None, action_id: Optional[str] = None) -> None:
         if self._waiting_message:
@@ -1020,21 +1031,6 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                         Logger.log("w", "Received invalid JSON from Hercules Host instance.")
                         json_data = {}
 
-                    if "gcodeAnalysis" in json_data and "progress" in json_data["gcodeAnalysis"]:
-                        Logger.log("d", "PrintTimeGenius analysis of %s is done" % end_point)
-
-                        self._waiting_for_analysis = False
-
-                        if self._waiting_message:
-                            self._waiting_message.hide()
-                            self._waiting_message = None
-
-                        self._polling_end_points = [point for point in self._polling_end_points if
-                                                    not point.startswith("files/")]
-
-                        self._selectAndPrint(end_point)
-                    else:
-                        Logger.log("d", "Still waiting for PrintTimeGenius analysis of %s" % end_point)
             elif self._api_prefix + "files" in reply.url().toString() and not file_info_received:  # Information about a files and memory
                 if http_status_code == 200:
                     try:
@@ -1142,7 +1138,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 if not error_string:
                     error_string = reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)
 
+
             self._showErrorMessage(error_string)
+            Logger.log("e", "OctoPrintOutputDevice got an error details: %s", http_status_code)
             Logger.log("e", "OctoPrintOutputDevice got an error while accessing %s", reply.url().toString())
             Logger.log("e", error_string)
 
@@ -1222,33 +1220,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             message.setTitle(i18n_catalog.i18nc("@label", "Hercules Host"))
             self._output_upload_device.finished.emit()
             message.show()
-            if self._auto_select:
-                self._selectAndPrint(end_point)
-        elif self._auto_print or self._auto_select or self._wait_for_analysis:
-            if not self._wait_for_analysis or not self._auto_print:
-                self._selectAndPrint(end_point)
-                return
 
-            self._waiting_message = Message(
-                i18n_catalog.i18nc("@info:status", "Waiting for Hercules Host to complete Gcode analysis..."),
-                title=i18n_catalog.i18nc("@label", "Hercules Host"),
-                progress=-1, lifetime=0, dismissable=False, use_inactivity_timer=False
-            )
-            self._waiting_message.addAction(
-                "print", i18n_catalog.i18nc("@action:button", "Print now"), "",
-                i18n_catalog.i18nc("@action:tooltip",
-                                   "Stop waiting for the Gcode analysis and start printing immediately"),
-                button_style=Message.ActionButtonStyle.SECONDARY
-            )
-            self._waiting_message.addAction(
-                "cancel", i18n_catalog.i18nc("@action:button", "Cancel"), "",
-                i18n_catalog.i18nc("@action:tooltip", "Abort the printjob")
-            )
-            self._waiting_message.actionTriggered.connect(self._stopWaitingForAnalysis)
-            self._waiting_message.show()
 
-            self._waiting_for_analysis = True
-            self._polling_end_points.append(end_point)  # start polling the API for information about this file
 
     def parseSettingsData(self, json_data: Dict[str, Any]) -> None:
         self._store_on_sd_supported = False
@@ -1295,10 +1268,6 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
         if "plugins" in json_data:
             plugin_data = json_data["plugins"]
             self._power_plugins_manager.parsePluginData(plugin_data)
-
-            if "PrintTimeGenius" in plugin_data:
-                Logger.log("d", "Instance needs time after uploading to analyse gcode")
-                self._gcode_analysis_supported = True
 
             if "UltimakerFormatPackage" in plugin_data:
                 self._ufp_transfer_supported = False

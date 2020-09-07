@@ -190,7 +190,6 @@ Cura.MachineAction
                         onCurrentIndexChanged:
                         {
                             base.selectedInstance = listview.model[currentIndex];
-                            apiCheckDelay.throttledCheck();
                         }
                         Component.onCompleted: manager.startDiscovery()
                         delegate: Rectangle
@@ -314,56 +313,17 @@ Cura.MachineAction
                             if(base.selectedInstance)
                             {
                                 manager.probeAppKeySupport(base.selectedInstance.getId());
-                                apiCheckDelay.lastKey = "\0";
-                                //apiKey.text = manager.getApiKey(base.selectedInstance.getId());
                             }
                         }
                     }
-                    Connections
-                    {
-                        target: manager
-                        onAppKeyReceived:
-                        {
-                            apiCheckDelay.lastKey = "\0";
-                            //apiKey.text = manager.getApiKey(base.selectedInstance.getId())
-                        }
-                    }
-                    Timer
-                    {
-                        id: apiCheckDelay
-                        interval: 500
 
-                        property bool checkOnTrigger: false
-                        property string lastKey: "\0"
 
-                        function throttledCheck()
-                        {
-                            checkOnTrigger = true;
-                            restart();
-                        }
-                        function check()
-                        {
-                            if(apiKeyText != lastKey && base.selectedInstance != null)
-                            {
-                                lastKey = apiKeyText;
-                                manager.testApiKey(base.selectedInstance.getId(), apiKeyText);
-                                checkOnTrigger = false;
-                                restart();
-                            }
-                        }
-                        onTriggered:
-                        {
-                            if(checkOnTrigger)
-                            {
-                                check();
-                            }
-                        }
-                    }
                 }
 
                 Label
                 {
-                    visible: base.selectedInstance != null && text != ""
+                    // visible: base.selectedInstance != null && text != ""
+                    visible: false
                     text:
                     {
                         var result = ""
