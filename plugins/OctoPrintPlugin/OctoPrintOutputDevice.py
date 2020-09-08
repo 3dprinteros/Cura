@@ -29,6 +29,7 @@ except ImportError:
     from cura.PrinterOutput.PrintJobOutputModel import PrintJobOutputModel
 
 from cura.PrinterOutput.NetworkedPrinterOutputDevice import NetworkedPrinterOutputDevice
+from UM.OutputDevice import OutputDeviceError
 
 from PyQt5.QtNetwork import QHttpMultiPart, QHttpPart, QNetworkRequest, QNetworkAccessManager
 from PyQt5.QtNetwork import QNetworkReply, QSslConfiguration, QSslSocket
@@ -406,6 +407,8 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
     def disconnect(self) -> None:
         Logger.log("d", "Connection with instance %s with url %s stopped", self._id, self._base_url)
         self.close()
+        self._output_upload_device.close()
+
 
     def pausePrint(self) -> None:
         self._sendJobCommand("pause")
@@ -428,7 +431,12 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             return
 
         if self._is_busy:
+            raise OutputDeviceError.DeviceBusyError()
             return
+
+        if self._connection_state == UnifiedConnectionState.Closed:
+            return
+
         self._is_busy = True
         # Make sure post-processing plugin are run on the gcode
         self.writeStarted.emit(self)
@@ -456,6 +464,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._error_message.show()
             Logger.log("e", "Can't send print job. Printer is not connected")
             self._output_upload_device.finished.emit()
+            raise OutputDeviceError.UserCanceledError()
             return
 
         # Check printer space
@@ -474,6 +483,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                        str(self._freeStorage), str(gcode_body_size))
 
             self._output_upload_device.finished.emit()
+            raise OutputDeviceError.UserCanceledError()
             return
 
         if self._error_message:

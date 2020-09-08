@@ -127,6 +127,7 @@ class DiscoverOctoPrintAction(MachineAction):
 
     def _onInstanceDiscovery(self, *args) -> None:
         self.instancesChanged.emit()
+        self._network_plugin.reCheckConnections()
 
     @pyqtSlot(str)
     def removeManualInstance(self, name: str) -> None:

@@ -21,8 +21,7 @@ class OctoPrintOutputUploadDevice(OutputDevice):
         self.setIconName("upload_3d")
         self._busy = False
 
-        self.finished.connect(self._onUploadJobFinished)
-		
+
     ##  Request the specified nodes to be written to a file.
     #
     #   \param nodes A collection of scene nodes that should be written to the
@@ -39,11 +38,17 @@ class OctoPrintOutputUploadDevice(OutputDevice):
         if self._busy:
             raise OutputDeviceError.DeviceBusyError()
 
+        self.finished.connect(self._onUploadJobFinished)
+
         self._busy = True
         self.started.emit()
 
     def _onUploadJobFinished(self):
+        self.finished.disconnect(self._onUploadJobFinished)
         self._busy = False
+
+    def close(self) -> None:
+        self.finished.disconnect(self._onUploadJobFinished)
 
     started = Signal()
     finished = Signal()

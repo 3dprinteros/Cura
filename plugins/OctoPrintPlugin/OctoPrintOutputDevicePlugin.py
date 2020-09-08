@@ -289,8 +289,8 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         instance.setApiKey(self._deobfuscateString(api_key))
         instance.setShowCamera(True)
         instance.connectionStateChanged.connect(self._onInstanceConnectionStateChanged)
-        instance.connect()
         self._instances[instance.getId()] = instance
+        self.reCheckConnections()
         if callback is not None:
             CuraApplication.getInstance().callLater(callback, True, address)
 
@@ -359,8 +359,9 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             self.getOutputDeviceManager().addOutputDevice(self._instances[key].getOutputUploadDevice())
             self.getOutputDeviceManager().addOutputDevice(self._instances[key])
         else:
-            self.getOutputDeviceManager().removeOutputDevice(key)
             self.getOutputDeviceManager().removeOutputDevice(self._instances[key].getOutputUploadDevice().getId())
+            self.getOutputDeviceManager().removeOutputDevice(key)
+
 
     ##  Handler for zeroConf detection
     def _onServiceChanged(self, zeroconf: Zeroconf, service_type: str, name: str, state_change: ServiceStateChange) -> None:
