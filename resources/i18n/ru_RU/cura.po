@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cura 4.7\n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
 "POT-Creation-Date: 2020-07-24 05:14+0300\n"
-"PO-Revision-Date: 2020-08-28 20:04+0300\n"
+"PO-Revision-Date: 2020-09-09 13:35+0300\n"
 "Last-Translator: Lionbridge <info@lionbridge.com>\n"
 "Language-Team: Russian <info@lionbridge.com>, Ruslan Popov <ruslan."
 "popov@gmail.com>, Russian <info@bothof.nl>\n"
@@ -4915,7 +4915,7 @@ msgid "Confirm Diameter Change"
 msgstr "Подтвердить изменение диаметра"
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsView.qml:102
-msgctxt "@label (%1 is a number)"
+msgctxt "@label"
 msgid ""
 "The new filament diameter is set to %1 mm, which is not compatible with the "
 "current extruder. Do you wish to continue?"
@@ -6539,12 +6539,12 @@ msgstr "Язык:"
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:161
 msgctxt "@action:button"
 msgid "Print with Hercules Host"
-msgstr "Печать через Hercules Host"
+msgstr "Отправить на печать"
 
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:162
 msgctxt "@properties:tooltip"
 msgid "Print with Hercules Host"
-msgstr "Печать через Hercules Host"
+msgstr "Отправить на печать"
 
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:164
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:362
@@ -6676,7 +6676,12 @@ msgstr "Загрузить на Hercules Host"
 #: Cura/plugins/OctoPrintPlugin/OctoPrintOutputUploadDevice.py:20
 msgctxt "@info:tooltip"
 msgid "Upload G-Code to Hercules Host"
-msgstr "Загрузить G-Code на Hercules Host"
+msgstr "Загрузить на Hercules Host"
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:460
+msgctxt "@info:status"
+msgid "Can't send print job. Printer is not connected"
+msgstr "Принтер не подключен."
 
 #~ msgctxt "@title:column"
 #~ msgid "Customized"

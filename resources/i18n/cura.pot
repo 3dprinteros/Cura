@@ -4599,10 +4599,8 @@ msgid "Confirm Diameter Change"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsView.qml:102
-msgctxt "@label (%1 is a number)"
-msgid ""
-"The new filament diameter is set to %1 mm, which is not compatible with the current extruder. Do you "
-"wish to continue?"
+msgctxt "@label"
+msgid "The new filament diameter is set to %1 mm, which is not compatible with the current extruder. Do you wish to continue?"
 msgstr ""
 
 #: /home/trin/Gedeeld/Projects/Cura/resources/qml/Preferences/Materials/MaterialsView.qml:128
@@ -6228,4 +6226,10 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "Upload G-Code to Hercules Host"
 msgstr ""
+
+#: Cura/plugins/OctoPrintPlugin/OctoPrintOutputDevice.py:460
+msgctxt "@info:status"
+msgid "Can't send print job. Printer is not connected"
+msgstr ""
+
 
