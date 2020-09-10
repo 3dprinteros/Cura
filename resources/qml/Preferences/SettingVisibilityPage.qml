@@ -11,7 +11,7 @@ import Cura 1.0 as Cura
 
 UM.PreferencesPage
 {
-    title: catalog.i18nc("@title:tab", "Setting Visibility");
+    title: catalog.i18nc("@title:tab", "Видимость параметров");
 
     property QtObject settingVisibilityPresetsModel: CuraApplication.getSettingVisibilityPresetsModel()
 
