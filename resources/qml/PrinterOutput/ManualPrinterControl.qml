@@ -265,22 +265,61 @@ Item
 
             Row
             {
-                Repeater
+
+                Button
                 {
-                    model: distancesModel
-                    delegate: Button
-                    {
-                        height: UM.Theme.getSize("setting_control").height
-                        width: height + UM.Theme.getSize("default_margin").width
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
 
-                        text: model.label
-                        exclusiveGroup: distanceGroup
-                        checkable: true
-                        checked: distancesRow.currentDistance == model.value
-                        onClicked: distancesRow.currentDistance = model.value
+                    text: "0.1"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 0.1
+                    onClicked: distancesRow.currentDistance = 0.1
 
-                        style: UM.Theme.styles.monitor_checkable_button_style
-                    }
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "1"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 1
+                    onClicked: distancesRow.currentDistance = 1
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "10"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 10
+                    onClicked: distancesRow.currentDistance = 10
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "100"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 100
+                    onClicked: distancesRow.currentDistance = 100
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
                 }
             }
         }
