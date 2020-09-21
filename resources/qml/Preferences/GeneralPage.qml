@@ -776,7 +776,7 @@ UM.PreferencesPage
                 height: UM.Theme.getSize("default_margin").height
                 width: UM.Theme.getSize("default_margin").height
             }
-
+/*
             Label
             {
                 font.bold: true
@@ -798,7 +798,7 @@ UM.PreferencesPage
                     onCheckedChanged: UM.Preferences.setValue("info/automatic_update_check", checked)
                 }
             }
-/*
+
             UM.TooltipArea
             {
                 width: childrenRect.width
