@@ -691,6 +691,7 @@ class CuraEngineBackend(QObject, Backend):
 
         self.setState(BackendState.Done)
         self.processingProgress.emit(1.0)
+        self._application.getController().setActiveStage("PreviewStage")
 
         try:
             gcode_list = self._scene.gcode_dict[self._start_slice_job_build_plate] #type: ignore #Because we generate this attribute dynamically.

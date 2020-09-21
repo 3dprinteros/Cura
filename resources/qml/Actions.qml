@@ -54,7 +54,7 @@ Item
     property alias manageProfiles: manageProfilesAction;
 
     property alias manageMaterials: manageMaterialsAction;
-    property alias marketplaceMaterials: marketplaceMaterialsAction;
+    //property alias marketplaceMaterials: marketplaceMaterialsAction;
 
     property alias preferences: preferencesAction;
 
@@ -188,11 +188,11 @@ Item
         shortcut: "Ctrl+K"
     }
 
-    Action
-    {
-        id: marketplaceMaterialsAction
-        text: catalog.i18nc("@action:inmenu", "Add more materials from Marketplace")
-    }
+    //Action
+    //{
+        //id: marketplaceMaterialsAction
+        //text: catalog.i18nc("@action:inmenu", "Add more materials from Marketplace")
+    //}
 
     Action
     {

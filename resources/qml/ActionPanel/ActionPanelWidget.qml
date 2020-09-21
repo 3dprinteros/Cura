@@ -54,7 +54,6 @@ Item
                 if(actionPanelWidget.outputAvailable)
                 {
                     loader.item.hasPreviewButton = base.hasPreviewButton;
-					UM.Controller.setActiveStage("PreviewStage")
                 }
             }
         }
