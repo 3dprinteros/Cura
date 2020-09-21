@@ -1222,7 +1222,9 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._store_on_sd_supported = json_data["feature"]["sdSupport"]
 
         if "webcam" in json_data and "streamUrl" in json_data["webcam"]:
+            print(json_data)
             stream_url = json_data["webcam"]["streamUrl"]
+            print(stream_url)
             if not stream_url:  # empty string or None
                 self._camera_url = ""
             elif stream_url[:4].lower() == "http":  # absolute uri
@@ -1233,10 +1235,10 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
                 self._camera_url = "%s://%s%s" % (self._protocol, self._address, stream_url)
             elif stream_url[:1] == "/":  # domain-relative (on same port)
                 if not self._basic_auth_string:
-                    self._camera_url = "%s://%s:%d%s" % (self._protocol, self._address, self._port, stream_url)
+                    self._camera_url = "%s://%s:%d%s" % (self._protocol, self._address, 80, stream_url)
                 else:
                     self._camera_url = "%s://%s@%s:%d%s" % (
-                    self._protocol, self._basic_auth_string, self._address, self._port, stream_url)
+                    self._protocol, self._basic_auth_string, self._address, 80, stream_url)
             else:
                 Logger.log("w", "Unusable stream url received: %s", stream_url)
                 self._camera_url = ""
