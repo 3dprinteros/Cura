@@ -304,9 +304,9 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
                 instance.connectionStateChanged.disconnect(self._onInstanceConnectionStateChanged)
                 instance.disconnect()
 
-        for item in discovered_printers_model.discoveredPrinters:
-            if instance.name == item.name:
-                discovered_printers_model.removeDiscoveredPrinter(item.address)
+            for item in discovered_printers_model.discoveredPrinters:
+                if instance.name == item.name:
+                    discovered_printers_model.removeDiscoveredPrinter(item.address)
 
     ## Add a device to the current active machine.
     def _connectToOutputDevice(self, device: OctoPrintOutputDevice, machine: GlobalStack) -> None:
