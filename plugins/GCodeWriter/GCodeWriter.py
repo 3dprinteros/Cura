@@ -86,8 +86,8 @@ class GCodeWriter(MeshWriter):
         info_comment_lines = [
             ";@Printing_duration: " + print_info.currentPrintTime.getDisplayString(DurationFormat.Format.ISO8601),
             ";@Nozzle: " + nozzle_sizes,
-            ";@Filment: " + ' '.join(print_info.materialNames),
-            ";@Filment_weight: " + ' '.join(map(str, print_info.materialWeights)),
+            ";@Filament: " + ' '.join(print_info.materialNames),
+            ";@Filament_weight: " + ' '.join(map(str, print_info.materialWeights)),
             ";@Infill: " + infill_sparse_densities,
             ";@Layer_height: " + layer_height,
             ";@Last_changed: " + str(round(datetime.datetime.timestamp(datetime.datetime.now())))
