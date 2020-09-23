@@ -80,7 +80,7 @@ class GCodeWriter(MeshWriter):
         layer_height = ""
         for extruder in sorted(stack.extruderList):
             nozzle_sizes += str(extruder.getProperty("machine_nozzle_size", "value")) + " "
-            infill_sparse_densities += str(extruder.getProperty("infill_sparse_density", "value")) + " "
+            infill_sparse_densities += str(extruder.getProperty("infill_sparse_density", "value"))
             layer_height = str(extruder.getProperty("layer_height", "value")) + " "
 
         info_comment_lines = [
@@ -88,7 +88,7 @@ class GCodeWriter(MeshWriter):
             ";@Nozzle: " + nozzle_sizes,
             ";@Filament: " + ' '.join(print_info.materialNames),
             ";@Filament_weight: " + ' '.join(map(str, print_info.materialWeights)),
-            ";@Infill: " + infill_sparse_densities,
+            ";@Infill: " + infill_sparse_densities+"%",
             ";@Layer_height: " + layer_height,
             ";@Last_changed: " + str(round(datetime.datetime.timestamp(datetime.datetime.now())))
         ]
