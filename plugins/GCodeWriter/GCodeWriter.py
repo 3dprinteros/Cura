@@ -79,9 +79,9 @@ class GCodeWriter(MeshWriter):
         infill_sparse_densities = ""
         layer_height = ""
         for extruder in sorted(stack.extruderList):
-            nozzle_sizes += str(extruder.getProperty("machine_nozzle_size", "value")) + " "
+            nozzle_sizes += str(extruder.getProperty("machine_nozzle_size", "value"))
             infill_sparse_densities += str(extruder.getProperty("infill_sparse_density", "value"))
-            layer_height = str(extruder.getProperty("layer_height", "value")) + " "
+            layer_height = str(extruder.getProperty("layer_height", "value"))
 
         info_comment_lines = [
             ";@Printing_duration: " + print_info.currentPrintTime.getDisplayString(DurationFormat.Format.ISO8601),

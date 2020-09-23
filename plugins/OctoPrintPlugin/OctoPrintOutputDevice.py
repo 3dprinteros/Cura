@@ -1222,9 +1222,7 @@ class OctoPrintOutputDevice(NetworkedPrinterOutputDevice):
             self._store_on_sd_supported = json_data["feature"]["sdSupport"]
 
         if "webcam" in json_data and "streamUrl" in json_data["webcam"]:
-            print(json_data)
             stream_url = json_data["webcam"]["streamUrl"]
-            print(stream_url)
             if not stream_url:  # empty string or None
                 self._camera_url = ""
             elif stream_url[:4].lower() == "http":  # absolute uri
