@@ -318,6 +318,9 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         machine.addConfiguredConnectionType(device.connectionType.value)
 
         if not device.isConnected():
+            global_container_stack = CuraApplication.getInstance().getGlobalContainerStack()
+            if global_container_stack:
+                global_container_stack.setMetaDataEntry("octoprint_id", device.getId())
             device.connect()
 
         output_device_manager = CuraApplication.getInstance().getOutputDeviceManager()
@@ -341,6 +344,8 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             return
         new_machine.setMetaDataEntry("octoprint_api_key", "0F22A68224504305889ECA247BD762F9")
         CuraApplication.getInstance().getMachineManager().setActiveMachine(new_machine.getId())
+
+
         self._connectToOutputDevice(device, new_machine)
 
 
