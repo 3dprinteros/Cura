@@ -68,7 +68,7 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }
@@ -258,7 +258,7 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }
@@ -341,7 +341,7 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }
