@@ -2,7 +2,7 @@
 // OctoPrintPlugin is released under the terms of the AGPLv3 or higher.
 
 import QtQuick 2.2
-import QtQuick.Controls 2.9
+import QtQuick.Controls 2.3
 import UM 1.2 as UM
 import Cura 1.0 as Cura
 import OctoPrintPlugin 1.0 as OctoPrintPlugin
