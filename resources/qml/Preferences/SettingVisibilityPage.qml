@@ -91,7 +91,7 @@ UM.PreferencesPage
                 rightMargin: UM.Theme.getSize("default_margin").width
             }
 
-            placeholderText: catalog.i18nc("@label:textbox", "Filter...")
+            placeholderText: catalog.i18nc("@label:textbox", "Фильтр...")
 
             onTextChanged: definitionsModel.filter = {"i18n_label": "*" + text}
         }

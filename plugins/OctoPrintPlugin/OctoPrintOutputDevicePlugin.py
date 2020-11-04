@@ -297,16 +297,17 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
 
     def removeInstance(self, name: str) -> None:
         instance = self._instances.pop(name, None)
-        discovered_printers_model = CuraApplication.getInstance().getDiscoveredPrintersModel()
 
         if instance:
+            discovered_printers_model = CuraApplication.getInstance().getDiscoveredPrintersModel()
+            for item in discovered_printers_model.discoveredPrinters:
+                if item and instance:
+                    if instance.name == item.name:
+                        discovered_printers_model.removeDiscoveredPrinter(item.address)
             if instance.isConnected():
                 instance.connectionStateChanged.disconnect(self._onInstanceConnectionStateChanged)
                 instance.disconnect()
 
-        for item in discovered_printers_model.discoveredPrinters:
-            if instance.name == item.name:
-                discovered_printers_model.removeDiscoveredPrinter(item.address)
 
     ## Add a device to the current active machine.
     def _connectToOutputDevice(self, device: OctoPrintOutputDevice, machine: GlobalStack) -> None:
@@ -317,6 +318,9 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
         machine.addConfiguredConnectionType(device.connectionType.value)
 
         if not device.isConnected():
+            global_container_stack = CuraApplication.getInstance().getGlobalContainerStack()
+            if global_container_stack:
+                global_container_stack.setMetaDataEntry("octoprint_id", device.getId())
             device.connect()
 
         output_device_manager = CuraApplication.getInstance().getOutputDeviceManager()
@@ -340,6 +344,8 @@ class OctoPrintOutputDevicePlugin(OutputDevicePlugin):
             return
         new_machine.setMetaDataEntry("octoprint_api_key", "0F22A68224504305889ECA247BD762F9")
         CuraApplication.getInstance().getMachineManager().setActiveMachine(new_machine.getId())
+
+
         self._connectToOutputDevice(device, new_machine)
 
 

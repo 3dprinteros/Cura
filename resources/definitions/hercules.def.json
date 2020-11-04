@@ -12,7 +12,11 @@
     "platform": "hercules.stl",
     "has_variants": true,
     "preferred_variant_name": "0.5 mm",
-    "supports_usb_connection": true
+    "supports_usb_connection": true,
+    "machine_extruder_trains":
+    {
+        "0": "hercules_extruder"
+    }
   },
 
   "overrides": {

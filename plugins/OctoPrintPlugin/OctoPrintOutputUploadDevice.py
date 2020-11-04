@@ -49,6 +49,7 @@ class OctoPrintOutputUploadDevice(OutputDevice):
 
     def close(self) -> None:
         self.finished.disconnect(self._onUploadJobFinished)
+        self._busy = False
 
     started = Signal()
     finished = Signal()

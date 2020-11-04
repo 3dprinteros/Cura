@@ -4,7 +4,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
-import QtQuick.Dialogs 1.1
+import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.1
 
 import UM 1.1 as UM
@@ -327,17 +327,38 @@ Item
 
             style: UM.Theme.styles.print_setup_action_button
         }
-
-        MessageDialog
-        {
+        
+        Dialog {
             id: confirmationDialog
-
             title: catalog.i18nc("@window:title", "Abort print")
-            icon: StandardIcon.Warning
-            text: catalog.i18nc("@label", "Are you sure you want to abort the print?")
-            standardButtons: StandardButton.Yes | StandardButton.No
-            Component.onCompleted: visible = false
-            onYes: activePrintJob.setState("abort")
+            visible: false 
+            standardButtons: StandardButton.NoButton
+            
+            ColumnLayout {
+                id: column
+                width: parent ? parent.width : 100
+                Label {
+                    text: catalog.i18nc("@label", "Are you sure you want to abort the print?")
+                    Layout.columnSpan: 2
+                    Layout.fillWidth: true
+                }
+                RowLayout {
+                    Layout.alignment: Qt.AlignRight
+                    Button{
+                        text: "Да"
+                        onClicked: {
+                            activePrintJob.setState("abort")
+                            confirmationDialog.close();
+                        }
+                    }
+                    Button{
+                        text: "Нет"
+                        onClicked: {
+                            confirmationDialog.close();
+                        }
+                    }
+                }
+            }
         }
     }
 }
