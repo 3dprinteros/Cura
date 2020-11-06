@@ -22,11 +22,11 @@ Item
                               ? machineList.model.getItem(machineList.currentIndex)
                               : null
     // The currently active (expanded) section/category, where section/category is the grouping of local machine items.
-    property string currentSection: "Ultimaker B.V."
-    // By default (when this list shows up) we always expand the "Ultimaker" section.
+    property string currentSection: "Custom"
+    // By default (when this list shows up) we always expand the "Custom" section.
     property var preferredCategories: {
-        "Ultimaker B.V.": -2,
-        "Custom": -1
+        "Custom": -2,
+        "Ultimaker B.V.": -1
     }
 
     property int maxItemCountAtOnce: 10  // show at max 10 items at once, otherwise you need to scroll.

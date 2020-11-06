@@ -21,7 +21,7 @@ UM.MainWindow
     id: base
 
     // Cura application window title
-    title: catalog.i18nc("@title:window", "Ultimaker Cura")
+    title: catalog.i18nc("@title:window", "Your Desktop Slicer")
     backgroundColor: UM.Theme.getColor("viewport_background")
 
     UM.I18nCatalog
@@ -98,14 +98,6 @@ UM.MainWindow
             else
             {
                 welcomeDialogItem.visible = false
-            }
-
-            // Reuse the welcome dialog item to show "What's New" only.
-            if (CuraApplication.shouldShowWhatsNewDialog())
-            {
-                welcomeDialogItem.model = CuraApplication.getWhatsNewPagesModel()
-                welcomeDialogItem.progressBarVisible = false
-                welcomeDialogItem.visible = true
             }
         }
     }

@@ -36,11 +36,10 @@ Item
             left: parent.left
             right: parent.right
         }
-
-        text: "<p><b>Disclaimer by Ultimaker</b></p>"
+        text: "<p><b>Disclaimer by 3DPrinterOS</b></p>"
             + "<p>Please read this disclaimer carefully.</p>"
-            + "<p>Except when otherwise stated in writing, Ultimaker provides any Ultimaker software or third party software \"As is\" without warranty of any kind. The entire risk as to the quality and performance of Ultimaker software is with you.</p>"
-            + "<p>Unless required by applicable law or agreed to in writing, in no event will Ultimaker be liable to you for damages, including any general, special, incidental, or consequential damages arising out of the use or inability to use any Ultimaker software or third party software.</p>"
+            + "<p>Except when otherwise stated in writing, 3DPrinterOS provides any 3DPrinterOS software or third party software \"As is\" without warranty of any kind. The entire risk as to the quality and performance of 3DPrinterOS software is with you.</p>"
+            + "<p>Unless required by applicable law or agreed to in writing, in no event will 3DPrinterOS be liable to you for damages, including any general, special, incidental, or consequential damages arising out of the use or inability to use any 3DPrinterOS software or third party software.</p>"
         textFormat: Text.RichText
         wrapMode: Text.WordWrap
         font: UM.Theme.getFont("medium")

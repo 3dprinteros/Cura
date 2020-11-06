@@ -4,9 +4,9 @@
 # ---------
 # General constants used in Cura
 # ---------
-DEFAULT_CURA_APP_NAME = "cura"
-DEFAULT_CURA_DISPLAY_NAME = "Ultimaker Cura"
-DEFAULT_CURA_VERSION = "master"
+DEFAULT_CURA_APP_NAME = "3dprinteros_slicer"
+DEFAULT_CURA_DISPLAY_NAME = "3DPrinterOS"
+DEFAULT_CURA_VERSION = "4.4.1"
 DEFAULT_CURA_BUILD_TYPE = ""
 DEFAULT_CURA_DEBUG_MODE = False
 DEFAULT_CURA_SDK_VERSION = "7.0.0"

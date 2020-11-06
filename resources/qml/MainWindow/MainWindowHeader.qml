@@ -114,7 +114,7 @@ Item
 
         anchors
         {
-            right: accountWidget.left
+            right: parent.right
             rightMargin: UM.Theme.getSize("default_margin").width
             verticalCenter: parent.verticalCenter
         }
@@ -136,17 +136,6 @@ Item
                 const itemCount = CuraApplication.getPackageManager().packagesWithUpdate.length
                 return itemCount > 9 ? "9+" : itemCount
             }
-        }
-    }
-
-    AccountWidget
-    {
-        id: accountWidget
-        anchors
-        {
-            verticalCenter: parent.verticalCenter
-            right: parent.right
-            rightMargin: UM.Theme.getSize("default_margin").width
         }
     }
 }
