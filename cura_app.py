@@ -11,7 +11,7 @@ import sys
 from UM.Platform import Platform
 from cura.ApplicationMetadata import CuraAppName
 
-parser = argparse.ArgumentParser(prog = "cura",
+parser = argparse.ArgumentParser(prog = "YourDesktopSlicer",
                                  add_help = False)
 parser.add_argument("--debug",
                     action="store_true",
