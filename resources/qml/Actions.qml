@@ -77,7 +77,7 @@ Item
     Action
     {
         id: showTroubleShootingAction
-        onTriggered: Qt.openUrlExternally("https://ultimaker.com/en/troubleshooting")
+        onTriggered: Qt.openUrlExternally("https://forum.3dprinteros.com/")
         text: catalog.i18nc("@action:inmenu", "Show Online Troubleshooting Guide");
     }
 
