@@ -53,7 +53,7 @@ class WelcomePagesModel(ListModel):
         self._application = application
         self._catalog = i18nCatalog("cura")
 
-        self._default_next_button_text = self._catalog.i18nc("@action:button", "Next")
+        self._default_next_button_text = self._catalog.i18nc("@action:button", "Далее")
 
         self._pages = []  # type: List[Dict[str, Any]]
 
