@@ -1,0 +1,13 @@
+{
+    "version": 2,
+    "name": "Экструдер",
+    "inherits": "fdmextruder",
+    "metadata": {
+        "machine": "hercules",
+        "position": "0"
+    },
+
+    "overrides": {
+        "material_diameter": { "default_value": 1.75 }
+    }
+}

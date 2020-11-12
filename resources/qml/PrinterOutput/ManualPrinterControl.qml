@@ -68,7 +68,7 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }
@@ -90,16 +90,16 @@ Item
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
 
-                    Layout.row: 1
-                    Layout.column: 2
+                    Layout.row: 0
+                    Layout.column: 1
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                 }
 
                 Button
                 {
-                    Layout.row: 2
-                    Layout.column: 2
+                    Layout.row: 1
+                    Layout.column: 1
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                     iconSource: UM.Theme.getIcon("arrow_top");
@@ -115,8 +115,8 @@ Item
 
                 Button
                 {
-                    Layout.row: 3
-                    Layout.column: 1
+                    Layout.row: 2
+                    Layout.column: 0
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                     iconSource: UM.Theme.getIcon("arrow_left");
@@ -132,8 +132,8 @@ Item
 
                 Button
                 {
-                    Layout.row: 3
-                    Layout.column: 3
+                    Layout.row: 2
+                    Layout.column: 2
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                     iconSource: UM.Theme.getIcon("arrow_right");
@@ -149,8 +149,8 @@ Item
 
                 Button
                 {
-                    Layout.row: 4
-                    Layout.column: 2
+                    Layout.row: 3
+                    Layout.column: 1
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                     iconSource: UM.Theme.getIcon("arrow_bottom");
@@ -166,8 +166,8 @@ Item
 
                 Button
                 {
-                    Layout.row: 3
-                    Layout.column: 2
+                    Layout.row: 2
+                    Layout.column: 1
                     Layout.preferredWidth: width
                     Layout.preferredHeight: height
                     iconSource: UM.Theme.getIcon("home");
@@ -258,29 +258,68 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }
 
             Row
             {
-                Repeater
+
+                Button
                 {
-                    model: distancesModel
-                    delegate: Button
-                    {
-                        height: UM.Theme.getSize("setting_control").height
-                        width: height + UM.Theme.getSize("default_margin").width
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
 
-                        text: model.label
-                        exclusiveGroup: distanceGroup
-                        checkable: true
-                        checked: distancesRow.currentDistance == model.value
-                        onClicked: distancesRow.currentDistance = model.value
+                    text: "0.1"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 0.1
+                    onClicked: distancesRow.currentDistance = 0.1
 
-                        style: UM.Theme.styles.monitor_checkable_button_style
-                    }
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "1"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 1
+                    onClicked: distancesRow.currentDistance = 1
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "10"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 10
+                    onClicked: distancesRow.currentDistance = 10
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
+                }
+
+                Button
+                {
+                    height: UM.Theme.getSize("setting_control").height
+                    width: height + UM.Theme.getSize("default_margin").width
+
+                    text: "100"
+                    exclusiveGroup: distanceGroup
+                    checkable: true
+                    checked: distancesRow.currentDistance == 100
+                    onClicked: distancesRow.currentDistance = 100
+
+                    style: UM.Theme.styles.monitor_checkable_button_style
                 }
             }
         }
@@ -302,7 +341,7 @@ Item
                 color: UM.Theme.getColor("setting_control_text")
                 font: UM.Theme.getFont("default")
 
-                width: Math.floor(parent.width * 0.4) - UM.Theme.getSize("default_margin").width
+                width: Math.floor(parent.width * 0.6) - UM.Theme.getSize("default_margin").width
                 height: UM.Theme.getSize("setting_control").height
                 verticalAlignment: Text.AlignVCenter
             }

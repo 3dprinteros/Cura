@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "name": "Hercules G2",
+  "inherits": "fdmprinter",
+  "metadata": {
+    "visible": true,
+    "author": "3DPrinterOS",
+    "manufacturer": "Imprinta",
+    "category": "Imprinta",
+    "has_machine_quality": true,
+    "file_formats": "text/x-gcode",
+    "platform": "hercules.stl",
+    "has_variants": true,
+    "preferred_variant_name": "0.5 mm",
+    "supports_usb_connection": true,
+    "machine_extruder_trains":
+    {
+        "0": "hercules_extruder"
+    }
+  },
+
+  "overrides": {
+	"machine_start_gcode": { "default_value": "M104 S180\nM140 S125\nM190 S125\nM109 S180\nG28\nG1 Z5 F400\nM106 S0\nM104 S260\nM109 S260\nG32\nG1 Z5 F400" },
+	"machine_end_gcode": { "default_value": "G28 X0 Y0\nM104 S0\nM140 S0\nM84" },
+    "machine_name": { "default_value": "Hercules" },
+	"material_diameter": {"default_value": 1.75 },
+    "machine_height": { "default_value": 210 },
+	"machine_width": { "default_value": 200 },
+    "machine_depth": { "default_value": 200 },
+    "layer_height": { "default_value": 0.5 },
+    "machine_show_variants": { "default_value": true },
+    "machine_nozzle_size": { "default_value": 0.5 }
+  }
+}

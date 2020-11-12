@@ -5,6 +5,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.1
+import QtQuick.Layouts 1.1
 
 import UM 1.2 as UM
 import Cura 1.0 as Cura
@@ -130,24 +131,46 @@ Menu
             copiesField.forceActiveFocus();
         }
 
-        standardButtons: StandardButton.Ok | StandardButton.Cancel
+        standardButtons: StandardButton.NoButton
 
-        Row
-        {
-            spacing: UM.Theme.getSize("default_margin").width
+        ColumnLayout {
+                id: column
+                width: parent ? parent.width : 100
 
-            Label
+            Row
             {
-                text: catalog.i18nc("@label", "Number of Copies")
-                anchors.verticalCenter: copiesField.verticalCenter
+                spacing: UM.Theme.getSize("default_margin").width
+
+                Label
+                {
+                    text: catalog.i18nc("@label", "Number of Copies")
+                    anchors.verticalCenter: copiesField.verticalCenter
+                }
+
+                SpinBox
+                {
+                    id: copiesField
+                    focus: true
+                    minimumValue: 1
+                    maximumValue: 99
+                }
             }
 
-            SpinBox
-            {
-                id: copiesField
-                focus: true
-                minimumValue: 1
-                maximumValue: 99
+            RowLayout {
+                Layout.alignment: Qt.AlignRight
+                Button{
+                    text: "Отмена"
+                    onClicked: {
+                        multiplyDialog.close();
+                    }
+                }
+                Button{
+                    text: "OK"
+                    onClicked: {
+                        CuraActions.multiplySelection(copiesField.value)
+                        multiplyDialog.close();
+                    }
+                }
             }
         }
     }

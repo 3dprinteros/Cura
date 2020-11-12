@@ -54,6 +54,7 @@ Item
     property alias manageProfiles: manageProfilesAction;
 
     property alias manageMaterials: manageMaterialsAction;
+    //property alias marketplaceMaterials: marketplaceMaterialsAction;
 
     property alias preferences: preferencesAction;
 
@@ -61,7 +62,7 @@ Item
     property alias documentation: documentationAction;
     property alias showTroubleshooting: showTroubleShootingAction
     property alias reportBug: reportBugAction;
-    property alias whatsNew: whatsNewAction
+    //property alias whatsNew: whatsNewAction
     property alias about: aboutAction;
 
     property alias toggleFullScreen: toggleFullScreenAction;
@@ -72,7 +73,6 @@ Item
     property alias browsePackages: browsePackagesAction
 
     UM.I18nCatalog{id: catalog; name: "cura"}
-
 
     Action
     {
@@ -163,7 +163,7 @@ Item
     Action
     {
         id: preferencesAction
-        text: catalog.i18nc("@action:inmenu", "Configure Cura...")
+        text: catalog.i18nc("@action:inmenu", "Configure...")
         iconName: "configure"
     }
 
@@ -187,6 +187,12 @@ Item
         iconName: "configure"
         shortcut: "Ctrl+K"
     }
+
+    //Action
+    //{
+        //id: marketplaceMaterialsAction
+        //text: catalog.i18nc("@action:inmenu", "Add more materials from Marketplace")
+    //}
 
     Action
     {
@@ -239,11 +245,11 @@ Item
         onTriggered: CuraActions.openBugReportPage();
     }
 
-    Action
-    {
-        id: whatsNewAction;
-        text: catalog.i18nc("@action:inmenu menubar:help", "What's New");
-    }
+//     Action
+//     {
+//         id: whatsNewAction;
+//         text: catalog.i18nc("@action:inmenu menubar:help", "What's New");
+//     }
 
     Action
     {
@@ -258,7 +264,7 @@ Item
         text: catalog.i18ncp("@action:inmenu menubar:edit", "Delete Selected Model", "Delete Selected Models", UM.Selection.selectionCount);
         enabled: UM.Controller.toolsEnabled && UM.Selection.hasSelection;
         iconName: "edit-delete";
-        shortcut: StandardKey.Delete;
+        shortcut: StandardKey.Delete | "Backspace"
         onTriggered: CuraActions.deleteSelection();
     }
 

@@ -73,9 +73,10 @@ Item
 
             y: -height
             x: parent.width - width
-
+			
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-
+			palette.base: "white"
+			palette.window: "white"
             contentItem: ColumnLayout
             {
                 Repeater
@@ -86,9 +87,13 @@ Item
                     {
                         text: model.description
                         visible: model.id != UM.OutputDeviceManager.activeDevice  // Don't show the active device in the list
-                        color: "transparent"
+                        color: "white"
                         cornerRadius: 0
-                        hoverColor: UM.Theme.getColor("primary")
+                        hoverColor: UM.Theme.getColor("primary_hover")
+						outlineColor: "white"
+						shadowColor: "white"
+						textHoverColor: "white"
+						textColor: "grey"
                         Layout.fillWidth: true
                         // The total width of the popup should be defined by the largest button. By stating that each
                         // button should be minimally the size of it's content (aka; implicitWidth) we can ensure that.
@@ -107,7 +112,7 @@ Item
             {
                 opacity: visible ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 100 } }
-                color: UM.Theme.getColor("action_panel_secondary")
+                color: "white"
             }
         }
     }

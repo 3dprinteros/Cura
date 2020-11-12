@@ -29,11 +29,11 @@ Item
         extruderPosition: Cura.ExtruderManager.activeExtruderIndex
     }
 
-    Cura.GenericMaterialsModel
-    {
-        id: genericMaterialsModel
-        extruderPosition: Cura.ExtruderManager.activeExtruderIndex
-    }
+    //Cura.GenericMaterialsModel
+    //{
+        //id: genericMaterialsModel
+        //extruderPosition: Cura.ExtruderManager.activeExtruderIndex
+    //}
 
     property var currentType: null
     property var currentBrand: null
@@ -57,6 +57,7 @@ Item
             var currentItemId = base.currentItem == null ? "" : base.currentItem.root_material_id
             search_root_id = currentItemId
         }
+        /*
         for (var material_idx = 0; material_idx < genericMaterialsModel.count; material_idx++)
         {
             var material = genericMaterialsModel.getItem(material_idx)
@@ -72,6 +73,7 @@ Item
                 return true
             }
         }
+        */
         for (var brand_idx = 0; brand_idx < materialsModel.count; brand_idx++)
         {
             var brand = materialsModel.getItem(brand_idx)
@@ -127,11 +129,11 @@ Item
         onItemsChanged: updateAfterModelChanges()
     }
 
-    Connections
-    {
-        target: genericMaterialsModel
-        onItemsChanged: updateAfterModelChanges()
-    }
+    //Connections
+    //{
+        //target: genericMaterialsModel
+        //onItemsChanged: updateAfterModelChanges()
+    //}
     
     Column
     {
@@ -146,13 +148,13 @@ Item
             hasMaterialTypes: false
         }
 
-        MaterialsBrandSection
-        {
-            id: genericSection
-            sectionName: "Generic"
-            elementsModel: genericMaterialsModel
-            hasMaterialTypes: false
-        }
+        //MaterialsBrandSection
+        //{
+            //id: genericSection
+            //sectionName: "Generic"
+            //elementsModel: genericMaterialsModel
+            //hasMaterialTypes: false
+        //}
 
         Repeater
         {

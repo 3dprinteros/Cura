@@ -1,13 +1,12 @@
 # Cura
-# Copyright (C) 2019 Ultimaker B.V.
+# Copyright (C) 2020 Ultimaker B.V.
 # This file is distributed under the same license as the Cura package.
-# Ruben Dulek <r.dulek@ultimaker.com>, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Cura 4.4\n"
+"Project-Id-Version: Cura 4.7\n"
 "Report-Msgid-Bugs-To: r.dulek@ultimaker.com\n"
-"POT-Creation-Date: 2019-11-05 13:13+0000\n"
+"POT-Creation-Date: 2020-07-31 12:48+0000\n"
 "PO-Revision-Date: 2019-03-13 14:00+0200\n"
 "Last-Translator: Bothof <info@bothof.nl>\n"
 "Language-Team: Ruslan Popov <ruslan.popov@gmail.com>, Russian <info@bothof.nl>\n"
@@ -306,11 +305,11 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "skirt_line_width label"
 #~ msgid "Skirt Line Width"
-#~ msgstr "Ширина линии юбки"
+#~ msgstr "Ширина линии скирт"
 
 #~ msgctxt "skirt_line_width description"
 #~ msgid "Width of a single skirt line."
-#~ msgstr "Ширина одной линии юбки."
+#~ msgstr "Ширина одной линии скирт."
 
 #~ msgctxt "support_line_width label"
 #~ msgid "Support Line Width"
@@ -330,7 +329,7 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "shell label"
 #~ msgid "Shell"
-#~ msgstr "Ограждение"
+#~ msgstr "Периметры"
 
 #~ msgctxt "wall_thickness label"
 #~ msgid "Wall Thickness"
@@ -810,11 +809,11 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "skirt_speed label"
 #~ msgid "Skirt Speed"
-#~ msgstr "Скорость печати юбки"
+#~ msgstr "Скорость печати скирт"
 
 #~ msgctxt "skirt_speed description"
 #~ msgid "The speed at which the skirt and brim are printed. Normally this is done at the initial layer speed, but sometimes you might want to print the skirt at a different speed."
-#~ msgstr "Скорость, на которой происходит печать юбки и каймы. Обычно, их печать происходит на скорости печати первого слоя, но иногда вам может потребоваться печатать юбку на другой скорости."
+#~ msgstr "Скорость, на которой происходит печать скирт и брима. Обычно, их печать происходит на скорости печати первого слоя, но иногда вам может потребоваться печатать скирт на другой скорости."
 
 #~ msgctxt "speed_slowdown_layers label"
 #~ msgid "Number of Slower Layers"
@@ -1246,63 +1245,63 @@ msgstr "Укажите диаметр используемой нити."
 
 #~ msgctxt "adhesion_type description"
 #~ msgid "Different options that help to improve both priming your extrusion and adhesion to the build plate. Brim adds a single layer flat area around the base of your object to prevent warping. Raft adds a thick grid with a roof below the object. Skirt is a line printed around the object, but not connected to the model."
-#~ msgstr "Различные варианты, которы помогают улучшить прилипание пластика к столу. Кайма добавляет однослойную плоскую область вокруг основания печатаемого объекта, предотвращая его деформацию. Подложка добавляет толстую сетку с крышей под объект. Юбка - это линия, печатаемая вокруг объекта, но не соединённая с моделью."
+#~ msgstr "Различные варианты, которы помогают улучшить прилипание пластика к столу. Брим добавляет однослойную плоскую область вокруг основания печатаемого объекта, предотвращая его деформацию. Рафт добавляет толстую сетку с крышей под объект. Скирт - это линия, печатаемая вокруг объекта, но не соединённая с моделью."
 
 #~ msgctxt "adhesion_type option skirt"
 #~ msgid "Skirt"
-#~ msgstr "Юбка"
+#~ msgstr "Скирт"
 
 #~ msgctxt "adhesion_type option brim"
 #~ msgid "Brim"
-#~ msgstr "Кайма"
+#~ msgstr "Брим"
 
 #~ msgctxt "adhesion_type option raft"
 #~ msgid "Raft"
-#~ msgstr "Подложка"
+#~ msgstr "Рафт"
 
 #~ msgctxt "skirt_line_count label"
 #~ msgid "Skirt Line Count"
-#~ msgstr "Количество линий юбки"
+#~ msgstr "Количество линий скирт"
 
 #~ msgctxt "skirt_line_count description"
 #~ msgid "Multiple skirt lines help to prime your extrusion better for small objects. Setting this to 0 will disable the skirt."
-#~ msgstr "Несколько линий юбки помогают лучше начать укладывание материала при печати небольших объектов. Установка этого параметра в 0 отключает печать юбки."
+#~ msgstr "Несколько линий скирт помогают лучше начать укладывание материала при печати небольших объектов. Установка этого параметра в 0 отключает печать скирт."
 
 #~ msgctxt "skirt_gap label"
 #~ msgid "Skirt Distance"
-#~ msgstr "Дистанция до юбки"
+#~ msgstr "Дистанция до скирт"
 
 #~ msgctxt "skirt_gap description"
 #~ msgid ""
 #~ "The horizontal distance between the skirt and the first layer of the print.\n"
 #~ "This is the minimum distance, multiple skirt lines will extend outwards from this distance."
 #~ msgstr ""
-#~ "Расстояние по горизонтали между юбкой и первым слоем печатаемого объекта.\n"
-#~ "Это минимальное расстояние, следующие линии юбки будут печататься наружу."
+#~ "Расстояние по горизонтали между скирт и первым слоем печатаемого объекта.\n"
+#~ "Это минимальное расстояние, следующие линии скирт будут печататься наружу."
 
 #~ msgctxt "skirt_minimal_length label"
 #~ msgid "Skirt Minimum Length"
-#~ msgstr "Минимальная длина юбки"
+#~ msgstr "Минимальная длина скирт"
 
 #~ msgctxt "skirt_minimal_length description"
 #~ msgid "The minimum length of the skirt. If this length is not reached by the skirt line count, more skirt lines will be added until the minimum length is reached. Note: If the line count is set to 0 this is ignored."
-#~ msgstr "Минимальная длина печатаемой линии юбки. Если при печати юбки эта длина не будет выбрана, то будут добавляться дополнительные кольца юбки. Следует отметить, если количество линий юбки установлено в 0, то этот параметр игнорируется."
+#~ msgstr "Минимальная длина печатаемой линии скирт. Если при печати скирт эта длина не будет выбрана, то будут добавляться дополнительные кольца скирт. Следует отметить, если количество линий скирт установлено в 0, то этот параметр игнорируется."
 
 #~ msgctxt "brim_width label"
 #~ msgid "Brim Width"
-#~ msgstr "Ширина каймы"
+#~ msgstr "Ширина брима"
 
 #~ msgctxt "brim_width description"
 #~ msgid "The distance from the model to the outermost brim line. A larger brim enhances adhesion to the build plate, but also reduces the effective print area."
-#~ msgstr "Расстояние между моделью и самой удалённой линией каймы. Более широкая кайма увеличивает прилипание к столу, но также уменьшает эффективную область печати."
+#~ msgstr "Расстояние между моделью и самой удалённой линией брима. Более широкий брим увеличивает прилипание к столу, но также уменьшает эффективную область печати."
 
 #~ msgctxt "brim_line_count label"
 #~ msgid "Brim Line Count"
-#~ msgstr "Количество линий каймы"
+#~ msgstr "Количество линий брима"
 
 #~ msgctxt "brim_line_count description"
 #~ msgid "The number of lines used for a brim. More brim lines enhance adhesion to the build plate, but also reduces the effective print area."
-#~ msgstr "Количество линий, используемых для печати каймы. Большее количество линий каймы улучшает прилипание к столу, но уменьшает эффективную область печати."
+#~ msgstr "Количество линий, используемых для печати брима. Большее количество линий брима улучшает прилипание к столу, но уменьшает эффективную область печати."
 
 #~ msgctxt "raft_margin label"
 #~ msgid "Raft Extra Margin"

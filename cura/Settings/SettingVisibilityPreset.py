@@ -69,9 +69,10 @@ class SettingVisibilityPreset(QObject):
             Logger.log("e", "[%s] is not a file", file_path)
             return None
 
+        with open(file_path, 'r', encoding='utf8') as f:
+            file_str = f.read()
         parser = ConfigParser(interpolation = None, allow_no_value = True)  # Accept options without any value,
-
-        parser.read([file_path])
+        parser.read_string(file_str)
         if not parser.has_option("general", "name") or not parser.has_option("general", "weight"):
             return None
 

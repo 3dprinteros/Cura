@@ -11,7 +11,7 @@ import Cura 1.0 as Cura
 
 UM.PreferencesPage
 {
-    title: catalog.i18nc("@title:tab", "Setting Visibility");
+    title: catalog.i18nc("@title:tab", "Видимость параметров");
 
     property QtObject settingVisibilityPresetsModel: CuraApplication.getSettingVisibilityPresetsModel()
 
@@ -43,7 +43,7 @@ UM.PreferencesPage
                 left: parent.left;
                 leftMargin: UM.Theme.getSize("default_margin").width
             }
-            text: catalog.i18nc("@label:textbox", "Check all")
+            text: catalog.i18nc("@label:textbox", "Выбрать все")
             checkedState:
             {
                 if(definitionsModel.visibleCount == definitionsModel.categoryCount)
@@ -91,7 +91,7 @@ UM.PreferencesPage
                 rightMargin: UM.Theme.getSize("default_margin").width
             }
 
-            placeholderText: catalog.i18nc("@label:textbox", "Filter...")
+            placeholderText: catalog.i18nc("@label:textbox", "Фильтр...")
 
             onTextChanged: definitionsModel.filter = {"i18n_label": "*" + text}
         }
